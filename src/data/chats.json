@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "user": {
+      "pfp": "./images/logo2.png",
+      "username": "John Smith"
+    },
+    "lastMessage": {
+      "text": "When are we going back to Mallorca? I could really do with some sun, getting rather depressed in the UK tbh, might just hang myself later :D",
+      "dayTimeSent": "2023-03-27T14:33:53"
+    }
+  },
+  {
+    "id": "2",
+    "user": {
+      "pfp": "./images/logo2.png",
+      "username": "Emma Watson"
+    },
+    "lastMessage": {
+      "text": "I got like 3 balls, that's 1 ball more than the average man",
+      "dayTimeSent": "2023-02-03T09:01:32"
+    }
+  },
+  {
+    "id": "3",
+    "user": {
+      "pfp": "./images/logo2.png",
+      "username": "Ted Bunda"
+    },
+    "lastMessage": {
+      "text": "Murderous cake right around the corner mate",
+      "dayTimeSent": "2023-03-26T12:15:13"
+    }
+  },
+  {
+    "id": "4",
+    "user": {
+      "pfp": "./images/logo2.png",
+      "username": "Your Mother"
+    },
+    "lastMessage": {
+      "text": "Okay",
+      "dayTimeSent": "2023-03-21T09:04:02"
+    }
+  },
+  {
+    "id": "5",
+    "user": {
+      "pfp": "./images/logo2.png",
+      "username": "Random from night out"
+    },
+    "lastMessage": {
+      "text": "got kicked out of bloom lol",
+      "dayTimeSent": "2023-03-27T09:04:02"
+    }
+  }
+]
