@@ -34,13 +34,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Chat'>
-        <Stack.Screen name='Home' component={homeTabNav} />
-        <Stack.Screen name='Your Chats' component={ChatScreen} />
+        <Stack.Screen name='Home' component={homeTabNav} options={{headerShown: false}} />
         <Stack.Screen name='ChatUI' component={ChatUI} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-
 }
 
 const styles = StyleSheet.create({
