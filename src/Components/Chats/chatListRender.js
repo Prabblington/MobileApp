@@ -7,31 +7,31 @@ DayJs.extend(RelativeTime);
 
 let { width } = Dimensions.get('window');
 
-const ChatListRenderer = (props) => {
+const ChatListRenderer = ({chat}) => {
   const navigation = useNavigation();
 
   return (
     <Pressable onPress={() => navigation.navigate('ChatUI',
-      { id: props.chat.id, name: props.chat.user.username })}
+      { id: chat.id, name: chat.user.username })}
       style={styles.container}
     >
 
-      <View key={props.chat?.id} style={styles.container}>
+      <View key={chat?.id} style={styles.container}>
         {/* This will be the users avatar */}
         <Image style={styles.image} source={require('../../images/logo2.png')} />
 
         <View style={styles.content}>
           <View style={styles.row}>
             <Text style={styles.text}>
-              {props.chat.user?.username}
+              {chat.user?.username}
             </Text>
             <Text style={styles.subHeader}>
-              {DayJs(props.chat.lastMessage?.dayTimeSent).fromNow()}
+              {DayJs(chat.lastMessage?.dayTimeSent).fromNow()}
             </Text>
           </View>
 
           <Text style={styles.subHeader} numberOfLines={2}>
-            {props.chat.lastMessage?.text}
+            {chat.lastMessage?.text}
           </Text>
 
         </View>
