@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 const inputUI = () => {
 
@@ -15,7 +16,7 @@ const inputUI = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <AntDesign name='plus' size={20} color='royalblue'/>
 
       <TextInput 
@@ -33,7 +34,7 @@ const inputUI = () => {
       />
 
       <StatusBar style='auto'/>
-    </View>
+    </SafeAreaView>
   );
 }
 

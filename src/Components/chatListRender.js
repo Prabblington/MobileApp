@@ -10,9 +10,7 @@ let { width } = Dimensions.get('window');
 
 const chatListProp = (props) => {
   const navigation = useNavigation();
-  console.log(props.chat.user.username);
-  console.log(props.chat.id);
-  //add onpress event
+
   return (
     <Pressable onPress={() => navigation.navigate('ChatUI',
       { id: props.chat.id, name: props.chat.user.username })}

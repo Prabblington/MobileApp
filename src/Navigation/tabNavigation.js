@@ -2,7 +2,7 @@
 import { View, Text } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import ChatScreen from '../Components/chatScreen';
 
@@ -49,6 +49,9 @@ const homeTabNav = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='newspaper-outline' size={size} color={color} />
+          ),
+          headerRight: () => (
+            <Entypo name='new-message' size={18} color={'royalblue'} style={{ marginRight: 15 }} />
           )
         }}
       />

@@ -1,9 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
 import AppStack from './src/Navigation/stackNavivation';
 
 export default function App() {
   return (
-    <AppStack />
+    <SafeAreaView style={styles.container}>
+      <AppStack />
+
+      <StatusBar style='auto' />
+    </SafeAreaView>
   );
 }
 
@@ -11,7 +17,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "whitesmoke",
-    justifyContent: "center",
-    alignItems: 'center'
+    justifyContent: "center"
   }
 });
