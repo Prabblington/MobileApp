@@ -1,13 +1,13 @@
 import { FlatList } from 'react-native-web';
 
-import contacts from '../data/contacts.json';
 import ContactListRenderer from '../Components/Contacts/ContactListRender';
+import contacts from '../data/contacts.json';
 
 const ContactScreen = () =>  {
   return (
     <FlatList
       data={contacts}
-      renderItem={({ item }) => <ContactListRenderer chat={item} />}
+      renderItem={({ item }) => <ContactListRenderer contact={item} />}
       style={{ backgroundColor: 'whitesmoke' }}
     />
   );

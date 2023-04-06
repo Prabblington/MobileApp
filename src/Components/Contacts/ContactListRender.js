@@ -5,28 +5,28 @@ let { width } = Dimensions.get('window');
 
 const ContactListRenderer = (props) =>  {
   const navigation = useNavigation();
+  console.log(props);
 
   return (
     <Pressable onPress={() => navigation.navigate('Contacts',
-      { id: props.contacts.user?.id, name: props.contacts.user?.username })}
+      { id: props.contact.user?.id, name: props.contact.user?.username })}
       style={styles.container}
     >
 
-      <View key={props.contacts.user?.id} style={styles.container}>
+      <View key={props.contact.user?.id} style={styles.container}>
         {/* This will be the users avatar */}
         <Image style={styles.image} source={require('../../images/logo2.png')} />
 
         <View style={styles.content}>
           <View style={styles.row}>
             <Text style={styles.text}>
-              {props.contacts.user?.username}
+              {props.contact.user?.username}
             </Text>
           </View>
 
         </View>
       </View>
 
-      <StatusBar style="auto" />
     </Pressable>
   );
 }
