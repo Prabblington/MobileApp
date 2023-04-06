@@ -2,42 +2,48 @@
   {
     "user" : {
       "id": 1,
-      "username" : "Emma Watson"
+      "username" : "Emma Watson",
+      "status" : "Online"
     },
     "blocked" : false
   },
   {
     "user" : {
       "id": 2,
-      "username" : "Ted Bunda"
+      "username" : "Ted Bunda",
+      "status" : "Online"
     },
     "blocked" : false
   },
   {
     "user" : {
       "id": 3,
-      "username" : "Your Mother"
+      "username" : "Your Mother",
+      "status" : "Online"
     },
     "blocked" : false
   },
   {
     "user" : {
       "id": 4,
-      "username" : "Random from night out"
+      "username" : "Random from night out",
+      "status" : "Offline"
     },
     "blocked" : false
   },
   {
     "user" : {
       "id": 5,
-      "username" : "Mike Tample"
+      "username" : "Mike Tample",
+      "status" : "Online"
     },
     "blocked" : false
   },
   {
     "user" : {
       "id": 6,
-      "username" : "Sophie Buggs"
+      "username" : "Sophie Buggs",
+      "status" : "Online"
     },
     "blocked" : false
   }
