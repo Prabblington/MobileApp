@@ -3,28 +3,24 @@ import { useNavigation } from '@react-navigation/native';
 
 let { width } = Dimensions.get('window');
 
-const ContactListRenderer = (props) =>  {
+const ContactListRenderer = ({contact}) =>  {
   const navigation = useNavigation();
-  console.log(props);
+  console.log(contact);
 
   return (
     <Pressable onPress={() => navigation.navigate('Contacts',
-      { id: props.contact.user?.id, name: props.contact.user?.username })}
+      { id: contact.user?.id, name: contact.user?.username })}
       style={styles.container}
     >
 
-      <View key={props.contact.user?.id} style={styles.container}>
+      <View key={contact.user?.id} style={styles.container}>
         {/* This will be the users avatar */}
         <Image style={styles.image} source={require('../../images/logo2.png')} />
 
-        <View style={styles.content}>
-          <View style={styles.row}>
             <Text style={styles.text}>
-              {props.contact.user?.username}
+              {contact.user?.username}
             </Text>
-          </View>
 
-        </View>
       </View>
 
     </Pressable>
@@ -40,23 +36,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     width: width-30,
     height: 70,
-  },
-
-  content: {
-    flex: 1,
-
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "lightgray",
-  },
-
-  row: {
-    flexDirection: 'row',
-    marginBottom: 5,
-  },
-
-  subHeader: {
-    color: 'grey',
-    maxWidth: '90%'
   },
 
   text: {
