@@ -26,6 +26,7 @@ const chatUI = () => {
 
   return (
     <KeyboardAvoidingView
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 90}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ImageBackground source={backgroundImage} style={styles.background}>
@@ -60,6 +61,6 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    padding: "0.2%",
+    padding: "0.5%",
   },
 });
