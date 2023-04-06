@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
-import ChatScreen from '../Components/chatScreen';
+import ChatScreen from '../Screens/chatScreen';
 
 const TEMP_COMPONENT = () => {
   return (

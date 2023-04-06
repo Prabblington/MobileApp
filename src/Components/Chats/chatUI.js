@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 
 import { FlatList, StyleSheet, ImageBackground, Dimensions, KeyboardAvoidingView, Platform } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
 import MessageUI from './messageUI';
-import InputUI from './inputUI';
+import InputUI from '../Input/inputUI';
 
-import backgroundImage from '../images/background.png';
-import messages from '../data/messages.json';
+import backgroundImage from '../../images/background.png';
+import messages from '../../data/messages.json';
 
 // make the background image take up the full screen
 let { height, width } = Dimensions.get('window');
@@ -37,8 +36,6 @@ const chatUI = () => {
         />
         <InputUI />
       </ImageBackground>
-
-      <StatusBar style="auto" />
     </KeyboardAvoidingView>
   );
 }
