@@ -52,7 +52,7 @@ const homeTabNav = () => {
             <Ionicons name='newspaper-outline' size={size} color={color} />
           ),
           headerRight: () => (
-            <Entypo onPress={() => navigation.homeTabNav('Contacts')} name='new-message' size={18} color={'royalblue'} style={{ marginRight: 15 }} />
+            <Entypo onPress={() => navigation.navigate('Contacts')} name='new-message' size={18} color={'royalblue'} style={{ marginRight: 15 }} />
           )
         })}
       />
