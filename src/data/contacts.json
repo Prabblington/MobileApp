@@ -1,0 +1,44 @@
+[
+  {
+    "user" : {
+      "id": 1,
+      "username" : "Emma Watson"
+    },
+    "blocked" : false
+  },
+  {
+    "user" : {
+      "id": 2,
+      "username" : "Ted Bunda"
+    },
+    "blocked" : false
+  },
+  {
+    "user" : {
+      "id": 3,
+      "username" : "Your Mother"
+    },
+    "blocked" : false
+  },
+  {
+    "user" : {
+      "id": 4,
+      "username" : "Random from night out"
+    },
+    "blocked" : false
+  },
+  {
+    "user" : {
+      "id": 5,
+      "username" : "Mike Tample"
+    },
+    "blocked" : false
+  },
+  {
+    "user" : {
+      "id": 6,
+      "username" : "Sophie Buggs"
+    },
+    "blocked" : false
+  }
+]
