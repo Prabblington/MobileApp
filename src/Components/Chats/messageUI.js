@@ -6,9 +6,9 @@ import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 DayJs.extend(RelativeTime);
 
-const messageUI = (props) => {
+const messageUI = ({message}) => {
   let isUser = () => {
-    return props.message.user.id === "u1";
+    return message.user.id === "u1";
   }
 
   return (    
@@ -22,11 +22,11 @@ const messageUI = (props) => {
         <Text style={[styles.text,
         {
           color: isUser() ? 'black' : 'white'
-        }]}>{props.message.text}</Text>
+        }]}>{message.text}</Text>
         <Text style={[styles.dayTimeSent,
         {
           color: isUser() ? 'gray' : 'black'
-        }]}>{DayJs(props.message.dayTimeSent).fromNow()}</Text>
+        }]}>{DayJs(message.dayTimeSent).fromNow()}</Text>
       <StatusBar style="auto" />
     </KeyboardAvoidingView>
   );
