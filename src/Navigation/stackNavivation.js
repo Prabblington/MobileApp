@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ChatUI from '../Components/Chats/chatUI';
 import HomeTabNav from './tabNavigation';
-import ContactScreen from '../Screens/ContactsScreen';
+import ContactScreen from '../Screens/contactScreen';
 
 const Stack = createNativeStackNavigator();
 
