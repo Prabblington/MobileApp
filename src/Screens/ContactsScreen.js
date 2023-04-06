@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native-web';
 
-import ContactListRenderer from '../Components/Contacts/ContactListRender';
+import ContactListRenderer from '../Components/Contacts/contactListRender';
 import contacts from '../data/contacts.json';
 
 const ContactScreen = () =>  {

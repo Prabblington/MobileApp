@@ -6,7 +6,7 @@ import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 DayJs.extend(RelativeTime);
 
-const messageUI = ({message}) => {
+const MessageUI = ({message}) => {
   let isUser = () => {
     return message.user.id === "u1";
   }
@@ -32,7 +32,7 @@ const messageUI = ({message}) => {
   );
 }
 
-export default messageUI;
+export default MessageUI;
 
 const styles = StyleSheet.create({
   container: {

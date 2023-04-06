@@ -16,7 +16,7 @@ const TEMP_COMPONENT = () => {
 
 const Tab = createBottomTabNavigator();
 
-const homeTabNav = () => {
+const HomeTabNav = () => {
   return (
     <Tab.Navigator initialRouteName='Chats'
       screenOptions={{
@@ -70,4 +70,4 @@ const homeTabNav = () => {
   );
 }
 
-export default homeTabNav;
+export default HomeTabNav;

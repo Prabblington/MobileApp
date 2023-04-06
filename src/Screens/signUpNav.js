@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const signUpNav = () => {
+const SignUpNav = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.landingContainer}>
@@ -74,7 +74,7 @@ const signUpNav = () => {
     );
 }
 
-export default signUpNav;
+export default SignUpNav;
 
 const styles = StyleSheet.create({
     container: {

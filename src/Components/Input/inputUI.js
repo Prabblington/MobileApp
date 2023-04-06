@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const inputUI = () => {
+const InputUI = () => {
 
   // state data
   const [newText, setNewText] = useState('');
@@ -38,7 +38,7 @@ const inputUI = () => {
   );
 }
 
-export default inputUI;
+export default InputUI;
 
 const styles = StyleSheet.create({
   container:  {

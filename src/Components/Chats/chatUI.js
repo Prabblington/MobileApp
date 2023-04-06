@@ -11,7 +11,7 @@ import messages from '../../data/messages.json';
 // make the background image take up the full screen
 let { height, width } = Dimensions.get('window');
 
-const chatUI = () => {
+const ChatUI = () => {
 
   // get data from the chatListProp to match user to messages and correctly
   // display from the right person/group
@@ -40,7 +40,7 @@ const chatUI = () => {
   );
 }
 
-export default chatUI;
+export default ChatUI;
 
 const styles = StyleSheet.create({
   container: {

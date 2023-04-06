@@ -8,7 +8,7 @@ const ContactListRenderer = ({ contact }) => {
   console.log(contact);
 
   return (
-    <Pressable onPress={() => { console.log('ContactsListRenderer: View contact status') }}
+    <Pressable onPress={() => { console.log('ContactsListRenderer: View contact interaction options') }}
       style={styles.container}
     >
 
