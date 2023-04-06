@@ -46,14 +46,15 @@ const homeTabNav = () => {
         }}
       />
       <Tab.Screen name='Chats' component={ChatScreen}
-        options={{
+        options={({navigation}) => (
+          {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='newspaper-outline' size={size} color={color} />
           ),
           headerRight: () => (
-            <Entypo name='new-message' size={18} color={'royalblue'} style={{ marginRight: 15 }} />
+            <Entypo onPress={() => navigation.homeTabNav('Contacts')} name='new-message' size={18} color={'royalblue'} style={{ marginRight: 15 }} />
           )
-        }}
+        })}
       />
       <Tab.Screen name='Settings' component={TEMP_COMPONENT}
         options={{
