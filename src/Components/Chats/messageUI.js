@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function MessageUI({ message }) {
+export default function MessageUI({ message }) {
   const isUser = () => message.user.id === 'u1';
 
   return (
@@ -68,5 +68,3 @@ function MessageUI({ message }) {
     </KeyboardAvoidingView>
   );
 }
-
-export default MessageUI;

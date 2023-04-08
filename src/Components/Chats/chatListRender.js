@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function ChatListRenderer({ chat }) {
+export default function ChatListRenderer({ chat }) {
   const navigation = useNavigation();
   return (
     <Pressable
@@ -84,5 +84,3 @@ function ChatListRenderer({ chat }) {
     </Pressable>
   );
 }
-
-export default ChatListRenderer;

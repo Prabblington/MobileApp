@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function Login() {
+export default function Login() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
@@ -122,5 +122,3 @@ function Login() {
     </SafeAreaView>
   );
 }
-
-export default Login;

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function ChatUI() {
+export default function ChatUI() {
   // get data from the chatListProp to match user to messages and correctly
   // display from the right person/group
   const route = useRoute();
@@ -66,5 +66,3 @@ function ChatUI() {
     </KeyboardAvoidingView>
   );
 }
-
-export default ChatUI;

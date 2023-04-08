@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function ContactListRenderer({ contact }) {
+export default function ContactListRenderer({ contact }) {
   // const navigation = useNavigation();
 
   return (
@@ -77,5 +77,3 @@ function ContactListRenderer({ contact }) {
     </Pressable>
   );
 }
-
-export default ContactListRenderer;

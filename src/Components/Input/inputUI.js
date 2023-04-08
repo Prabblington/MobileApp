@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function InputUI() {
+export default function InputUI() {
   // state data
   const [newText, setNewText] = useState('');
 
@@ -65,5 +65,3 @@ function InputUI() {
     </SafeAreaView>
   );
 }
-
-export default InputUI;

@@ -16,7 +16,7 @@ function TEMP_COMPONENT() {
 
 const Tab = createBottomTabNavigator();
 
-function HomeTabNav() {
+export default function HomeTabNav() {
   return (
     <Tab.Navigator
       initialRouteName="Chats"
@@ -82,5 +82,3 @@ function HomeTabNav() {
     </Tab.Navigator>
   );
 }
-
-export default HomeTabNav;

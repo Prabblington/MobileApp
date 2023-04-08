@@ -3,7 +3,7 @@ import { FlatList } from 'react-native-web';
 import ContactListRenderer from '../Components/Contacts/contactListRender';
 import contacts from '../data/contacts.json';
 
-function ContactScreen() {
+export default function ContactScreen() {
   return (
     <FlatList
       data={contacts}
@@ -12,5 +12,3 @@ function ContactScreen() {
     />
   );
 }
-
-export default ContactScreen;

@@ -7,7 +7,7 @@ import ContactScreen from '../Screens/contactScreen';
 
 const Stack = createNativeStackNavigator();
 
-function AppStack() {
+export default function AppStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -28,5 +28,3 @@ function AppStack() {
     </NavigationContainer>
   );
 }
-
-export default AppStack;

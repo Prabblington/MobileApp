@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import ChatListRenderer from '../Components/Chats/chatListRender';
 import chat from '../data/chats.json';
 
-function ChatScreen() {
+export default function ChatScreen() {
   return (
     <FlatList
       data={chat}
@@ -12,5 +12,3 @@ function ChatScreen() {
     />
   );
 }
-
-export default ChatScreen;
