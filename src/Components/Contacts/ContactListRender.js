@@ -1,39 +1,17 @@
-import { Pressable, StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+} from 'react-native';
+// import { useNavigation } from "@react-navigation/native";
 
-let { width } = Dimensions.get('window');
+require('../../images/logo2.png');
+const contactPicture = require('../../images/logo2.png');
 
-const ContactListRenderer = ({ contact }) => {
-  const navigation = useNavigation();
-  console.log(contact);
-
-  return (
-    <Pressable onPress={() => { console.log('ContactsListRenderer: View contact interaction options') }}
-      style={styles.container}
-    >
-
-      <View key={contact.user?.id} style={styles.container}>
-        {/* This will be the users avatar */}
-        <Image style={styles.image} source={require('../../images/logo2.png')} />
-
-        <View style={styles.content}>
-          <View style={styles.row}>
-            <Text style={styles.text}>
-              {contact.user?.username}
-            </Text>
-          </View>
-          <Text style={styles.subHeader}>
-            {contact.user?.status}
-          </Text>
-        </View>
-
-      </View>
-
-    </Pressable>
-  );
-}
-
-export default ContactListRenderer;
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
 
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "lightgray",
+    borderBottomColor: 'lightgray',
   },
 
   row: {
@@ -74,3 +52,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+
+function ContactListRenderer({ contact }) {
+  // const navigation = useNavigation();
+
+  return (
+    <Pressable
+      onPress={() => {
+        console.log('ContactsListRenderer: View contact interaction options');
+      }}
+      style={styles.container}
+    >
+      <View key={contact.user?.id} style={styles.container}>
+        {/* This will be the users avatar */}
+        <Image style={styles.image} source={contactPicture} />
+
+        <View style={styles.content}>
+          <View style={styles.row}>
+            <Text style={styles.text}>{contact.user?.username}</Text>
+          </View>
+          <Text style={styles.subHeader}>{contact.user?.status}</Text>
+        </View>
+      </View>
+    </Pressable>
+  );
+}
+
+export default ContactListRenderer;

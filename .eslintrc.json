@@ -14,10 +14,19 @@
         "sourceType": "module"
     },
     "plugins": [
-        "prettier"
+        "prettier",
+        "react"
     ],
     "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier": [
+            "error",
+            {
+              "endOfLine": "auto"
+            }
+          ],
+        "react/prop-types": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/react-in-jsx-scope": "off",
         "no-unused-vars": "warn",
         "no-unused-expressions": "warn"
     }

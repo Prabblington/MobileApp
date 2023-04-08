@@ -7,18 +7,23 @@ import ContactScreen from '../Screens/contactScreen';
 
 const Stack = createNativeStackNavigator();
 
-const AppStack = () =>  {
+function AppStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Chat'
+        initialRouteName="Chat"
         screenOptions={{
           tabBarStyle: { backgroundColor: 'whitesmoke' },
-          headerStyle: { backgroundColor: 'whitesmoke' }
-        }}>
-        <Stack.Screen name='Home' component={HomeTabNav} options={{ headerShown: false }} />
-        <Stack.Screen name='ChatUI' component={ChatUI} />
-        <Stack.Screen name='Contacts' component={ContactScreen} />
+          headerStyle: { backgroundColor: 'whitesmoke' },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeTabNav}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="ChatUI" component={ChatUI} />
+        <Stack.Screen name="Contacts" component={ContactScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

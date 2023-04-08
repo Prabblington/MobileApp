@@ -1,55 +1,18 @@
 import { useState } from 'react';
 import { StyleSheet, TextInput, SafeAreaView } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const InputUI = () => {
-
-  // state data
-  const [newText, setNewText] = useState('');
-
-  // check if the send button is working
-  const onSend = () =>  {
-    console.warn('Sending a new message:', newText);
-    setNewText('');
-  }
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <AntDesign name='plus' size={20} color='royalblue'/>
-
-      <TextInput 
-        value={newText} 
-        style={styles.input}
-        onChangeText={setNewText}
-        placeholder='type your message'
-      />
-
-      <MaterialIcons 
-        onPress={onSend}  
-        style={styles.send} 
-        name='send' size={16} 
-        color={'white'}
-      />
-
-      <StatusBar style='auto'/>
-    </SafeAreaView>
-  );
-}
-
-export default InputUI;
-
 const styles = StyleSheet.create({
-  container:  {
+  container: {
     flexDirection: 'row',
     backgroundColor: 'whitesmoke',
     padding: '2%',
     paddingHorizontal: '4%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
-  input:  {
+  input: {
     flex: 1,
     backgroundColor: 'white',
     padding: '2%',
@@ -60,13 +23,47 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
     borderWidth: StyleSheet.hairlineWidth,
 
-    fontSize: 15
+    fontSize: 15,
   },
 
   send: {
     backgroundColor: 'royalblue',
     padding: '3%',
     borderRadius: 15,
-    overflow: 'hidden'
-  }
-})
+    overflow: 'hidden',
+  },
+});
+
+function InputUI() {
+  // state data
+  const [newText, setNewText] = useState('');
+
+  // check if the send button is working
+  const onSend = () => {
+    console.warn('Sending a new message:', newText);
+    setNewText('');
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <AntDesign name="plus" size={20} color="royalblue" />
+
+      <TextInput
+        value={newText}
+        style={styles.input}
+        onChangeText={setNewText}
+        placeholder="type your message"
+      />
+
+      <MaterialIcons
+        onPress={onSend}
+        style={styles.send}
+        name="send"
+        size={16}
+        color="white"
+      />
+    </SafeAreaView>
+  );
+}
+
+export default InputUI;
