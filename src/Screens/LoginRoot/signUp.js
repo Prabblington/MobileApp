@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import CustInput from '../../Components/Input/custInput';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,18 +58,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
 
-  input: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'whitesmoke',
-    borderRadius: 22,
-    padding: 10,
-    paddingBottom: 10,
-    margin: 10,
-    marginTop: '2%',
-    width: '91%',
-  },
-
   button: {
     borderWidth: 1,
     borderColor: 'black',
@@ -98,35 +88,15 @@ export default function SignUp() {
 
           <View style={styles.infoBox}>
             <Text style={styles.subHeader}> First Name </Text>
-            <TextInput
-              placeholder="Example: John"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. John" />
 
             <Text style={styles.subHeader}> Last Name </Text>
-            <TextInput
-              placeholder="Example: Smith"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. Smith" />
 
             <Text style={styles.subHeader}> Email Address </Text>
-            <TextInput
-              placeholder="Example: John.Smith@WhatsThat.com"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. johnSmith@whatsThat.com" />
             <Text style={styles.subHeader}> Password </Text>
-            <TextInput
-              placeholder="Example: Password@123"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. password@123" />
 
             <Text style={[styles.subHeader, { paddingLeft: 0, fontSize: 14 }]}>
               Start using Whats That

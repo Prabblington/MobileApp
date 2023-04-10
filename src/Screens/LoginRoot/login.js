@@ -1,12 +1,7 @@
-import {
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import CustInput from '../../Components/Input/custInput';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,18 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
 
-  input: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'whitesmoke',
-    borderRadius: 22,
-    padding: 10,
-    paddingBottom: 10,
-    margin: 10,
-    marginTop: '5%',
-    width: '91%',
-  },
-
   button: {
     borderWidth: 1,
     borderColor: 'black',
@@ -86,6 +69,7 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
@@ -96,22 +80,10 @@ export default function Login() {
 
           <View style={styles.infoBox}>
             <Text style={styles.subHeader}> Email Address </Text>
-
-            <TextInput
-              placeholder="Example: user@user.com"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. johnSmith@whatsThat.com" />
 
             <Text style={styles.subHeader}> Password </Text>
-
-            <TextInput
-              placeholder="Example: Password@123"
-              editable
-              maxLength={80}
-              style={styles.input}
-            />
+            <CustInput placeholder="e.g. password@123" />
 
             <Pressable
               style={styles.button}
