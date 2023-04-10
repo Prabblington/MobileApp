@@ -22,21 +22,29 @@ const styles = StyleSheet.create({
   },
 
   headerContainer: {
-    marginTop: '30%',
+    marginTop: '25%',
     width: '100%',
     alignItems: 'center',
   },
 
   header: {
-    fontSize: 42,
+    fontSize: 38,
     fontWeight: 'bold',
     textAlign: 'center',
   },
 
-  subHeader: {
+  header2: {
     marginTop: '5%',
-    marginLeft: '8%',
-    fontSize: 30,
+    paddingBottom: 22,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+
+  subHeader: {
+    marginTop: '1%',
+    paddingLeft: 10,
+    fontSize: 16,
+    textAlign: 'left',
   },
 
   infoBox: {
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
     width: '91%',
   },
 
-  // ------------------------------ not used ----------------------------------
   button: {
     borderWidth: 1,
     borderColor: 'black',
@@ -70,6 +77,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 2,
   },
+
+  buttonText: {
+    textAlign: 'center',
+    fontWeight: 600,
+  },
 });
 
 export default function Login() {
@@ -78,18 +90,12 @@ export default function Login() {
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.header}>Welcome to WhatsThat!</Text>
-          <Text style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}>
-            Do you already have an account with us?
-          </Text>
-          <Text style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}>
-            Log in
-          </Text>
+          <Text style={styles.header}> Welcome to WhatsThat! </Text>
+          <Text style={styles.header2}> Already have an account? </Text>
+          <Text style={[styles.subHeader, { paddingLeft: 0 }]}> Log in </Text>
 
           <View style={styles.infoBox}>
-            <Text style={[styles.subHeader, { fontSize: 15, marginTop: '5%' }]}>
-              Email Address
-            </Text>
+            <Text style={styles.subHeader}> Email Address </Text>
 
             <TextInput
               placeholder="Example: user@user.com"
@@ -98,9 +104,7 @@ export default function Login() {
               style={styles.input}
             />
 
-            <Text style={[styles.subHeader, { fontSize: 15, marginTop: '5%' }]}>
-              Password
-            </Text>
+            <Text style={styles.subHeader}> Password </Text>
 
             <TextInput
               placeholder="Example: Password@123"
@@ -115,16 +119,16 @@ export default function Login() {
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
             >
-              <Text> Submit Login details </Text>
+              <Text style={styles.buttonText}> Submit Login details </Text>
             </Pressable>
 
             <Pressable
               style={styles.button}
               onPress={() => navigation.navigate('SignUp')}
               title="Create a new account"
-              accessibilityLabel="press this button to log in with provided details"
+              accessibilityLabel="press this button to create a new account"
             >
-              <Text> Create a new account </Text>
+              <Text style={styles.buttonText}> Create a new account </Text>
             </Pressable>
           </View>
         </View>

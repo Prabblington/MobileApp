@@ -1,5 +1,5 @@
 import {
-  Button,
+  Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -22,22 +22,15 @@ const styles = StyleSheet.create({
   },
 
   headerContainer: {
-    marginTop: '2%',
+    marginTop: '25%',
     width: '100%',
     alignItems: 'center',
   },
 
   header: {
-    fontSize: 42,
+    fontSize: 38,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-
-  subHeader: {
-    marginTop: '5%',
-    paddingLeft: 10,
-    fontSize: 16,
-    textAlign: 'left',
   },
 
   header2: {
@@ -48,10 +41,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+  subHeader: {
+    marginTop: '2%',
+    paddingLeft: 10,
+    fontSize: 16,
+    textAlign: 'left',
+  },
+
   infoBox: {
     width: '80%',
     height: '70%',
-    marginTop: '2%',
+    marginTop: '1%',
     borderRadius: 22,
     backgroundColor: '#f0f0f0',
   },
@@ -66,6 +66,22 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: '2%',
     width: '91%',
+  },
+
+  button: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 5,
+    textAlign: 'center',
+    backgroundColor: '#0088FF',
+    marginTop: 2,
+    marginBottom: 2,
+  },
+
+  buttonText: {
+    textAlign: 'center',
+    fontWeight: 600,
   },
 });
 
@@ -113,20 +129,26 @@ export default function SignUp() {
             />
 
             <Text style={styles.subHeader}>Start using Whats That</Text>
-            <Button
-              style={styles.loginButton}
+            <Pressable
+              style={styles.button}
               onPress={console.log('Create Account')}
               title="Submit details to create new account"
               accessibilityLabel="press this button to submit new account details"
-            />
+            >
+              <Text style={styles.buttonText}>
+                Submit details and create new account
+              </Text>
+            </Pressable>
 
             <Text style={styles.subHeader}>Already have an account?</Text>
-            <Button
-              style={styles.loginButton}
+            <Pressable
+              style={styles.button}
               onPress={() => navigation.navigate('Login')}
               title="Go back to Login page"
               accessibilityLabel="press this button to go back to login page"
-            />
+            >
+              <Text style={styles.buttonText}> Login </Text>
+            </Pressable>
           </View>
         </View>
       </View>
