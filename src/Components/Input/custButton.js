@@ -20,16 +20,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function CustButton(
-  onPressFunction,
+export default function CustButton({
+  onPress,
   title,
   accessibilityLabel,
-  buttonText
-) {
+  buttonText,
+}) {
   return (
     <Pressable
       style={styles.button}
-      onPress={() => onPressFunction}
+      onPress={() => onPress()}
       title={title}
       accessibilityLabel={accessibilityLabel}
     >
