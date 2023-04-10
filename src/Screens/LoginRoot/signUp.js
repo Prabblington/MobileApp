@@ -1,8 +1,9 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
+import CustButton from '../../Components/Input/custButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,28 +52,13 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     backgroundColor: '#d4e0e7',
   },
-
-  button: {
-    width: '90%',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
-    padding: 5,
-    textAlign: 'center',
-    backgroundColor: '#0088FF',
-    marginTop: 12,
-    marginBottom: 2,
-    alignSelf: 'center',
-  },
-
-  buttonText: {
-    textAlign: 'center',
-    fontWeight: 600,
-  },
 });
 
 export default function SignUp() {
   const navigation = useNavigation();
+  const goToLogin = () => {
+    navigation.navigate('Login');
+  };
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -120,28 +106,22 @@ export default function SignUp() {
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Start using Whats That
             </Text>
-            <Pressable
-              style={styles.button}
-              onPress={console.log('Create Account')}
-              title="Submit details to create new account"
+            <CustButton
+              onPress={console.log('submit new account details')}
+              title="Submit details"
               accessibilityLabel="press this button to submit new account details"
-            >
-              <Text style={styles.buttonText}>
-                Submit details and create new account
-              </Text>
-            </Pressable>
+              buttonText="Submit details and create new account"
+            />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Already have an account?
             </Text>
-            <Pressable
-              style={styles.button}
-              onPress={() => navigation.navigate('Login')}
+            <CustButton
+              onPress={goToLogin}
               title="Go back to Login page"
               accessibilityLabel="press this button to go back to login page"
-            >
-              <Text style={styles.buttonText}> Login </Text>
-            </Pressable>
+              buttonText="Log in"
+            />
           </View>
         </View>
       </View>
