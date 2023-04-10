@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
@@ -12,9 +12,17 @@ const styles = StyleSheet.create({
     marginTop: '2%',
     width: '91%',
   },
+
+  subHeader: {
+    marginTop: '1%',
+    paddingLeft: 10,
+    fontSize: 16,
+    textAlign: 'left',
+  },
 });
 
 export default function CustInput({
+  titleText,
   value,
   setValue,
   placeholder,
@@ -22,6 +30,7 @@ export default function CustInput({
 }) {
   return (
     <View style={styles.button}>
+      <Text style={styles.subHeader}> {titleText} </Text>
       <TextInput
         value={value}
         onChangeText={setValue}

@@ -79,36 +79,37 @@ export default function SignUp() {
           </Text>
 
           <View style={styles.infoBox}>
-            <Text style={styles.subHeader}> First Name </Text>
             <CustInput
+              titleText="First Name"
               placeholder="e.g. John"
               value={firstName}
               setValue={setFirstName}
             />
 
-            <Text style={styles.subHeader}> Last Name </Text>
             <CustInput
+              titleText="Last Name"
               placeholder="e.g. Smith"
               value={lastName}
               setValue={setLastName}
             />
 
-            <Text style={styles.subHeader}> Email Address </Text>
             <CustInput
+              titleText="Email Address"
               placeholder="e.g. johnSmith@whatsThat.com"
               value={email}
               setValue={setEmail}
             />
 
-            <Text style={styles.subHeader}> Password </Text>
             <CustInput
+              titleText="Password"
               placeholder="e.g. password@123"
               value={password}
               setValue={setPassword}
               secureTextEntry
             />
-            <Text style={styles.subHeader}> Re-type password </Text>
+
             <CustInput
+              titleText="Re-type password"
               placeholder="e.g. password@123"
               value={passRetype}
               setValue={setPassRetype}

@@ -78,15 +78,14 @@ export default function Login() {
           <Text style={[styles.subHeader, { paddingLeft: 0 }]}> Log in </Text>
 
           <View style={styles.infoBox}>
-            <Text style={styles.subHeader}> Email Address </Text>
             <CustInput
+              titleText="Email Address"
               placeholder="e.g. johnSmith@whatsThat.com"
               value={email}
               setValue={setEmail}
             />
-
-            <Text style={styles.subHeader}> Password </Text>
             <CustInput
+              titleText="Password"
               placeholder="e.g. password@123"
               value={password}
               setValue={setPassword}
