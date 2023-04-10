@@ -91,13 +91,13 @@ export default function SignUp() {
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.header}>Create a new account</Text>
+          <Text style={styles.header}> Create a new account </Text>
           <Text style={[styles.header2, { fontSize: 20, marginLeft: 0 }]}>
             Your details
           </Text>
 
           <View style={styles.infoBox}>
-            <Text style={styles.subHeader}>First Name</Text>
+            <Text style={styles.subHeader}> First Name </Text>
             <TextInput
               placeholder="Example: John"
               editable
@@ -105,7 +105,7 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text style={styles.subHeader}>Last Name</Text>
+            <Text style={styles.subHeader}> Last Name </Text>
             <TextInput
               placeholder="Example: Smith"
               editable
@@ -113,14 +113,14 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text style={styles.subHeader}>Email Address</Text>
+            <Text style={styles.subHeader}> Email Address </Text>
             <TextInput
               placeholder="Example: John.Smith@WhatsThat.com"
               editable
               maxLength={80}
               style={styles.input}
             />
-            <Text style={styles.subHeader}>Password</Text>
+            <Text style={styles.subHeader}> Password </Text>
             <TextInput
               placeholder="Example: Password@123"
               editable
@@ -128,7 +128,9 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text style={styles.subHeader}>Start using Whats That</Text>
+            <Text style={[styles.subHeader, { paddingLeft: 0, fontSize: 14 }]}>
+              Start using Whats That
+            </Text>
             <Pressable
               style={styles.button}
               onPress={console.log('Create Account')}
@@ -140,7 +142,9 @@ export default function SignUp() {
               </Text>
             </Pressable>
 
-            <Text style={styles.subHeader}>Already have an account?</Text>
+            <Text style={[styles.subHeader, { paddingLeft: 0, fontSize: 14 }]}>
+              Already have an account?
+            </Text>
             <Pressable
               style={styles.button}
               onPress={() => navigation.navigate('Login')}
