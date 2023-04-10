@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
+  const logIn = () => {
+    console.log('log in');
+  };
   const goToSignUp = () => {
     navigation.navigate('SignUp');
   };
@@ -91,7 +94,7 @@ export default function Login() {
             />
 
             <CustButton
-              onPress={() => console.log('Login')}
+              onPress={logIn}
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
               buttonText="Submit Login details"

@@ -2,7 +2,7 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-import { AppStack, LoginStack } from './src/Navigation/stackNavivation';
+import { AppStack, LoginStack } from './src/Navigation/stackNavigation';
 
 const styles = StyleSheet.create({
   container: {

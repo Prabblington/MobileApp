@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
 
 export default function SignUp() {
   const navigation = useNavigation();
+  const createNewAccount = () => {
+    console.log('create a new account');
+  };
   const goToLogin = () => {
     navigation.navigate('Login');
   };
@@ -107,7 +110,7 @@ export default function SignUp() {
               Start using Whats That
             </Text>
             <CustButton
-              onPress={console.log('submit new account details')}
+              onPress={createNewAccount}
               title="Submit details"
               accessibilityLabel="press this button to submit new account details"
               buttonText="Submit details and create new account"
