@@ -10,7 +10,6 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d2c3fa',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
   landingContainer: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#fac5ee',
+    backgroundColor: 'whitesmoke',
   },
 
   headerContainer: {
@@ -45,13 +44,13 @@ const styles = StyleSheet.create({
     height: '58%',
     marginTop: '7%',
     borderRadius: 22,
-    backgroundColor: '#e8daf0',
+    backgroundColor: '#f0f0f0',
   },
 
   input: {
     borderWidth: 1,
     borderColor: 'purple',
-    backgroundColor: '#f8edff',
+    backgroundColor: 'whitesmoke',
     borderRadius: 22,
     padding: 10,
     margin: 10,

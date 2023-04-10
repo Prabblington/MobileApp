@@ -6,11 +6,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d2c3fa',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   landingContainer: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#fac5ee',
+    backgroundColor: 'whitesmoke',
   },
 
   headerContainer: {
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     marginTop: '8%',
     marginLeft: '8%',
     fontSize: 30,
-    color: '#31053b',
   },
 
   infoBox: {
@@ -45,13 +44,13 @@ const styles = StyleSheet.create({
     height: '58%',
     marginTop: '7%',
     borderRadius: 22,
-    backgroundColor: '#e8daf0',
+    backgroundColor: '#f0f0f0',
   },
 
   input: {
     borderWidth: 1,
-    borderColor: 'purple',
-    backgroundColor: '#f8edff',
+    borderColor: 'black',
+    backgroundColor: 'whitesmoke',
     borderRadius: 22,
     padding: 10,
     margin: 10,
@@ -59,16 +58,18 @@ const styles = StyleSheet.create({
     width: '91%',
   },
 
+  // ------------------------------ not used ----------------------------------
   loginButton: {
-    backgroundColor: '#35decd',
+    backgroundColor: '#C8FF24',
   },
-
+  // ------------------------------ not used ----------------------------------
   signUpButton: {
-    backgroundColor: '#35decd',
+    backgroundColor: '#C8FF24',
   },
 });
 
 export default function Login() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
@@ -101,7 +102,7 @@ export default function Login() {
               placeholder="Example: Password@123"
               editable
               maxLength={80}
-              style={[styles.input]}
+              style={styles.input}
             />
 
             <Button
@@ -112,7 +113,7 @@ export default function Login() {
             />
             <Button
               style={styles.signUpButton}
-              onPress={console.log('Go to Sign in page')}
+              onPress={() => navigation.navigate('SignUp')}
               title="Create a new account"
               accessibilityLabel="press this button to log in with provided details"
             />

@@ -4,10 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatUI from '../Components/Chats/chatUI';
 import HomeTabNav from './tabNavigation';
 import ContactScreen from '../Screens/contactScreen';
+import Login from '../Screens/LoginRoot/loginV1';
+import SignUp from '../Screens/LoginRoot/signUp';
 
 const Stack = createNativeStackNavigator();
 
-export default function AppStack() {
+function AppStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -28,3 +30,24 @@ export default function AppStack() {
     </NavigationContainer>
   );
 }
+
+function LoginStack() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="LoginScreen">
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export { AppStack, LoginStack };
