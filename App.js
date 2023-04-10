@@ -4,8 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AppStack, LoginStack } from './src/Navigation/stackNavivation';
 
-import SignUp from './src/Screens/LoginRoot/signUp';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,10 +16,8 @@ export default function App() {
   return (
     // <SafeAreaView style={styles.container}>
     <SafeAreaView style={styles.container}>
+      <LoginStack />
       {/* <AppStack /> */}
-      {/* <LoginStack /> */}
-      <SignUp />
-
       <StatusBar style="auto" />
     </SafeAreaView>
   );

@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
 
   headerContainer: {
-    marginTop: '10%',
+    marginTop: '2%',
     width: '100%',
     alignItems: 'center',
   },
@@ -34,14 +35,23 @@ const styles = StyleSheet.create({
 
   subHeader: {
     marginTop: '5%',
+    paddingLeft: 10,
+    fontSize: 16,
+    textAlign: 'left',
+  },
+
+  header2: {
+    marginTop: '5%',
     marginLeft: '8%',
-    fontSize: 30,
+    paddingLeft: 10,
+    fontSize: 20,
+    textAlign: 'center',
   },
 
   infoBox: {
-    width: '75%',
+    width: '80%',
     height: '70%',
-    marginTop: '7%',
+    marginTop: '2%',
     borderRadius: 22,
     backgroundColor: '#f0f0f0',
   },
@@ -54,25 +64,24 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 10,
     margin: 10,
-    marginTop: '5%',
+    marginTop: '2%',
     width: '91%',
   },
 });
 
 export default function SignUp() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Create a new account</Text>
-          <Text style={styles.subHeader}>Fill in your details here</Text>
+          <Text style={[styles.header2, { fontSize: 20, marginLeft: 0 }]}>
+            Your details
+          </Text>
 
           <View style={styles.infoBox}>
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              First Name
-            </Text>
+            <Text style={styles.subHeader}>First Name</Text>
             <TextInput
               placeholder="Example: John"
               editable
@@ -80,11 +89,7 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              Last Name
-            </Text>
+            <Text style={styles.subHeader}>Last Name</Text>
             <TextInput
               placeholder="Example: Smith"
               editable
@@ -92,22 +97,14 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              Email Address
-            </Text>
+            <Text style={styles.subHeader}>Email Address</Text>
             <TextInput
               placeholder="Example: John.Smith@WhatsThat.com"
               editable
               maxLength={80}
               style={styles.input}
             />
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              Password
-            </Text>
+            <Text style={styles.subHeader}>Password</Text>
             <TextInput
               placeholder="Example: Password@123"
               editable
@@ -115,11 +112,7 @@ export default function SignUp() {
               style={styles.input}
             />
 
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              Start using Whats That
-            </Text>
+            <Text style={styles.subHeader}>Start using Whats That</Text>
             <Button
               style={styles.loginButton}
               onPress={console.log('Create Account')}
@@ -127,14 +120,10 @@ export default function SignUp() {
               accessibilityLabel="press this button to submit new account details"
             />
 
-            <Text
-              style={[styles.subHeader, { fontSize: 16, marginLeft: '0%' }]}
-            >
-              Already have an account?
-            </Text>
+            <Text style={styles.subHeader}>Already have an account?</Text>
             <Button
               style={styles.loginButton}
-              onPress={console.log('Back to Login page')}
+              onPress={() => navigation.navigate('Login')}
               title="Go back to Login page"
               accessibilityLabel="press this button to go back to login page"
             />
