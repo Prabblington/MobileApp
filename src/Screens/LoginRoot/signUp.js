@@ -67,6 +67,7 @@ export default function SignUp() {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [passRetype, setPassRetype] = useState();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,6 +105,14 @@ export default function SignUp() {
               placeholder="e.g. password@123"
               value={password}
               setValue={setPassword}
+              secureTextEntry
+            />
+            <Text style={styles.subHeader}> Re-type password </Text>
+            <CustInput
+              placeholder="e.g. password@123"
+              value={passRetype}
+              setValue={setPassRetype}
+              secureTextEntry
             />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
