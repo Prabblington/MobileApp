@@ -15,13 +15,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function CustInput({ value, setValue, placeholder }) {
+export default function CustInput({
+  value,
+  setValue,
+  placeholder,
+  secureTextEntry = false,
+}) {
   return (
     <View style={styles.button}>
       <TextInput
         value={value}
         onChangeText={setValue}
         placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
         editable
         maxLength={80}
         style={styles.input}

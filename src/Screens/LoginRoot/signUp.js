@@ -1,12 +1,6 @@
-import {
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 
@@ -79,6 +73,12 @@ const styles = StyleSheet.create({
 
 export default function SignUp() {
   const navigation = useNavigation();
+
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
@@ -90,15 +90,32 @@ export default function SignUp() {
 
           <View style={styles.infoBox}>
             <Text style={styles.subHeader}> First Name </Text>
-            <CustInput placeholder="e.g. John" />
+            <CustInput
+              placeholder="e.g. John"
+              value={firstName}
+              setValue={setFirstName}
+            />
 
             <Text style={styles.subHeader}> Last Name </Text>
-            <CustInput placeholder="e.g. Smith" />
+            <CustInput
+              placeholder="e.g. Smith"
+              value={lastName}
+              setValue={setLastName}
+            />
 
             <Text style={styles.subHeader}> Email Address </Text>
-            <CustInput placeholder="e.g. johnSmith@whatsThat.com" />
+            <CustInput
+              placeholder="e.g. johnSmith@whatsThat.com"
+              value={email}
+              setValue={setEmail}
+            />
+
             <Text style={styles.subHeader}> Password </Text>
-            <CustInput placeholder="e.g. password@123" />
+            <CustInput
+              placeholder="e.g. password@123"
+              value={password}
+              setValue={setPassword}
+            />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Start using Whats That

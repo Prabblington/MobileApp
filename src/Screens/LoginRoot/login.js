@@ -1,5 +1,6 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 
@@ -73,6 +74,9 @@ const styles = StyleSheet.create({
 export default function Login() {
   const navigation = useNavigation();
 
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.landingContainer}>
@@ -83,10 +87,19 @@ export default function Login() {
 
           <View style={styles.infoBox}>
             <Text style={styles.subHeader}> Email Address </Text>
-            <CustInput placeholder="e.g. johnSmith@whatsThat.com" />
+            <CustInput
+              placeholder="e.g. johnSmith@whatsThat.com"
+              value={email}
+              setValue={setEmail}
+            />
 
             <Text style={styles.subHeader}> Password </Text>
-            <CustInput placeholder="e.g. password@123" />
+            <CustInput
+              placeholder="e.g. password@123"
+              value={password}
+              setValue={setPassword}
+              secureTextEntry
+            />
 
             <Pressable
               style={[styles.button, { marginTop: 22 }]}
