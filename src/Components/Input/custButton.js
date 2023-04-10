@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center',
     backgroundColor: '#0088FF',
-    marginTop: 15,
+    marginTop: 8,
     marginBottom: 2,
     alignSelf: 'center',
   },
