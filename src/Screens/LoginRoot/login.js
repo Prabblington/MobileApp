@@ -59,9 +59,8 @@ export default function Login() {
   const goToSignUp = () => {
     navigation.navigate('SignUp');
   };
-
-  const onPressTest = () => {
-    console.log('onPress working');
+  const forgotPassword = () => {
+    console.log('password forgotten');
   };
 
   const [email, setEmail] = useState();
@@ -92,7 +91,7 @@ export default function Login() {
             />
 
             <CustButton
-              onPress={onPressTest}
+              onPress={() => console.log('Login')}
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
               buttonText="Submit Login details"
@@ -103,6 +102,14 @@ export default function Login() {
               title="Create a new account"
               accessibilityLabel="press this button to create a new account"
               buttonText="Create a new account"
+            />
+
+            <CustButton
+              onPress={forgotPassword}
+              title="password reset"
+              accessibilityLabel="button to reset your password"
+              buttonText="forgot password?"
+              type="Secondary"
             />
           </View>
         </View>

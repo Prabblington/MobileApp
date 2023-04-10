@@ -1,7 +1,7 @@
 import { StyleSheet, Pressable, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-  button: {
+  buttonMain: {
     width: '90%',
     borderWidth: 1,
     borderColor: 'black',
@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 2,
     alignSelf: 'center',
+  },
+
+  buttonSecondary: {
+    marginTop: '5%',
+    borderWidth: 0,
+    backgroundColor: 'clear',
   },
 
   buttonText: {
@@ -25,10 +31,11 @@ export default function CustButton({
   title,
   accessibilityLabel,
   buttonText,
+  type = `Main`,
 }) {
   return (
     <Pressable
-      style={styles.button}
+      style={[styles.buttonMain, styles[`button${type}`]]}
       onPress={() => onPress()}
       title={title}
       accessibilityLabel={accessibilityLabel}
