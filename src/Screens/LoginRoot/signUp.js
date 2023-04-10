@@ -52,21 +52,23 @@ const styles = StyleSheet.create({
 
   infoBox: {
     width: '80%',
-    height: '70%',
+    height: '100%',
     marginTop: '1%',
     borderRadius: 22,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#d4e0e7',
   },
 
   button: {
+    width: '90%',
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 5,
     padding: 5,
     textAlign: 'center',
     backgroundColor: '#0088FF',
-    marginTop: 2,
+    marginTop: 12,
     marginBottom: 2,
+    alignSelf: 'center',
   },
 
   buttonText: {
@@ -98,7 +100,7 @@ export default function SignUp() {
             <Text style={styles.subHeader}> Password </Text>
             <CustInput placeholder="e.g. password@123" />
 
-            <Text style={[styles.subHeader, { paddingLeft: 0, fontSize: 14 }]}>
+            <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Start using Whats That
             </Text>
             <Pressable
@@ -112,7 +114,7 @@ export default function SignUp() {
               </Text>
             </Pressable>
 
-            <Text style={[styles.subHeader, { paddingLeft: 0, fontSize: 14 }]}>
+            <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Already have an account?
             </Text>
             <Pressable

@@ -44,13 +44,15 @@ const styles = StyleSheet.create({
 
   infoBox: {
     width: '75%',
-    height: '70%',
+    height: '80%',
     marginTop: '7%',
+    paddingTop: 30,
     borderRadius: 22,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#d4e0e7',
   },
 
   button: {
+    width: '90%',
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 5,
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0088FF',
     marginTop: 15,
     marginBottom: 2,
+    alignSelf: 'center',
   },
 
   buttonText: {
@@ -86,7 +89,7 @@ export default function Login() {
             <CustInput placeholder="e.g. password@123" />
 
             <Pressable
-              style={styles.button}
+              style={[styles.button, { marginTop: 22 }]}
               onPress={console.log('Login Submitted')}
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
