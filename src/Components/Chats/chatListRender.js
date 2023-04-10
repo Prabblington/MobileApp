@@ -9,8 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
-
-const contactPfp = require('../../images/logo2.png');
+import contactPfp from '../../images/logo2.png';
 
 DayJs.extend(RelativeTime);
 

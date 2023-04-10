@@ -6,10 +6,8 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import contactPicture from '../../images/logo2.png';
 // import { useNavigation } from "@react-navigation/native";
-
-require('../../images/logo2.png');
-const contactPicture = require('../../images/logo2.png');
 
 const { width } = Dimensions.get('window');
 
