@@ -1,8 +1,9 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
+import CustButton from '../../Components/Input/custButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,28 +52,17 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     backgroundColor: '#d4e0e7',
   },
-
-  button: {
-    width: '90%',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
-    padding: 5,
-    textAlign: 'center',
-    backgroundColor: '#0088FF',
-    marginTop: 15,
-    marginBottom: 2,
-    alignSelf: 'center',
-  },
-
-  buttonText: {
-    textAlign: 'center',
-    fontWeight: 600,
-  },
 });
 
 export default function Login() {
   const navigation = useNavigation();
+  const goToSignUp = () => {
+    navigation.navigate('SignUp');
+  };
+
+  const onPressTest = () => {
+    console.log('onPress working');
+  };
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -101,23 +91,19 @@ export default function Login() {
               secureTextEntry
             />
 
-            <Pressable
-              style={[styles.button, { marginTop: 22 }]}
-              onPress={console.log('Login Submitted')}
+            <CustButton
+              onPress={onPressTest}
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
-            >
-              <Text style={styles.buttonText}> Submit Login details </Text>
-            </Pressable>
+              buttonText="Submit Login details"
+            />
 
-            <Pressable
-              style={styles.button}
-              onPress={() => navigation.navigate('SignUp')}
+            <CustButton
+              onPress={goToSignUp}
               title="Create a new account"
               accessibilityLabel="press this button to create a new account"
-            >
-              <Text style={styles.buttonText}> Create a new account </Text>
-            </Pressable>
+              buttonText="Create a new account"
+            />
           </View>
         </View>
       </View>
