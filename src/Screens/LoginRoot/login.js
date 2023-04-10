@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
   infoBox: {
     width: '75%',
-    height: '80%',
+    height: '90%',
     marginTop: '7%',
     paddingTop: 30,
     borderRadius: 22,
