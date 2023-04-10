@@ -10,11 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
-require('../../images/logo2.png');
+const contactPfp = require('../../images/logo2.png');
 
 DayJs.extend(RelativeTime);
-
-const contactPfp = require('../../images/logo2.png');
 
 const { width } = Dimensions.get('window');
 
