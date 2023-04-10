@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   headerContainer: {
-    marginTop: '30%',
+    marginTop: '10%',
     width: '100%',
     alignItems: 'center',
   },
@@ -29,19 +29,18 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 42,
     fontWeight: 'bold',
-    alignItems: 'center',
+    textAlign: 'center',
   },
 
   subHeader: {
-    marginTop: '8%',
+    marginTop: '5%',
     marginLeft: '8%',
     fontSize: 30,
-    color: '#31053b',
   },
 
   infoBox: {
     width: '75%',
-    height: '58%',
+    height: '70%',
     marginTop: '7%',
     borderRadius: 22,
     backgroundColor: '#f0f0f0',
@@ -49,10 +48,11 @@ const styles = StyleSheet.create({
 
   input: {
     borderWidth: 1,
-    borderColor: 'purple',
+    borderColor: 'black',
     backgroundColor: 'whitesmoke',
     borderRadius: 22,
     padding: 10,
+    paddingBottom: 10,
     margin: 10,
     marginTop: '5%',
     width: '91%',

@@ -2,8 +2,6 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-// import AppStack from './src/Navigation/stackNavivation';
-// import LoginScreen from './src/Screens/LoginRoot/loginV1';
 import { AppStack, LoginStack } from './src/Navigation/stackNavivation';
 
 import SignUp from './src/Screens/LoginRoot/signUp';
@@ -22,7 +20,6 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       {/* <AppStack /> */}
       {/* <LoginStack /> */}
-      {/* <LoginScreen /> */}
       <SignUp />
 
       <StatusBar style="auto" />
