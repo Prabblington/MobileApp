@@ -1,11 +1,15 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import PasswordChecklist from 'react-password-checklist';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
+import {
+  EMAIL_VALIDATION,
+  PASSWORD_VALIDATION,
+} from '../../api/apiValidation/userValidation';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,12 +62,6 @@ const styles = StyleSheet.create({
 
 export default function SignUp() {
   const navigation = useNavigation();
-  const createNewAccount = () => {
-    console.log('create a new account');
-  };
-  const goToLogin = () => {
-    navigation.navigate('Login');
-  };
 
   const passwordChecklistRules = [
     'minLength',
@@ -72,6 +70,7 @@ export default function SignUp() {
     'number',
     'capital',
     'match',
+    'notEmpty',
   ];
 
   const [firstName, setFirstName] = useState('');
@@ -79,6 +78,13 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passRetype, setPassRetype] = useState('');
+
+  const createNewAccount = () => {
+    console.log('create a new account');
+  };
+  const goToLogin = () => {
+    navigation.navigate('Login');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,7 +119,7 @@ export default function SignUp() {
 
             <CustInput
               titleText="Password"
-              placeholder="e.g. password@123"
+              placeholder="e.g. Password@123"
               value={password}
               setValue={setPassword}
               secureTextEntry
@@ -121,7 +127,7 @@ export default function SignUp() {
 
             <CustInput
               titleText="Re-type password"
-              placeholder="e.g. password@123"
+              placeholder="e.g. Password@123"
               value={passRetype}
               setValue={setPassRetype}
               secureTextEntry
@@ -134,7 +140,11 @@ export default function SignUp() {
               maxLength={20}
               value={password}
               valueAgain={passRetype}
-              onChange={(isValid) => {}}
+              onChange={() => {
+                if (password === passRetype) {
+                  console.log('passwords match');
+                }
+              }}
             />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
