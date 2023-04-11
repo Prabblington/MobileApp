@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const logIn = () => {
     console.log('log in');
   };
@@ -65,9 +69,6 @@ export default function Login() {
   const forgotPassword = () => {
     console.log('password forgotten');
   };
-
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
 
   return (
     <SafeAreaView style={styles.container}>
