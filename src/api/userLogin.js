@@ -14,3 +14,5 @@ const userLogin = async (data) => {
     return err.response.data;
   }
 };
+
+export default userLogin;
