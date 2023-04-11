@@ -13,51 +13,50 @@ const api = axios.create({
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json',
-    'X-Authorization': authorisationToken,
+    'X-Authorization': `apiKey ${authorisationToken}`,
   },
 });
 
 export default function ApiTest() {
   const [err, setErr] = useState(null);
-
-  api.interceptors.request.use(
-    (config) => {
-      config.headers['X-Authorization'] = `${authorisationToken}`;
-      return config;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Authorization': `apiKey ${authorisationToken}`,
     },
-    (error) => Promise.reject(error)
-  );
+  };
 
   const first_name = 'ags';
   const last_name = 'asdf';
   const email = 'ags.f@test.com';
   const password = 'Password@123';
 
-  const addUsers = async () => {
-    try {
-      const response = await api.post('/user', {
-        first_name,
-        last_name,
-        email,
-        password,
-      });
+  // const addUsers = async () => {
+  //   try {
+  //     const response = await api.post('/user', {
+  //       first_name,
+  //       last_name,
+  //       email,
+  //       password,
+  //     });
 
-      // Handle successful response here
-      console.log(response.data);
-    } catch (error) {
-      // Handle error response here
-      console.error(error);
-      setErr('Failed to add users');
-    }
-  };
+  //     // Handle successful response here
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     // Handle error response here
+  //     console.error(error);
+  //     setErr('Failed to add users');
+  //   }
+  // };
 
   const getUsers = async () => {
     try {
-      const response = await api.get('/user/4');
+      const response = await api.get('/user/14', config);
       // Handle successful response here
       console.log(response.data);
     } catch (error) {
       // Handle error response here
+      console.log(api.defaults.headers);
       console.error(error);
       setErr('Failed to get user');
     }
@@ -66,6 +65,7 @@ export default function ApiTest() {
   return (
     <View>
       {/* <Button onPress={addUsers} title="Add Users" /> */}
+
       <Button onPress={getUsers} title="Get Users" />
       {err && <Text>{err}</Text>}
     </View>
