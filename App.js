@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { AppStack, LoginStack } from './src/Navigation/stackNavigation';
-import ApiTest from './src/api/apiValidation/apiTest';
+import ApiTestComponent from './src/api/apiTestComponent';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ApiTest />
       {/* <LoginStack /> */}
       {/* <AppStack /> */}
+      <ApiTestComponent />
 
       <StatusBar style="auto" />
     </SafeAreaView>
