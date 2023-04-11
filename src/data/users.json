@@ -1,0 +1,23 @@
+[
+  {
+    "id": 14,
+    "first_name": "Ashley",
+    "last_name": "Williams",
+    "email": "ashley.williams@mmu.ac.uk",
+    "password": "Wr3xh4m!"
+  },
+  {
+    "id": 12,
+    "first_name": "Becca",
+    "last_name": "Sharkey",
+    "email": "bec.test@mmu.ac.uk",
+    "password": "Password@123"
+  },
+  {
+    "id": 10,
+    "first_name": "Kat",
+    "last_name": "Mondu",
+    "email": "kat.mond@mmu.ac.uk",
+    "password": "Password@321"
+  }
+]
