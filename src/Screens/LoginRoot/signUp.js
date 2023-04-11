@@ -2,6 +2,8 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
+import PasswordChecklist from 'react-password-checklist';
+
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
 
@@ -63,11 +65,20 @@ export default function SignUp() {
     navigation.navigate('Login');
   };
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [passRetype, setPassRetype] = useState();
+  const passwordChecklistRules = [
+    'minLength',
+    'maxLength',
+    'specialChar',
+    'number',
+    'capital',
+    'match',
+  ];
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passRetype, setPassRetype] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -114,6 +125,16 @@ export default function SignUp() {
               value={passRetype}
               setValue={setPassRetype}
               secureTextEntry
+            />
+
+            <PasswordChecklist
+              style={styles.subHeader}
+              rules={passwordChecklistRules}
+              minLength={8}
+              maxLength={20}
+              value={password}
+              valueAgain={passRetype}
+              onChange={(isValid) => {}}
             />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
