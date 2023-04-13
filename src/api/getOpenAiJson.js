@@ -38,11 +38,9 @@ const signupTest = () => {
     .post('/user', signupData)
     .then((response) => {
       const signup = response.data;
-      console.log(signup);
     })
     .catch((error) => {
-      console.error(error);
-      // throw new Error(error);
+      throw new Error(error);
     });
 };
 
