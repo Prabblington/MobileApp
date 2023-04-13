@@ -10,7 +10,8 @@ function apiTestComponent() {
     try {
       // const data = await getUser(2); // call the getUser function with a specific user ID
       // setUserData(data);
-      getUserTest();
+      loginTest();
+      getUserTest(6);
       setError(null);
     } catch (err) {
       setError(err.message);
