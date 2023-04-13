@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseURL = 'http://localhost:3333/api/1.0.0';
-const AUTH_TOKEN = 'cf1c6c64be48c22cfe8f90a08c1027a4';
+let AUTH_TOKEN = 'cf1c6c64be48c22cfe8f90a08c1027a4';
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.common['X-Authorization'] = AUTH_TOKEN;
@@ -19,6 +19,7 @@ const addUser = async (user) => {
   }
 };
 
+// POST /user
 const signupData = {
   first_name: 'Ashley',
   last_name: 'Williams',
@@ -26,6 +27,7 @@ const signupData = {
   password: 'Wr3xh4m!',
 };
 
+// POST /login
 const loginUserData = {
   email: 'ashley.williams@mmu.ac.uk',
   password: 'Wr3xh4m!',
@@ -49,6 +51,9 @@ const loginTest = () => {
     .post('/login', loginUserData)
     .then((response) => {
       const loginResponse = response.data;
+      const userToken = response.data.token;
+      AUTH_TOKEN = userToken;
+      console.log(AUTH_TOKEN);
       console.log(loginResponse);
     })
     .catch((error) => {
@@ -57,9 +62,9 @@ const loginTest = () => {
     });
 };
 
-const getUserTest = () => {
+const getUserTest = (user) => {
   axios
-    .get('/user/6')
+    .get(`/user/${user}`)
     .then((response) => {
       // const loginResponse = response.data;
       console.log(response);
