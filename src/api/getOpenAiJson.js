@@ -1,35 +1,73 @@
-import OpenAPIClientAxios from 'openapi-client-axios';
 import axios from 'axios';
 
-const api = new OpenAPIClientAxios({
-  definition: 'http://localhost:3333/api/1.0.0',
-  axiosConfigDefaults: {
-    headers: {
-      'Content-Type': 'json',
-      'X-Authorization': 'access',
-    },
-  },
-  axios,
-});
+const baseURL = 'http://localhost:3333/api/1.0.0';
+const AUTH_TOKEN = 'cf1c6c64be48c22cfe8f90a08c1027a4';
 
-const client = await api.init();
-// const res = await client.getUser(2);
+axios.defaults.baseURL = baseURL;
+axios.defaults.headers.common['X-Authorization'] = AUTH_TOKEN;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-client.paths['/user/{user_id}'].get({ user_id: 2 }); // GET /pets, same as calling client.getPets()
-// client.paths['/pets'].post(); // POST /pets
-// client.paths['/pets/{petId}'].put(1); // PUT /pets/1
-// client.paths['/pets/{petId}/owner/{ownerId}'].get({ petId: 1, ownerId: 2 }) ; // GET /pets/1/owner/2
+const addUser = async (user) => {
+  try {
+    const response = await axios.post('/user', user, {
+      baseURL,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error);
+  }
+};
 
-// const getUser = (userID) =>
-//   client
-//     .getUser({ userId: userID })
-//     .then((response) => {
-//       console.log(response.data);
-//       return response.data;
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       throw new Error('Failed to get user');
-//     });
+const signupData = {
+  first_name: 'Ashley',
+  last_name: 'Williams',
+  email: 'ashley.williams@mmu.ac.uk',
+  password: 'Wr3xh4m!',
+};
 
-// export default getUser;
+const loginUserData = {
+  email: 'ashley.williams@mmu.ac.uk',
+  password: 'Wr3xh4m!',
+};
+
+const signupTest = () => {
+  axios
+    .post('/user', signupData)
+    .then((response) => {
+      const signup = response.data;
+      console.log(signup);
+    })
+    .catch((error) => {
+      console.error(error);
+      // throw new Error(error);
+    });
+};
+
+const loginTest = () => {
+  axios
+    .post('/login', loginUserData)
+    .then((response) => {
+      const loginResponse = response.data;
+      console.log(loginResponse);
+    })
+    .catch((error) => {
+      console.error(error);
+      // throw new Error(error);
+    });
+};
+
+const getUserTest = () => {
+  axios
+    .get('/user/6')
+    .then((response) => {
+      // const loginResponse = response.data;
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+      // throw new Error(error);
+    });
+};
+
+export { signupTest, loginTest, getUserTest };

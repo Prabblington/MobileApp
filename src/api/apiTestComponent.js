@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Button, Text } from 'react-native';
-import getUser from './getOpenAiJson'; // import the getUser function from another file
+import { loginTest, signupTest, getUserTest } from './getOpenAiJson';
 
 function apiTestComponent() {
   const [userData, setUserData] = useState(null);
@@ -8,8 +8,9 @@ function apiTestComponent() {
 
   const handleGetUser = async () => {
     try {
-      const data = await getUser(2); // call the getUser function with a specific user ID
-      setUserData(data);
+      // const data = await getUser(2); // call the getUser function with a specific user ID
+      // setUserData(data);
+      getUserTest();
       setError(null);
     } catch (err) {
       setError(err.message);
