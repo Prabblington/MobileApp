@@ -53,12 +53,11 @@ const loginTest = () => {
       const loginResponse = response.data;
       const userToken = response.data.token;
       AUTH_TOKEN = userToken;
-      console.log(AUTH_TOKEN);
-      console.log(loginResponse);
+      console.log(`X-Authorization: ${AUTH_TOKEN}`);
+      console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
     })
     .catch((error) => {
-      console.error(error);
-      // throw new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -66,12 +65,13 @@ const getUserTest = (user) => {
   axios
     .get(`/user/${user}`)
     .then((response) => {
-      // const loginResponse = response.data;
-      console.log(response);
+      const firstName = response.data.first_name;
+      const lastName = response.data.last_name;
+      const { email } = response.data;
+      console.log(`User ${user} data: ${firstName} ${lastName} ${email}`);
     })
     .catch((error) => {
-      console.error(error);
-      // throw new Error(error);
+      throw new Error(error);
     });
 };
 
