@@ -76,8 +76,10 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
   const [passRetype, setPassRetype] = useState('');
+  const [match, setMatch] = useState(false);
 
   const createNewAccount = () => {
     console.log('create a new account');
@@ -142,7 +144,7 @@ export default function SignUp() {
               valueAgain={passRetype}
               onChange={() => {
                 if (password === passRetype) {
-                  console.log('passwords match');
+                  setMatch(true);
                 }
               }}
             />
