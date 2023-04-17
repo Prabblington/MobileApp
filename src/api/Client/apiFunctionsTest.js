@@ -6,16 +6,12 @@ const baseURL = 'http://localhost:3333/api/1.0.0';
 
 axios.defaults.baseURL = baseURL;
 
-const addUser = async (user) => {
-  try {
-    const response = await axios.post('/user', user, {
-      baseURL,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw new Error(error);
-  }
+// POST /user
+const signupData = {
+  first_name: 'Ashley',
+  last_name: 'Williams',
+  email: 'ashley.williams@mmu.ac.uk',
+  password: 'Wr3xh4m!',
 };
 
 const signupTest = () => {
@@ -43,14 +39,6 @@ const signupTest = () => {
 //       throw new Error(error);
 //     });
 // };
-
-// POST /user
-const signupData = {
-  first_name: 'Ashley',
-  last_name: 'Williams',
-  email: 'ashley.williams@mmu.ac.uk',
-  password: 'Wr3xh4m!',
-};
 
 // POST /login
 const loginUserData = {
