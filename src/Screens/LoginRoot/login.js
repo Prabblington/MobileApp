@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
-  const handleLogin = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
