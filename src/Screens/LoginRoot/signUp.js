@@ -84,12 +84,12 @@ export default function SignUp() {
   const [err, setErr] = useState('');
 
   const validate = () => {
-    if (password === passRetype) {
-      if (EMAIL_VALIDATION.test(email) && PASSWORD_VALIDATION.test(password)) {
-        setIsValid(true);
-      } else {
-        setIsValid(false);
-      }
+    if (
+      password === passRetype &&
+      EMAIL_VALIDATION.test(email) &&
+      PASSWORD_VALIDATION.test(password)
+    ) {
+      setIsValid(true);
     } else {
       setIsValid(false);
     }
@@ -98,9 +98,9 @@ export default function SignUp() {
 
   const signUp = async () => {
     try {
-      if (validate === true) {
-        await createNewAccount(firstName, lastName, email, password);
-      }
+      // if (isValid === true) {
+      await createNewAccount(firstName, lastName, email, password);
+      // }
 
       setErr(null);
     } catch (e) {
