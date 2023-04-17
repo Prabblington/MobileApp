@@ -14,31 +14,35 @@ const signupData = {
   password: 'Wr3xh4m!',
 };
 
-const signupTest = () => {
-  axios
-    .post('/user', signupData)
-    .then((response) => {
-      const signup = response.data;
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
+let userData = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
 };
 
-// const loginTest = () => {
-//   axios
-//     .post('/login', loginUserData)
-//     .then((response) => {
-//       const loginResponse = response.data;
-//       const userToken = response.data.token;
-//       AUTH_TOKEN = userToken;
-//       console.log(`X-Authorization: ${AUTH_TOKEN}`);
-//       console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
-//     })
-//     .catch((error) => {
-//       throw new Error(error);
-//     });
-// };
+const createNewAccount = (firstName, lastName, email, password) => {
+  userData = { firstName, lastName, email, password };
+  const accData = { firstName, lastName, email, password };
+
+  axios
+    .post('/user', accData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(async (response) => {
+      const newAccResponse = await response.data;
+
+      console.log(JSON.stringify(newAccResponse));
+      return true;
+    })
+    .catch((error) => {
+      console.warn(error);
+      return false;
+    });
+};
 
 // POST /login
 const loginUserData = {
@@ -47,8 +51,8 @@ const loginUserData = {
 };
 
 const loginTest = (email, password) => {
-  const userData = { email, password, id: '' };
-  const loginData = { email: userData.email, password: userData.password };
+  userData = { email, password };
+  const loginData = { email, password };
 
   axios
     .post('/login', loginData, {
@@ -67,6 +71,7 @@ const loginTest = (email, password) => {
 
       console.log(`X-Authorization: ${JSON.stringify(loginResponse.token)}`);
       console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
+      console.log(`User: ${JSON.stringify(userData)}`);
 
       return true;
     })
@@ -75,6 +80,21 @@ const loginTest = (email, password) => {
       return false;
     });
 };
+
+// const loginTest = () => {
+//   axios
+//     .post('/login', loginUserData)
+//     .then((response) => {
+//       const loginResponse = response.data;
+//       const userToken = response.data.token;
+//       AUTH_TOKEN = userToken;
+//       console.log(`X-Authorization: ${AUTH_TOKEN}`);
+//       console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
+//     })
+//     .catch((error) => {
+//       throw new Error(error);
+//     });
+// };
 
 const getUserTest = (user) => {
   axios
@@ -90,4 +110,4 @@ const getUserTest = (user) => {
     });
 };
 
-export { signupTest, loginTest, getUserTest };
+export { createNewAccount, loginTest, getUserTest };
