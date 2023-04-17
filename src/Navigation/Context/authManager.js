@@ -10,9 +10,23 @@ function AuthProvider({ children }) {
   const [err, setErr] = useState('');
 
   const checkAuth = async () => {
-    const auth = await AsyncStorage.getItem('isLoggedIn');
-    setIsLoggedIn(auth);
+    try {
+      const auth = await AsyncStorage.getItem('isLoggedIn');
+      if (auth === 'true') {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (e) {
+      setErr(e);
+      console.warn(err);
+      setIsLoggedIn(false);
+    }
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const handleLogin = async (email, password) => {
     try {
@@ -36,6 +50,7 @@ function AuthProvider({ children }) {
   const handleLogout = async () => {
     try {
       await logoutTest();
+      setErr(null);
     } catch (e) {
       setErr(e);
       console.warn(err);
