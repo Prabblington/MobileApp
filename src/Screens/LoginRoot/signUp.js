@@ -9,7 +9,7 @@ import CustButton from '../../Components/Input/custButton';
 import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
-} from '../../api/apiValidation/userValidation';
+} from './Validation/userValidation';
 
 const styles = StyleSheet.create({
   container: {
