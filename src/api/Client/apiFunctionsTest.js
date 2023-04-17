@@ -70,6 +70,7 @@ const loginTest = (email, password) => {
 
       await AsyncStorage.setItem('userData', userData);
       await AsyncStorage.setItem('X-Authorization', loginResponse.token);
+      await AsyncStorage.setItem('isAuthenticated', true);
 
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
 
@@ -79,8 +80,9 @@ const loginTest = (email, password) => {
 
       return true;
     })
-    .catch((error) => {
+    .catch(async (error) => {
       console.warn(error);
+      await AsyncStorage.setItem('isAuthenticated', false);
       return false;
     });
 };
