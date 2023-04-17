@@ -72,8 +72,10 @@ export default function Login() {
       } else {
         setLoggedIn(false);
       }
+      setErr(null);
     } catch (e) {
       setErr(e);
+      console.warn(err);
     }
   };
 
