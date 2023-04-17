@@ -1,11 +1,12 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 import PasswordChecklist from 'react-password-checklist';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
+import { createNewAccount } from '../../api/Client/apiFunctionsTest';
 import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
@@ -79,10 +80,33 @@ export default function SignUp() {
 
   const [password, setPassword] = useState('');
   const [passRetype, setPassRetype] = useState('');
-  const [match, setMatch] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [err, setErr] = useState('');
 
-  const createNewAccount = () => {
-    console.log('create a new account');
+  const validate = () => {
+    if (password === passRetype) {
+      if (EMAIL_VALIDATION.test(email) && PASSWORD_VALIDATION.test(password)) {
+        setIsValid(true);
+      } else {
+        setIsValid(false);
+      }
+    } else {
+      setIsValid(false);
+    }
+    return isValid;
+  };
+
+  const signUp = async () => {
+    try {
+      if (validate === true) {
+        await createNewAccount(firstName, lastName, email, password);
+      }
+
+      setErr(null);
+    } catch (e) {
+      setErr(e);
+      console.warn(err);
+    }
   };
   const goToLogin = () => {
     navigation.navigate('Login');
@@ -142,18 +166,13 @@ export default function SignUp() {
               maxLength={20}
               value={password}
               valueAgain={passRetype}
-              onChange={() => {
-                if (password === passRetype) {
-                  setMatch(true);
-                }
-              }}
             />
 
             <Text style={[styles.subHeader, { paddingLeft: 16, fontSize: 14 }]}>
               Start using Whats That
             </Text>
             <CustButton
-              onPress={createNewAccount}
+              onPress={signUp}
               title="Submit details"
               accessibilityLabel="press this button to submit new account details"
               buttonText="Submit details and create new account"
