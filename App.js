@@ -1,9 +1,10 @@
 /* eslint-disable react/style-prop-object */
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { createContext, useState } from 'react';
 
 import { AppStack, LoginStack } from './src/Navigation/stackNavigation';
-import ApiTestComponent from './src/api/apiTestComponent';
+import ApiTestComponent from './src/api/Client/apiTestComponent';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +14,22 @@ const styles = StyleSheet.create({
   },
 });
 
+// const authContext = createContext({
+//   authState: {
+//     id: '',
+//     email: '',
+//     password: '',
+//     loggedIn: false,
+//   },
+//   setAuthState: () => {},
+// });
+
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <LoginStack /> */}
+      <LoginStack />
       {/* <AppStack /> */}
-      <ApiTestComponent />
+      {/* <ApiTestComponent /> */}
 
       <StatusBar style="auto" />
     </SafeAreaView>
