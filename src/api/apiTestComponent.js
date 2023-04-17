@@ -11,7 +11,7 @@ function apiTestComponent() {
       // const data = await getUser(2); // call the getUser function with a specific user ID
       // setUserData(data);
       await loginTest();
-      await getUserTest(6);
+      // await getUserTest(6);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -20,7 +20,7 @@ function apiTestComponent() {
 
   return (
     <View>
-      <Button onPress={handleGetUser} title="Get User" />
+      <Button onPress={handleGetUser} title="Log in" />
       {userData && <Text>{JSON.stringify(userData)}</Text>}
       {error && <Text>{error}</Text>}
     </View>
