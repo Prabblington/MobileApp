@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
+import { loginTest } from '../../api/Client/apiFunctionsTest';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,11 +61,22 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const logIn = () => {
-    console.log('log in');
+  const logIn = async () => {
+    try {
+      const tryLogIn = await loginTest(email, password);
+
+      if (tryLogIn === true) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    } catch (e) {
+      setErr(e);
+    }
   };
+
   const goToSignUp = () => {
     navigation.navigate('SignUp');
   };
