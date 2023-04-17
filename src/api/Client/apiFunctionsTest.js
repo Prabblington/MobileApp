@@ -70,7 +70,7 @@ const loginTest = (email, password) => {
 
       await AsyncStorage.setItem('userData', userData);
       await AsyncStorage.setItem('X-Authorization', loginResponse.token);
-      await AsyncStorage.setItem('isAuthenticated', true);
+      await AsyncStorage.setItem('isLoggedIn', true);
 
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
 
@@ -82,9 +82,18 @@ const loginTest = (email, password) => {
     })
     .catch(async (error) => {
       console.warn(error);
-      await AsyncStorage.setItem('isAuthenticated', false);
+      await AsyncStorage.setItem('isLoggedIn', false);
       return false;
     });
+};
+
+const logoutTest = async () => {
+  await AsyncStorage.removeItem('userData');
+  await AsyncStorage.removeItem('X-Authorization');
+  await AsyncStorage.setItem('isLoggedIn', false);
+  axios.defaults.headers.common['X-Authorization'] = '';
+
+  console.log('Signed out!');
 };
 
 // const loginTest = () => {
@@ -116,4 +125,4 @@ const getUserTest = (user) => {
     });
 };
 
-export { createNewAccount, loginTest, getUserTest };
+export { createNewAccount, loginTest, logoutTest, getUserTest };
