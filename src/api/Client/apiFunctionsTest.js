@@ -14,6 +14,13 @@ const signupData = {
   password: 'Wr3xh4m!',
 };
 
+const testData = {
+  first_name: 'Lemmony',
+  last_name: 'Snickett',
+  email: 'Lemony.snickers@gmail.com',
+  password: 'Gkls56@0',
+};
+
 let userData = {
   id: '',
   firstName: '',
@@ -22,16 +29,18 @@ let userData = {
   password: '',
 };
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 const createNewAccount = (firstName, lastName, email, password) => {
   userData = { firstName, lastName, email, password };
   const accData = { firstName, lastName, email, password };
 
   axios
-    .post('/user', accData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    .post('/user', accData, config)
     .then(async (response) => {
       const newAccResponse = await response.data;
 
@@ -55,11 +64,7 @@ const loginTest = (email, password) => {
   const loginData = { email, password };
 
   axios
-    .post('/login', loginData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    .post('/login', loginData, config)
     .then(async (response) => {
       const loginResponse = await response.data;
       userData.id = await JSON.stringify(loginResponse.id);
