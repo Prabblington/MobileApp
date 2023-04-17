@@ -14,7 +14,7 @@ const signupData = {
   password: 'Wr3xh4m!',
 };
 
-const testData = {
+const user8 = {
   first_name: 'Lemmony',
   last_name: 'Snickett',
   email: 'Lemony.snickers@gmail.com',
@@ -23,8 +23,8 @@ const testData = {
 
 let userData = {
   id: '',
-  firstName: '',
-  lastName: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: '',
 };
@@ -36,11 +36,10 @@ const config = {
 };
 
 const createNewAccount = (firstName, lastName, email, password) => {
-  userData = { firstName, lastName, email, password };
-  const accData = { firstName, lastName, email, password };
+  userData = { first_name: firstName, last_name: lastName, email, password };
 
   axios
-    .post('/user', accData, config)
+    .post('/user', userData, config)
     .then(async (response) => {
       const newAccResponse = await response.data;
 
