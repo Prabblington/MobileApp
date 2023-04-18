@@ -125,7 +125,7 @@ const getUserTest = async () => {
   const userID = parseUser.id;
 
   axios
-    .get(`/user/${userID}`)
+    .get(`/user/${userID}`, config)
     .then((response) => {
       const firstName = response.data.first_name;
       const lastName = response.data.last_name;
