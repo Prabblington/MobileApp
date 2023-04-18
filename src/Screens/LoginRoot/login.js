@@ -1,11 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
 import { loginTest } from '../../api/Client/apiFunctionsTest';
-import { AuthContext } from '../../Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,39 +57,26 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
-  const { handleLogin } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
-
-  const pressedLogin = async () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const logIn = async () => {
     try {
-      await handleLogin(email, password);
+      const tryLogIn = await loginTest(email, password);
+
+      if (tryLogIn === true) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
       setErr(null);
-      return true;
     } catch (e) {
       setErr(e);
       console.warn(err);
-      return false;
     }
   };
-
-  // const logIn = async () => {
-  //   try {
-  //     const tryLogIn = await loginTest(email, password);
-
-  //     if (tryLogIn === true) {
-  //       setLoggedIn(true);
-  //     } else {
-  //       setLoggedIn(false);
-  //     }
-  //     setErr(null);
-  //   } catch (e) {
-  //     setErr(e);
-  //     console.warn(err);
-  //   }
-  // };
 
   const goToSignUp = () => {
     navigation.navigate('SignUp');
@@ -123,7 +109,7 @@ export default function Login() {
             />
 
             <CustButton
-              onPress={pressedLogin}
+              onPress={logIn}
               title="submit login details"
               accessibilityLabel="press this button to log in with provided details"
               buttonText="Submit Login details"
