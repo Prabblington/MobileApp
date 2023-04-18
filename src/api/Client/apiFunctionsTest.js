@@ -40,9 +40,8 @@ const createNewAccount = (firstName, lastName, email, password) => {
   axios
     .post('/user', userData, config)
     .then(async (response) => {
-      const newAccResponse = await response.data;
+      await response.data;
 
-      console.log(JSON.stringify(newAccResponse));
       return true;
     })
     .catch((error) => {
@@ -67,8 +66,11 @@ const loginTest = (email, password) => {
       const loginResponse = await response.data;
       userData.id = await JSON.stringify(loginResponse.id);
 
-      await AsyncStorage.setItem('userData', userData);
-      await AsyncStorage.setItem('X-Authorization', loginResponse.token);
+      await AsyncStorage.setItem('userData', JSON.stringify(userData));
+      await AsyncStorage.setItem(
+        'X-Authorization',
+        JSON.stringify(loginResponse.token)
+      );
       await AsyncStorage.setItem('isLoggedIn', true);
 
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
@@ -95,24 +97,13 @@ const logoutTest = async () => {
   console.log('Signed out!');
 };
 
-// const loginTest = () => {
-//   axios
-//     .post('/login', loginUserData)
-//     .then((response) => {
-//       const loginResponse = response.data;
-//       const userToken = response.data.token;
-//       AUTH_TOKEN = userToken;
-//       console.log(`X-Authorization: ${AUTH_TOKEN}`);
-//       console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
-//     })
-//     .catch((error) => {
-//       throw new Error(error);
-//     });
-// };
+const getUserTest = async () => {
+  const user = await AsyncStorage.getItem('userData');
+  const parseUser = user !== null ? JSON.parse(user) : null;
+  const userID = parseUser.id;
 
-const getUserTest = (user) => {
   axios
-    .get(`/user/${user}`)
+    .get(`/user/${userID}`)
     .then((response) => {
       const firstName = response.data.first_name;
       const lastName = response.data.last_name;

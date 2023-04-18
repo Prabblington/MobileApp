@@ -98,10 +98,20 @@ export default function SignUp() {
 
   const signUp = async () => {
     try {
-      // if (isValid === true) {
-      await createNewAccount(firstName, lastName, email, password);
-      // }
+      if (isValid === true) {
+        const successful = await createNewAccount(
+          firstName,
+          lastName,
+          email,
+          password
+        );
 
+        if (successful === true) {
+          console.log('Account created');
+        } else if (successful === false) {
+          console.log('There was an error creating your account');
+        }
+      }
       setErr(null);
     } catch (e) {
       setErr(e);
