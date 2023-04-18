@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { config } from '../../AxiosConfig/axiosConfig';
 
 // POST /logout
-const logoutTest = async (isLoggedIn) => {
+export default function UserLogout(isLoggedIn) {
   let loggedOut;
   if (isLoggedIn === true) {
     loggedOut = false;
@@ -32,4 +32,4 @@ const logoutTest = async (isLoggedIn) => {
       loggedOut = false;
       return loggedOut;
     });
-};
+}

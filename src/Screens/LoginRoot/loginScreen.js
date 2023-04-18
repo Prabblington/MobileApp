@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../Navigation/Context/authManager';
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
-import userLogin from '../../api/Client/UserLogin/userLogin';
+import userLogin from '../../api/Client/User/userLogin';
 
 const styles = StyleSheet.create({
   container: {
