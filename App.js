@@ -23,17 +23,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-// export default function App() {
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <MainNavigation />
-//       {/* <LoginStack /> */}
-//       <StatusBar style="auto" />
-//     </SafeAreaView>
-//   );
-// }
-
 // const [isLoading, setIsLoading] = useState(true); // added loading state
 
 // useEffect(() => {
