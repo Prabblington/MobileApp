@@ -113,7 +113,6 @@ const logoutTest = async (isLoggedIn) => {
       return loggedOut;
     })
     .catch(async (error) => {
-      console.warn(error);
       loggedOut = false;
       return loggedOut;
     });
@@ -124,16 +123,12 @@ const getUserTest = async () => {
   const parseUser = user !== null ? JSON.parse(user) : null;
   const userID = parseUser.id;
 
-  axios
+  return axios
     .get(`/user/${userID}`, config)
-    .then((response) => {
-      const firstName = response.data.first_name;
-      const lastName = response.data.last_name;
-      const { email } = response.data;
-      console.log(`User ${user} data: ${firstName} ${lastName} ${email}`);
-    })
+    .then((response) => true)
     .catch((error) => {
-      throw new Error(error);
+      console.warn(error);
+      return false;
     });
 };
 
