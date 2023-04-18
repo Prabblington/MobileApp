@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../Navigation/Context/authManager';
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
-import { loginTest } from '../../api/Client/apiFunctionsTest';
+import userLogin from '../../api/Client/UserLogin/userLogin';
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +67,7 @@ export default function Login() {
 
   const logIn = async () => {
     try {
-      const tryLogIn = await loginTest(email, password);
+      const tryLogIn = await userLogin(email, password);
 
       if (tryLogIn === true) {
         setIsLoggedInLocal(true);

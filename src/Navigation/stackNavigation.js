@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatUI from '../Components/Chats/chatUI';
 import HomeTabNav from './tabNavigation';
 import ContactScreen from '../Screens/contactScreen';
-import Login from '../Screens/LoginRoot/login';
-import SignUp from '../Screens/LoginRoot/signUp';
+import Login from '../Screens/LoginRoot/loginScreen';
+import SignUp from '../Screens/LoginRoot/signUpScreen';
 
 const Stack = createNativeStackNavigator();
 
