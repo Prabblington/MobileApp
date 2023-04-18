@@ -19,8 +19,6 @@ export default function App() {
       <AuthProvider>
         <MainNavigation />
       </AuthProvider>
-
-      {/* <LoginStack /> */}
       <StatusBar style="auto" />
     </SafeAreaView>
   );
