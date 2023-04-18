@@ -1,12 +1,8 @@
 /* eslint-disable react/style-prop-object */
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useContext, useState, useEffect } from 'react';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppStack, LoginStack } from './src/Navigation/stackNavigation';
-import { AuthContext } from './src/Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +13,15 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // console.log(AuthContext);
+  // const { isLoggedIn } = useContext(AuthContext);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <LoginStack />
+      <StatusBar style="auto" />
+    </SafeAreaView>
+  );
 
   // const [isLoading, setIsLoading] = useState(true); // added loading state
 
@@ -38,15 +42,4 @@ export default function App() {
   //     </SafeAreaView>
   //   );
   // }
-
-  return (
-    <SafeAreaView style={styles.container}>
-      {isLoggedIn ? <AppStack /> : <LoginStack />}
-
-      {/* <AppStack /> */}
-      {/* <ApiTestComponent /> */}
-
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
 }
