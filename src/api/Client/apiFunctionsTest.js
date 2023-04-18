@@ -34,6 +34,7 @@ const config = {
   },
 };
 
+// POST /user
 const createNewAccount = (firstName, lastName, email, password) => {
   userData = { first_name: firstName, last_name: lastName, email, password };
 
@@ -55,7 +56,7 @@ const loginUserData = {
   email: 'ashley.williams@mmu.ac.uk',
   password: 'Wr3xh4m!',
 };
-
+// POST /login
 const loginTest = (email, password) => {
   userData = { email, password };
   const loginData = { email, password };
@@ -87,14 +88,35 @@ const loginTest = (email, password) => {
       return false;
     });
 };
+// POST /logout
+const logoutTest = async (isLoggedIn) => {
+  let loggedOut;
+  if (isLoggedIn === true) {
+    loggedOut = false;
+  } else {
+    loggedOut = true;
+  }
 
-const logoutTest = async () => {
-  await AsyncStorage.removeItem('userData');
-  await AsyncStorage.removeItem('X-Authorization');
-  await AsyncStorage.setItem('isLoggedIn', false);
-  axios.defaults.headers.common['X-Authorization'] = '';
+  return axios
+    .post('/logout', config)
+    .then(async (response) => {
+      if (response.status === 200) {
+        await AsyncStorage.removeItem('userData');
+        await AsyncStorage.removeItem('X-Authorization');
+        await AsyncStorage.setItem('isLoggedIn', false);
+        axios.defaults.headers.common['X-Authorization'] = '';
 
-  console.log('Signed out!');
+        console.log('Signing out!');
+
+        loggedOut = true;
+      }
+      return loggedOut;
+    })
+    .catch(async (error) => {
+      console.warn(error);
+      loggedOut = false;
+      return loggedOut;
+    });
 };
 
 const getUserTest = async () => {
