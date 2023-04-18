@@ -1,11 +1,9 @@
 import { useState, useEffect, useMemo, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { loginTest, logoutTest } from '../../api/Client/apiFunctionsTest';
+const AuthContext = createContext({});
 
-const AuthContext = createContext();
-
-function AuthProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [err, setErr] = useState('');
 
@@ -28,42 +26,9 @@ function AuthProvider({ children }) {
     checkAuth();
   }, []);
 
-  const handleLogin = async (email, password) => {
-    try {
-      const tryLogIn = await loginTest(email, password);
-
-      if (tryLogIn === true) {
-        setIsLoggedIn(true);
-        await AsyncStorage.setItem('isLoggedIn', 'true');
-      } else {
-        setIsLoggedIn(false);
-        await AsyncStorage.setItem('isLoggedIn', 'false');
-      }
-
-      setErr(null);
-    } catch (e) {
-      setErr(e);
-      console.warn(err);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logoutTest();
-      setErr(null);
-    } catch (e) {
-      setErr(e);
-      console.warn(err);
-    }
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   const auth = useMemo(
-    () => ({ isLoggedIn, handleLogin, handleLogout }),
-    [isLoggedIn, handleLogin, handleLogout]
+    () => ({ isLoggedIn, setIsLoggedIn }),
+    [isLoggedIn, setIsLoggedIn]
   );
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;

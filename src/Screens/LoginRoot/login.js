@@ -1,7 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
+import { AuthContext } from '../../Navigation/Context/authManager';
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
 import { loginTest } from '../../api/Client/apiFunctionsTest';
@@ -57,19 +58,21 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedInLocal, setIsLoggedInLocal] = useState(false);
+
   const logIn = async () => {
     try {
       const tryLogIn = await loginTest(email, password);
 
       if (tryLogIn === true) {
-        setLoggedIn(true);
-      } else {
-        setLoggedIn(false);
+        setIsLoggedInLocal(true);
+      } else if (tryLogIn === false) {
+        setIsLoggedInLocal(false);
       }
       setErr(null);
     } catch (e) {
@@ -77,6 +80,10 @@ export default function Login() {
       console.warn(err);
     }
   };
+
+  useEffect(() => {
+    setIsLoggedIn(isLoggedInLocal);
+  });
 
   const goToSignUp = () => {
     navigation.navigate('SignUp');

@@ -3,7 +3,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseURL = 'http://localhost:3333/api/1.0.0';
-
 axios.defaults.baseURL = baseURL;
 
 // POST /user
@@ -62,7 +61,7 @@ const loginTest = (email, password) => {
   userData = { email, password };
   const loginData = { email, password };
 
-  axios
+  return axios
     .post('/login', loginData, config)
     .then(async (response) => {
       const loginResponse = await response.data;
