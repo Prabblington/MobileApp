@@ -6,7 +6,7 @@ import PasswordChecklist from 'react-password-checklist';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
-import { createNewAccount } from '../../api/Client/apiFunctionsTest';
+import userSignup from '../../api/Client/User/userSignUp';
 import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
@@ -99,7 +99,7 @@ export default function SignUp() {
   const signUp = async () => {
     try {
       if (isValid === true) {
-        const successful = await createNewAccount(
+        const successful = await userSignup(
           firstName,
           lastName,
           email,

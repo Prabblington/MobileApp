@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 const config = {
+  baseURL: 'http://localhost:3333/api/1.0.0',
   headers: {
     'Content-Type': 'application/json',
   },

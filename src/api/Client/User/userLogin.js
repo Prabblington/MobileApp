@@ -11,6 +11,18 @@ let userData = {
   password: '',
 };
 
+// DUMMY DATA
+const loginUserData = {
+  email: 'ashley.williams@mmu.ac.uk',
+  password: 'Wr3xh4m!',
+};
+const user8 = {
+  first_name: 'Lemmony',
+  last_name: 'Snickett',
+  email: 'Lemony.snickers@gmail.com',
+  password: 'Gkls56@0',
+};
+
 // POST /login
 export default function userLogin(email, password) {
   userData = { email, password };
