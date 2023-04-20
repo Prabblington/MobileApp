@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { config } from '../../AxiosConfig/axiosConfig';
+import config from '../../../Navigation/Context/authManager';
 
 // POST /user
 export default function userSignup(firstName, lastName, email, password) {

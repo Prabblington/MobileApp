@@ -1,21 +1,21 @@
 import axios from 'axios';
 
-import { config } from '../../AxiosConfig/axiosConfig';
+import config from '../../../Navigation/Context/authManager';
 
 // GET /search
 export default function searchUser(userQuery, searchInParam) {
   const queryParams = {
-    q: `${userQuery}`,
+    q: userQuery,
     filter: 'first_name, last_name, email',
-    limit: 20,
-    search_in: `${searchInParam}`,
-    offset: 0,
+    // limit: 20,
+    // search_in: `${searchInParam}`,
+    // offset: 0,
   };
 
   let result = {};
 
   axios
-    .get('./search', { queryParams }, config)
+    .get('./search', userQuery, config)
     .then((response) => {
       result = response.data;
       // DO SOMETHING WITH THE RESPONSE

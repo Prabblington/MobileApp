@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { config } from '../../AxiosConfig/axiosConfig';
+import config from '../../../Navigation/Context/authManager';
 
 // POST /logout
 export default function UserLogout(isLoggedIn) {
