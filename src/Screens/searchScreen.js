@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
 
 import { useState } from 'react';
@@ -23,17 +23,19 @@ export default function SearchScreen() {
   return (
     <KeyboardAvoidingView>
       <CustInput
-        titleText="Search..."
+        titleText="Type a name here"
         placeholder="e.g. John Smith"
         value={query}
         setValue={setQuery}
         secureTextEntry
       />
-      <FlatList
-        data={result}
-        renderItem={({ item }) => <ChatListRenderer chat={item} />}
-        style={{ backgroundColor: 'whitesmoke' }}
-      />
+      <View>
+        <FlatList
+          data={result}
+          renderItem={({ item }) => <ChatListRenderer chat={item} />}
+          style={{ backgroundColor: 'whitesmoke' }}
+        />
+      </View>
     </KeyboardAvoidingView>
   );
 }

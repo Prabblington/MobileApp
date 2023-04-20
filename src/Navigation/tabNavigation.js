@@ -71,7 +71,7 @@ export default function HomeTabNav() {
           headerRight: () => (
             <View style={styles.topIcons}>
               <Entypo
-                onPress={() => navigation.navigate('Search')}
+                onPress={() => navigation.navigate('Search for contacts')}
                 name="magnifying-glass"
                 size={18}
                 color="royalblue"
