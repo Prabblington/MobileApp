@@ -1,6 +1,6 @@
 import { FlatList, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-dropdown-picker';
 
 import { useState } from 'react';
 
@@ -11,17 +11,18 @@ import searchUser from '../api/Client/User/searchUser';
 
 export default function SearchScreen() {
   const [query, setQuery] = useState('');
-  const [contactsOrAll, setContactsOrAll] = useState('all');
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('all');
   const [err, setErr] = useState(null);
 
   const searchLocationOptions = ['contacts', 'all'];
-  const handleSearchLocation = (searchLocation) => {
-    setContactsOrAll(searchLocation);
+  const handleSearchLocation = (v) => {
+    setValue(v);
   };
 
   const result = async () => {
     try {
-      const trySearch = await searchUser(query, contactsOrAll);
+      const trySearch = await searchUser(query, value);
       setErr(null);
     } catch (e) {
       setErr(e);
@@ -46,7 +47,11 @@ export default function SearchScreen() {
       />
       <Dropdown
         label="Search Location: all or contacts"
-        data={searchLocationOptions}
+        open={open}
+        items={searchLocationOptions}
+        value={value}
+        setOpen={setOpen}
+        setValue={setValue}
       />
       <View>
         <FlatList
