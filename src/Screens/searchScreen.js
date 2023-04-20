@@ -6,7 +6,7 @@ import CustInput from '../Components/Input/custInput';
 import ChatListRenderer from '../Components/Chats/chatListRender';
 import searchUser from '../api/Client/User/searchUser';
 
-export default function ChatScreen() {
+export default function SearchScreen() {
   const [query, setQuery] = useState('');
   const [err, setErr] = useState(null);
 
