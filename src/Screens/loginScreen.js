@@ -2,10 +2,10 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useContext, useEffect } from 'react';
 
-import { AuthContext } from '../../Navigation/Context/authManager';
-import CustInput from '../../Components/Input/custInput';
-import CustButton from '../../Components/Input/custButton';
-import userLogin from '../../api/Client/User/userLogin';
+import { AuthContext } from '../Navigation/Context/authManager';
+import CustInput from '../Components/Input/custInput';
+import CustButton from '../Components/Input/custButton';
+import userLogin from '../api/Client/User/userLogin';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,11 +71,10 @@ export default function Login() {
 
       if (tryLogIn === true) {
         setIsLoggedInLocal(true);
-      } else if (tryLogIn === false) {
-        setIsLoggedInLocal(false);
       }
       setErr(null);
     } catch (e) {
+      setIsLoggedInLocal(false);
       setErr(e);
       console.warn(err);
     }
