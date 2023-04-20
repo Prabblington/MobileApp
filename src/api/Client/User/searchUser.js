@@ -12,18 +12,19 @@ export default function searchUser(userQuery, searchInParam) {
     // offset: 0,
   };
 
-  let result = {};
+  // let result = {};
 
   axios
     .get('./search', queryParams, axiosConfig)
     .then((response) => {
-      result = response.data;
+      console.log(response.data);
       // DO SOMETHING WITH THE RESPONSE
     })
     .catch(async (error) => {
       // DO SOMETHING WHEN AN ERROR IS THROWN
+      console.log(axiosConfig);
       console.error(error);
     });
 
-  return result;
+  // return result;
 }

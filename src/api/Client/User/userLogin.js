@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { axiosConfig } from '../../../Navigation/Context/authManager';
+// import { axiosConfig } from '../../../Navigation/Context/authManager';
 
 let userData = {
   id: '',
@@ -24,12 +24,12 @@ const user8 = {
 };
 
 // POST /login
-export default function userLogin(email, password) {
+export default function userLogin(email, password, cfg) {
   userData = { email, password };
   const loginData = { email, password };
 
   return axios
-    .post('/login', loginData, axiosConfig)
+    .post('/login', loginData, cfg)
     .then(async (response) => {
       const loginResponse = await response.data;
       userData.id = await JSON.stringify(loginResponse.id);
@@ -38,9 +38,10 @@ export default function userLogin(email, password) {
       await AsyncStorage.setItem('userData', userData);
       const token = await AsyncStorage.setItem(
         'X-Authorization',
-        loginResponse.token
+        JSON.stringify(loginResponse.token)
       );
 
+      axios.defaults.headers.common['Content-Type'] = 'applocation/json';
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
 
       console.log(`X-Authorization: ${JSON.stringify(loginResponse.token)}`);
