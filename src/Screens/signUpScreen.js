@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import PasswordChecklist from 'react-password-checklist';
 
-import CustInput from '../../Components/Input/custInput';
-import CustButton from '../../Components/Input/custButton';
-import userSignup from '../../api/Client/User/userSignUp';
+import CustInput from '../Components/Input/custInput';
+import CustButton from '../Components/Input/custButton';
+import userSignup from '../api/Client/User/userSignUp';
 import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
