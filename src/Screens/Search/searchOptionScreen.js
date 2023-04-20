@@ -9,6 +9,23 @@ import CustButton from '../../Components/Input/custButton';
 import ChatListRenderer from '../../Components/Chats/chatListRender';
 import searchUser from '../../api/Client/User/searchUser';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dropDownContainer: {
+    padding: 2,
+    alignSelf: 'center',
+    width: '25%',
+    backgroundColor: '#fafafa',
+    zIndex: 10,
+    position: 'relative',
+    margin: 10,
+  },
+});
+
 export default function SearchOptionScreen() {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -19,26 +36,10 @@ export default function SearchOptionScreen() {
   const [value, setValue] = useState('all');
   const [err, setErr] = useState(null);
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    dropDownContainer: {
-      padding: 2,
-      alignSelf: 'center',
-      width: '25%',
-      backgroundColor: '#fafafa',
-      zIndex: 10,
-      position: 'relative',
-      margin: 10,
-    },
-  });
-
   const result = async () => {
     try {
       const trySearch = await searchUser(query, value);
+      console.log(query);
       setErr(null);
     } catch (e) {
       setErr(e);
