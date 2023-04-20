@@ -1,6 +1,6 @@
 import { FlatList, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
-import { DropDownData } from 'react-native-material-dropdown';
+import { DropDownData, Dropdown } from 'react-native-material-dropdown';
 
 import { useState } from 'react';
 
@@ -15,6 +15,9 @@ export default function SearchScreen() {
   const [err, setErr] = useState(null);
 
   const searchLocationOptions = ['contacts', 'all'];
+  const handleSearchLocation = (searchLocation) => {
+    setContactsOrAll(searchLocation);
+  };
 
   const result = async () => {
     try {
@@ -40,6 +43,10 @@ export default function SearchScreen() {
         title="Search Button"
         accessibilityLabel="press button to search for all users containing name"
         buttonText="Search"
+      />
+      <Dropdown
+        label="Search Location: all or contacts"
+        data={searchLocationOptions}
       />
       <View>
         <FlatList
