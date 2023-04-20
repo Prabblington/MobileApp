@@ -14,28 +14,25 @@ const axiosConfig = {
 
 export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(null);
   const [err, setErr] = useState('');
 
   const checkAuth = async () => {
     try {
       const tokenPresent = await AsyncStorage.getItem('X-Authorization');
-      console.log(`here's a token! ${tokenPresent}`);
 
       if (tokenPresent) {
+        console.log(`here's a token! ${tokenPresent}`);
+
         setToken(JSON.parse(tokenPresent));
         axios.defaults.headers.common['X-Authorization'] = `${tokenPresent}`;
         setIsLoggedIn(true);
+      } else {
+        console.log('No token');
+
+        setToken(null);
+        setIsLoggedIn(false);
       }
-      // setToken('');
-      // setIsLoggedIn(false);
-      // console.log('oh dear');
-      // } else if (tokenPresent !== null) {
-      //   setToken(JSON.parse(tokenPresent));
-      //   axios.defaults.headers.common['X-Authorization'] = `${tokenPresent}`;
-      //   setIsLoggedIn(true);
-      //   console.log('else if');
-      // }
     } catch (e) {
       setErr(e);
       console.warn(err);
