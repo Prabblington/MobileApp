@@ -28,7 +28,6 @@ export default function SearchScreen() {
         placeholder="e.g. John Smith"
         value={query}
         setValue={setQuery}
-        secureTextEntry
       />
       <View>
         <FlatList
