@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import config from '../../../Navigation/Context/authManager';
+import { axiosConfig } from '../../../Navigation/Context/authManager';
 
 let userData = {
   id: '',
@@ -29,7 +29,7 @@ export default function userLogin(email, password) {
   const loginData = { email, password };
 
   return axios
-    .post('/login', loginData, config)
+    .post('/login', loginData, axiosConfig)
     .then(async (response) => {
       const loginResponse = await response.data;
       userData.id = await JSON.stringify(loginResponse.id);

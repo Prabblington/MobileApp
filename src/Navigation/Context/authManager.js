@@ -1,7 +1,18 @@
 import { useState, useEffect, useMemo, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import axios from 'axios';
+
 const AuthContext = createContext({});
+let token = '';
+
+const axiosConfig = {
+  baseURL: 'http://localhost:3333/api/1.0.0',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Authorization': `${token}`,
+  },
+};
 
 export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -9,13 +20,18 @@ export default function AuthProvider({ children }) {
 
   const checkAuth = async () => {
     try {
-      const auth = await AsyncStorage.getItem('isLoggedIn');
-      if (auth === 'true') {
-        setIsLoggedIn(true);
-      } else {
+      const tokenPresent = await AsyncStorage.getItem('X-Authorization');
+      console.log(tokenPresent);
+
+      if (tokenPresent === null) {
+        token = '';
         setIsLoggedIn(false);
+      } else {
+        token = tokenPresent;
+        setIsLoggedIn(true);
       }
     } catch (e) {
+      axios.defaults.headers.common['X-Authorization'] = '';
       setErr(e);
       console.warn(err);
       setIsLoggedIn(false);
@@ -34,4 +50,4 @@ export default function AuthProvider({ children }) {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
-export { AuthContext, AuthProvider };
+export { AuthContext, AuthProvider, axiosConfig };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import config from '../../../Navigation/Context/authManager';
+import { axiosConfig } from '../../../Navigation/Context/authManager';
 
 // GET /search
 export default function searchUser(userQuery, searchInParam) {
@@ -15,7 +15,7 @@ export default function searchUser(userQuery, searchInParam) {
   let result = {};
 
   axios
-    .get('./search', userQuery, config)
+    .get('./search', userQuery, axiosConfig)
     .then((response) => {
       result = response.data;
       // DO SOMETHING WITH THE RESPONSE

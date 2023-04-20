@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import config from '../../../Navigation/Context/authManager';
+import { axiosConfig } from '../../../Navigation/Context/authManager';
 
 // POST /logout
 export default function UserLogout(isLoggedIn) {
@@ -13,7 +13,7 @@ export default function UserLogout(isLoggedIn) {
   }
 
   return axios
-    .post('/logout', config)
+    .post('/logout', axiosConfig)
     .then(async (response) => {
       if (response.status === 200) {
         await AsyncStorage.removeItem('userData');

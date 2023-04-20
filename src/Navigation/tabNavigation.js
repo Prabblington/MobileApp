@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import ChatScreen from '../Screens/chatScreen';
-import SearchScreen from '../Screens/searchScreen';
 
 const styles = StyleSheet.create({
   topIcons: {
