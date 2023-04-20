@@ -17,6 +17,7 @@ const getUserTest = async () => {
       console.log(`User ${user} data: ${firstName} ${lastName} ${email}`);
     })
     .catch((error) => {
+      console.log(error);
       throw new Error(error);
     });
 };
