@@ -1,5 +1,6 @@
 import { FlatList, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
+import { DropDownData } from 'react-native-material-dropdown';
 
 import { useState } from 'react';
 
@@ -12,6 +13,8 @@ export default function SearchScreen() {
   const [query, setQuery] = useState('');
   const [contactsOrAll, setContactsOrAll] = useState('all');
   const [err, setErr] = useState(null);
+
+  const searchLocationOptions = ['contacts', 'all'];
 
   const result = async () => {
     try {
@@ -26,7 +29,8 @@ export default function SearchScreen() {
   return (
     <KeyboardAvoidingView>
       <CustInput
-        titleText="Type a name here"
+        titleText="Search for a contact or user"
+        accessibilityLabel="Type in this box to search for a contact"
         placeholder="e.g. John Smith"
         value={query}
         setValue={setQuery}
