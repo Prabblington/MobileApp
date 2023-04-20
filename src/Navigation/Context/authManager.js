@@ -20,16 +20,22 @@ export default function AuthProvider({ children }) {
   const checkAuth = async () => {
     try {
       const tokenPresent = await AsyncStorage.getItem('X-Authorization');
-      console.log(tokenPresent);
+      console.log(`here's a token! ${tokenPresent}`);
 
-      if (tokenPresent === null) {
-        setToken('');
-        setIsLoggedIn(false);
-      } else if (tokenPresent !== null) {
+      if (tokenPresent) {
         setToken(JSON.parse(tokenPresent));
-        axios.defaults.headers.common['X-Authorization'] = `${token}`;
+        axios.defaults.headers.common['X-Authorization'] = `${tokenPresent}`;
         setIsLoggedIn(true);
       }
+      // setToken('');
+      // setIsLoggedIn(false);
+      // console.log('oh dear');
+      // } else if (tokenPresent !== null) {
+      //   setToken(JSON.parse(tokenPresent));
+      //   axios.defaults.headers.common['X-Authorization'] = `${tokenPresent}`;
+      //   setIsLoggedIn(true);
+      //   console.log('else if');
+      // }
     } catch (e) {
       setErr(e);
       console.warn(err);
@@ -37,9 +43,9 @@ export default function AuthProvider({ children }) {
     }
   };
 
-  // useEffect(() => {
-  //   checkAuth();
-  // }, []);
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const auth = useMemo(
     () => ({ isLoggedIn, setIsLoggedIn }),

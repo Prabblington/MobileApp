@@ -7,5 +7,5 @@ export default function MainNavigation() {
   const { isLoggedIn } = useContext(AuthContext);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{isLoggedIn ? <AppStack /> : <LoginStack />}</>;
+  return <>{isLoggedIn ? <LoginStack /> : <AppStack />}</>;
 }

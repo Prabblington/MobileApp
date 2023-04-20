@@ -5,8 +5,8 @@ import { axiosConfig } from '../../../Navigation/Context/authManager';
 // GET /search
 export default function searchUser(userQuery, searchInParam) {
   const queryParams = {
-    q: userQuery,
-    filter: 'first_name, last_name, email',
+    q: `${userQuery}`,
+    // filter: 'first_name, last_name, email',
     // limit: 20,
     // search_in: `${searchInParam}`,
     // offset: 0,
@@ -15,7 +15,7 @@ export default function searchUser(userQuery, searchInParam) {
   let result = {};
 
   axios
-    .get('./search', userQuery, axiosConfig)
+    .get('./search', queryParams, axiosConfig)
     .then((response) => {
       result = response.data;
       // DO SOMETHING WITH THE RESPONSE
