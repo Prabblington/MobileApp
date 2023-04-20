@@ -1,6 +1,6 @@
 import { FlatList, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
-import { DropDownData, Dropdown } from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 
 import { useState } from 'react';
 
