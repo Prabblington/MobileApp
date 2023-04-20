@@ -4,18 +4,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const AuthContext = createContext({});
-let token = '';
 
 const axiosConfig = {
   baseURL: 'http://localhost:3333/api/1.0.0',
   headers: {
     'Content-Type': 'application/json',
-    'X-Authorization': `${token}`,
   },
 };
 
 export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
   const [err, setErr] = useState('');
 
   const checkAuth = async () => {
@@ -24,23 +23,23 @@ export default function AuthProvider({ children }) {
       console.log(tokenPresent);
 
       if (tokenPresent === null) {
-        token = '';
+        setToken('');
         setIsLoggedIn(false);
-      } else {
-        token = tokenPresent;
+      } else if (tokenPresent !== null) {
+        setToken(JSON.parse(tokenPresent));
+        axios.defaults.headers.common['X-Authorization'] = `${token}`;
         setIsLoggedIn(true);
       }
     } catch (e) {
-      axios.defaults.headers.common['X-Authorization'] = '';
       setErr(e);
       console.warn(err);
       setIsLoggedIn(false);
     }
   };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
 
   const auth = useMemo(
     () => ({ isLoggedIn, setIsLoggedIn }),
