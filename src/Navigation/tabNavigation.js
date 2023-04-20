@@ -1,10 +1,18 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import ChatScreen from '../Screens/chatScreen';
+
+const styles = StyleSheet.create({
+  topIcons: {
+    flex: 1,
+    flexDirection: 'row',
+    marginRight: 15,
+  },
+});
 
 function TEMP_COMPONENT() {
   return (
@@ -60,13 +68,22 @@ export default function HomeTabNav() {
             <Ionicons name="newspaper-outline" size={size} color={color} />
           ),
           headerRight: () => (
-            <Entypo
-              onPress={() => navigation.navigate('Contacts')}
-              name="new-message"
-              size={18}
-              color="royalblue"
-              style={{ marginRight: 15 }}
-            />
+            <View style={styles.topIcons}>
+              <Entypo
+                onPress={() => navigation.navigate('Search')}
+                name="magnifying-glass"
+                size={18}
+                color="royalblue"
+                style={{ marginRight: 15 }}
+              />
+              <Entypo
+                onPress={() => navigation.navigate('Contacts')}
+                name="new-message"
+                size={18}
+                color="royalblue"
+                style={{ marginRight: 15 }}
+              />
+            </View>
           ),
         })}
       />
