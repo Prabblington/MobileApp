@@ -18,7 +18,6 @@ export default function AuthProvider({ children }) {
   const [err, setErr] = useState('');
 
   const resetAuth = async () => {
-    // Remove auth data from AsyncStorage
     await AsyncStorage.removeItem('X-Authorization');
     await AsyncStorage.removeItem('isLoggedIn');
     await AsyncStorage.removeItem('userData');
@@ -47,7 +46,6 @@ export default function AuthProvider({ children }) {
         const checkUser = JSON.parse(await AsyncStorage.getItem('userData'));
 
         if (checkToken && checkLoggedIn) {
-          // console.log('if reached');
           axios.defaults.headers.common['Content-Type'] = 'application/json';
           axios.defaults.headers.common['X-Authorization'] = checkToken;
 
@@ -70,7 +68,6 @@ export default function AuthProvider({ children }) {
               'Content-Type': 'application/json',
             },
           };
-          console.log('else reached??');
           setIsLoggedIn(false);
           setAxiosConfig(JSON.stringify(config));
         }
