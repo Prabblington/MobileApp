@@ -1,5 +1,9 @@
-function blockUser() {}
+function blockUser() {
+  console.log('User Blocked!');
+}
 
-function unblockUser() {}
+function unblockUser() {
+  console.log('User Unblocked!');
+}
 
 export { blockUser, unblockUser };
