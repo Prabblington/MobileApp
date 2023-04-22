@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
-import ChatListRenderer from '../../Components/Chats/chatListRender';
 import searchUser from '../../api/Client/User/searchUser';
+import ContactListRenderer from '../../Components/Contacts/contactListRender';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,10 +71,10 @@ export default function SearchOptionScreen() {
         accessibilityLabel="press button to search for all users containing name"
         buttonText="Search"
       />
-      <View style={styles.container}>
+      <View>
         <FlatList
           data={result}
-          renderItem={({ item }) => <ChatListRenderer chat={item} />}
+          renderItem={({ item }) => <ContactListRenderer contact={item} />}
           style={{ backgroundColor: 'whitesmoke' }}
         />
       </View>
