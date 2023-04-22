@@ -35,13 +35,10 @@ export default function userLogin(email, password, cfg) {
       userData.id = await JSON.stringify(loginResponse.id);
 
       await AsyncStorage.setItem('isLoggedIn', true);
-      await AsyncStorage.setItem('userData', userData);
-      const token = await AsyncStorage.setItem(
-        'X-Authorization',
-        JSON.stringify(loginResponse.token)
-      );
+      await AsyncStorage.setItem('userData', JSON.stringify(userData));
+      await AsyncStorage.setItem('X-Authorization', loginResponse.token);
 
-      axios.defaults.headers.common['Content-Type'] = 'applocation/json';
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
 
       console.log(`X-Authorization: ${JSON.stringify(loginResponse.token)}`);

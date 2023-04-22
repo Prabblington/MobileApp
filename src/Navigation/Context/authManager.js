@@ -6,83 +6,105 @@ import axios from 'axios';
 const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
-  const [config, setAxiosConfig] = useState({});
-  const [token, setToken] = useState(null);
-  const [err, setErr] = useState('');
-
   const resetAuth = async () => {
     // Remove auth data from AsyncStorage
     await AsyncStorage.removeItem('X-Authorization');
     await AsyncStorage.removeItem('isLoggedIn');
     await AsyncStorage.removeItem('userData');
 
-    setIsLoggedIn(false);
-    setUser(null);
-    setToken(null);
-    setAxiosConfig({
-      baseURL: 'http://localhost:3333/api/1.0.0',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    // setIsLoggedIn(false);
+    // setUser(null);
+    // setToken(null);
+    // setAxiosConfig({
+    //   baseURL: 'http://localhost:3333/api/1.0.0',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
   };
 
-  const updateAuth = async (islogin, t, cfg) => {
-    setToken(t);
-    setAxiosConfig(cfg);
-    setIsLoggedIn(islogin);
-
-    // Store the auth data in AsyncStorage
-    try {
-      await AsyncStorage.setItem('isLoggedIn', `${islogin}`);
-      await AsyncStorage.setItem('X-Authorization', t);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const checkAuth = async () => {
-    axios.defaults.baseURL = 'http://localhost:3333/api/1.0.0';
-    // await AsyncStorage.removeItem('X-Authorization');
-
-    try {
-      const tokenPresent = await AsyncStorage.getItem('X-Authorization');
-
-      if (tokenPresent) {
-        console.log(`here's a token! ${tokenPresent}`);
-
-        await setToken(JSON.stringify(tokenPresent));
-        await setAxiosConfig({
-          baseURL: 'http://localhost:3333/api/1.0.0',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': `${token}`,
-          },
-        });
-        setIsLoggedIn(true);
-      } else {
-        console.log('No token');
-
-        resetAuth();
-      }
-    } catch (e) {
-      setErr(e);
-      console.warn(err);
-      resetAuth();
-    }
-  };
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [user, setUser] = useState();
+  const [axiosConfig, setAxiosConfig] = useState({
+    baseURL: 'http://localhost:3333/api/1.0.0',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const [token, setToken] = useState(null);
+  const [err, setErr] = useState('');
 
   useEffect(() => {
+    console.log('useEffect: checkAuth()');
+
+    const checkAuth = async () => {
+      // resetAuth();
+      axios.defaults.baseURL = 'http://localhost:3333/api/1.0.0';
+      // await AsyncStorage.removeItem('X-Authorization');
+
+      try {
+        const checkToken = await AsyncStorage.getItem('X-Authorization');
+        const checkLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+        const checkUser = JSON.stringify(
+          await AsyncStorage.getItem('userData')
+        );
+
+        console.log(
+          `Token: ${checkToken}, isLoggedIn: ${checkLoggedIn}, user: ${checkUser}`
+        );
+
+        if (checkToken && checkLoggedIn) {
+          console.log('if reached');
+          axios.defaults.headers.common['Content-Type'] = 'application/json';
+          axios.defaults.headers.common['X-Authorization'] = checkToken;
+
+          const config = {
+            baseURL: 'http://localhost:3333/api/1.0.0',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Authorization': `${token}`,
+            },
+          };
+
+          console.log(`Reached initialState token&&loggedIn`);
+
+          setIsLoggedIn(JSON.parse(checkLoggedIn));
+          setUser(JSON.stringify(user));
+          setToken(JSON.stringify(token));
+          setAxiosConfig(config);
+
+          console.log(
+            `initState values: 
+            \ntoken: ${checkToken}, 
+            \nuser: ${checkUser}, 
+            \nisLoggedIn: ${JSON.stringify(checkLoggedIn)}, 
+            \nconfig: ${JSON.stringify(axiosConfig)}`
+          );
+        } else {
+          const config = {
+            baseURL: 'http://localhost:3333/api/1.0.0',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          };
+          console.log('else reached??');
+          setIsLoggedIn(false);
+          setAxiosConfig(JSON.stringify(config));
+        }
+      } catch (e) {
+        setErr(e);
+        console.warn(err);
+        resetAuth();
+      }
+    };
     checkAuth();
-  }, []);
+  }, [setIsLoggedIn, setUser, setAxiosConfig, setToken]);
 
   const auth = useMemo(
     () => ({
       isLoggedIn,
       setIsLoggedIn,
-      config,
+      axiosConfig,
       setAxiosConfig,
       user,
       setUser,
@@ -92,7 +114,7 @@ export default function AuthProvider({ children }) {
     [
       isLoggedIn,
       setIsLoggedIn,
-      config,
+      axiosConfig,
       setAxiosConfig,
       user,
       setUser,
@@ -103,13 +125,5 @@ export default function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
-
-// const axiosConfig = {
-//   baseURL: 'http://localhost:3333/api/1.0.0',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'X-Authorization': `${tempToken}`,
-//   },
-// };
 
 export { AuthContext, AuthProvider };

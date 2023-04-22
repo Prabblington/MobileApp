@@ -59,42 +59,42 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const navigation = useNavigation();
-  // const { setIsLoggedIn, axiosConfig, setAxiosConfig, setUser } =
-  //   useContext(AuthContext);
+  const { setIsLoggedIn, axiosConfig, setAxiosConfig, setUser } =
+    useContext(AuthContext);
 
-  const { setIsLoggedIn, axiosConfig } = useContext(AuthContext);
+  // const { setIsLoggedIn, axiosConfig } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
 
-  // const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null);
   const [isLoggedInLocal, setIsLoggedInLocal] = useState(false);
-  // const [localUser, setLocalUser] = useState({});
-  // const [localAxiosConfig, setLocalAxiosConfig] = useState({});
+  const [localUser, setLocalUser] = useState({});
+  const [localAxiosConfig, setLocalAxiosConfig] = useState({});
 
   const logIn = async () => {
     try {
       const tryLogIn = await userLogin(email, password, axiosConfig);
 
       if (tryLogIn === true) {
-        // setLocalUser(await AsyncStorage.getItem('userData'));
-        // await setToken(await AsyncStorage.getItem('X-Authorization'));
-        // await setLocalAxiosConfig({
-        //   baseURL: 'http://localhost:3333/api/1.0.0',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'X-Authorization': `${token}`,
-        //   },
-        // });
+        setLocalUser(await AsyncStorage.getItem('userData'));
+        await setToken(await AsyncStorage.getItem('X-Authorization'));
+        await setLocalAxiosConfig({
+          baseURL: 'http://localhost:3333/api/1.0.0',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': `${token}`,
+          },
+        });
         // store it in the auth later
         setIsLoggedInLocal(true);
       }
       setErr(null);
     } catch (e) {
-      // setLocalUser(null);
-      // setToken(null);
-      // setLocalAxiosConfig(null);
+      setLocalUser(null);
+      setToken(null);
+      setLocalAxiosConfig(null);
       setIsLoggedInLocal(false);
       setErr(e);
       console.warn(err);
@@ -102,8 +102,8 @@ export default function Login() {
   };
 
   useEffect(() => {
-    // setUser(localUser);
-    // setAxiosConfig(localAxiosConfig);
+    setUser(localUser);
+    setAxiosConfig(localAxiosConfig);
     setIsLoggedIn(isLoggedInLocal);
   });
 
