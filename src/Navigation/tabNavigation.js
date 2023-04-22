@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   topIcons: {
     flex: 1,
     flexDirection: 'row',
-    marginRight: 15,
+    marginRight: 5,
+    marginTop: 20,
   },
 });
 
@@ -72,14 +73,14 @@ export default function HomeTabNav() {
               <Entypo
                 onPress={() => navigation.navigate('Search for contacts')}
                 name="magnifying-glass"
-                size={18}
+                size={22}
                 color="royalblue"
                 style={{ marginRight: 15 }}
               />
               <Entypo
                 onPress={() => navigation.navigate('Contacts')}
                 name="new-message"
-                size={18}
+                size={22}
                 color="royalblue"
                 style={{ marginRight: 15 }}
               />
