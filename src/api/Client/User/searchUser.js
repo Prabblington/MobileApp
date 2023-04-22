@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-import { axiosConfig } from '../../../Navigation/Context/authManager';
-
 // GET /search
-export default function searchUser(userQuery, searchInParam) {
+export default function searchUser(userQuery, searchInParam, cfg) {
   const queryParams = {
     q: `${userQuery}`,
     // filter: 'first_name, last_name, email',
@@ -15,14 +13,14 @@ export default function searchUser(userQuery, searchInParam) {
   // let result = {};
 
   axios
-    .get('./search', queryParams, axiosConfig)
+    .get('./search', queryParams, cfg)
     .then((response) => {
       console.log(response.data);
       // DO SOMETHING WITH THE RESPONSE
     })
     .catch(async (error) => {
       // DO SOMETHING WHEN AN ERROR IS THROWN
-      console.log(axiosConfig);
+      console.log(cfg);
       console.error(error);
     });
 
