@@ -38,18 +38,10 @@ function AppStack() {
 
 function LoginStack() {
   return (
-    <NavigationContainer>
+    <NavigationContainer screenOptions={{ headerShown: false }}>
       <Stack.Navigator initialRouteName="LoginScreen">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );
