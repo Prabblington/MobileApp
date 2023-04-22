@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // POST /logout
-export default function UserLogout(isLoggedIn, cfg) {
+export default function UserLogout(cfg) {
   return axios
     .post('/logout', cfg)
     .then(async (response) => {
