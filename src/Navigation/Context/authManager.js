@@ -6,25 +6,8 @@ import axios from 'axios';
 const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
-  const resetAuth = async () => {
-    // Remove auth data from AsyncStorage
-    await AsyncStorage.removeItem('X-Authorization');
-    await AsyncStorage.removeItem('isLoggedIn');
-    await AsyncStorage.removeItem('userData');
-
-    // setIsLoggedIn(false);
-    // setUser(null);
-    // setToken(null);
-    // setAxiosConfig({
-    //   baseURL: 'http://localhost:3333/api/1.0.0',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
-  };
-
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const [axiosConfig, setAxiosConfig] = useState({
     baseURL: 'http://localhost:3333/api/1.0.0',
     headers: {
@@ -34,27 +17,39 @@ export default function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [err, setErr] = useState('');
 
-  useEffect(() => {
-    console.log('useEffect: checkAuth()');
+  const resetAuth = async () => {
+    // Remove auth data from AsyncStorage
+    await AsyncStorage.removeItem('X-Authorization');
+    await AsyncStorage.removeItem('isLoggedIn');
+    await AsyncStorage.removeItem('userData');
 
+    setIsLoggedIn(false);
+    setUser(null);
+    setToken(null);
+    setAxiosConfig({
+      baseURL: 'http://localhost:3333/api/1.0.0',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
+  useEffect(() => {
     const checkAuth = async () => {
       // resetAuth();
       axios.defaults.baseURL = 'http://localhost:3333/api/1.0.0';
-      // await AsyncStorage.removeItem('X-Authorization');
 
       try {
-        const checkToken = await AsyncStorage.getItem('X-Authorization');
-        const checkLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-        const checkUser = JSON.stringify(
-          await AsyncStorage.getItem('userData')
+        const checkToken = JSON.stringify(
+          await AsyncStorage.getItem('X-Authorization')
         );
-
-        console.log(
-          `Token: ${checkToken}, isLoggedIn: ${checkLoggedIn}, user: ${checkUser}`
+        const checkLoggedIn = JSON.parse(
+          await AsyncStorage.getItem('isLoggedIn')
         );
+        const checkUser = JSON.parse(await AsyncStorage.getItem('userData'));
 
         if (checkToken && checkLoggedIn) {
-          console.log('if reached');
+          // console.log('if reached');
           axios.defaults.headers.common['Content-Type'] = 'application/json';
           axios.defaults.headers.common['X-Authorization'] = checkToken;
 
@@ -62,24 +57,14 @@ export default function AuthProvider({ children }) {
             baseURL: 'http://localhost:3333/api/1.0.0',
             headers: {
               'Content-Type': 'application/json',
-              'X-Authorization': `${token}`,
+              'X-Authorization': `${checkToken}`,
             },
           };
 
-          console.log(`Reached initialState token&&loggedIn`);
-
-          setIsLoggedIn(JSON.parse(checkLoggedIn));
-          setUser(JSON.stringify(user));
-          setToken(JSON.stringify(token));
+          setUser(checkUser);
+          setToken(checkToken);
           setAxiosConfig(config);
-
-          console.log(
-            `initState values: 
-            \ntoken: ${checkToken}, 
-            \nuser: ${checkUser}, 
-            \nisLoggedIn: ${JSON.stringify(checkLoggedIn)}, 
-            \nconfig: ${JSON.stringify(axiosConfig)}`
-          );
+          setIsLoggedIn(true);
         } else {
           const config = {
             baseURL: 'http://localhost:3333/api/1.0.0',
@@ -98,7 +83,16 @@ export default function AuthProvider({ children }) {
       }
     };
     checkAuth();
-  }, [setIsLoggedIn, setUser, setAxiosConfig, setToken]);
+  }, [
+    isLoggedIn,
+    user,
+    token,
+    axiosConfig,
+    setIsLoggedIn,
+    setUser,
+    setAxiosConfig,
+    setToken,
+  ]);
 
   const auth = useMemo(
     () => ({

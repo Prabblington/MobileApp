@@ -62,8 +62,6 @@ export default function Login() {
   const { setIsLoggedIn, axiosConfig, setAxiosConfig, setUser } =
     useContext(AuthContext);
 
-  // const { setIsLoggedIn, axiosConfig } = useContext(AuthContext);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
@@ -87,7 +85,6 @@ export default function Login() {
             'X-Authorization': `${token}`,
           },
         });
-        // store it in the auth later
         setIsLoggedInLocal(true);
       }
       setErr(null);
