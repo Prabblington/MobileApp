@@ -2,10 +2,10 @@ import { FlatList } from 'react-native';
 
 import ChatListRenderer from '../../Components/Chats/chatListRender';
 
-export default function SearchScreen() {
+export default function SearchScreen(result) {
   return (
     <FlatList
-      // data={result}
+      data={result}
       renderItem={({ item }) => <ChatListRenderer chat={item} />}
       style={{ backgroundColor: 'whitesmoke' }}
     />
