@@ -4,10 +4,9 @@ import axios from 'axios';
 export default function searchUser(userQuery, searchInParam, cfg) {
   const queryParams = {
     q: `${userQuery}`,
-    // filter: 'first_name, last_name, email',
-    // limit: 20,
-    // search_in: `${searchInParam}`,
-    // offset: 0,
+    search_in: searchInParam,
+    limit: 20,
+    offset: 0,
   };
 
   // let result = {};
