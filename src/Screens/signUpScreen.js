@@ -82,25 +82,22 @@ export default function SignUp() {
 
   const [password, setPassword] = useState('');
   const [passRetype, setPassRetype] = useState('');
-  const [isValid, setIsValid] = useState(false);
   const [err, setErr] = useState('');
 
-  const validate = () => {
+  const handleValidation = () => {
     if (
       password === passRetype &&
       EMAIL_VALIDATION.test(email) &&
       PASSWORD_VALIDATION.test(password)
     ) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
+      return true;
     }
-    return isValid;
+    return false;
   };
 
   const signUp = async () => {
     try {
-      if (isValid === true) {
+      if (handleValidation() === true) {
         const successful = await userSignup(
           firstName,
           lastName,
