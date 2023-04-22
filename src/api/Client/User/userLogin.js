@@ -41,7 +41,7 @@ export default function userLogin(email, password, cfg) {
 
       return true;
     })
-    .catch(async (error) => {
+    .catch(async () => {
       await AsyncStorage.setItem('isLoggedIn', false);
       return false;
     });
