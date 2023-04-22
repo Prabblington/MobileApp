@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import PasswordChecklist from 'react-password-checklist';
 
@@ -11,6 +11,7 @@ import {
   EMAIL_VALIDATION,
   PASSWORD_VALIDATION,
 } from './Validation/userValidation';
+import { AuthContext } from '../Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
 
 export default function SignUp() {
   const navigation = useNavigation();
+  const { axiosConfig } = useContext(AuthContext);
 
   const passwordChecklistRules = [
     'minLength',
@@ -103,7 +105,8 @@ export default function SignUp() {
           firstName,
           lastName,
           email,
-          password
+          password,
+          axiosConfig
         );
 
         if (successful === true) {

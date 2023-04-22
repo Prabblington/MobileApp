@@ -1,19 +1,10 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { axiosConfig } from '../../../Navigation/Context/authManager';
-
 // POST /logout
-export default function UserLogout(isLoggedIn) {
-  let loggedOut;
-  if (isLoggedIn === true) {
-    loggedOut = false;
-  } else {
-    loggedOut = true;
-  }
-
+export default function UserLogout(isLoggedIn, cfg) {
   return axios
-    .post('/logout', axiosConfig)
+    .post('/logout', cfg)
     .then(async (response) => {
       if (response.status === 200) {
         await AsyncStorage.removeItem('userData');
@@ -22,14 +13,11 @@ export default function UserLogout(isLoggedIn) {
         axios.defaults.headers.common['X-Authorization'] = '';
 
         console.log('Signing out!');
-
-        loggedOut = true;
       }
-      return loggedOut;
+      return true;
     })
     .catch(async (error) => {
       console.warn(error);
-      loggedOut = false;
-      return loggedOut;
+      return false;
     });
 }

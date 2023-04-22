@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-import { axiosConfig } from '../../../Navigation/Context/authManager';
-
 // POST /user
-export default function userSignup(firstName, lastName, email, password) {
+export default function userSignup(firstName, lastName, email, password, cfg) {
   const userData = {
     first_name: firstName,
     last_name: lastName,
@@ -12,7 +10,7 @@ export default function userSignup(firstName, lastName, email, password) {
   };
 
   axios
-    .post('/user', userData, axiosConfig)
+    .post('/user', userData, cfg)
     .then(async (response) => {
       await response.data;
 

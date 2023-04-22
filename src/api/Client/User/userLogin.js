@@ -1,8 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// import { axiosConfig } from '../../../Navigation/Context/authManager';
-
 let userData = {
   id: '',
   first_name: '',
@@ -41,14 +39,9 @@ export default function userLogin(email, password, cfg) {
       axios.defaults.headers.common['Content-Type'] = 'application/json';
       axios.defaults.headers.common['X-Authorization'] = loginResponse.token;
 
-      console.log(`X-Authorization: ${JSON.stringify(loginResponse.token)}`);
-      console.log(`Logged in: ${JSON.stringify(loginResponse)}`);
-      console.log(`User: ${JSON.stringify(userData)}`);
-
       return true;
     })
     .catch(async (error) => {
-      // console.warn(error);
       await AsyncStorage.setItem('isLoggedIn', false);
       return false;
     });

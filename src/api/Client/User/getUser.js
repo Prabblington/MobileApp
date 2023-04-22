@@ -1,15 +1,13 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { axiosConfig } from '../../../Navigation/Context/authManager';
-
-const getUserTest = async () => {
+const getUserTest = async (cfg) => {
   const user = await AsyncStorage.getItem('userData');
   const parseUser = user !== null ? JSON.parse(user) : null;
   const userID = parseUser.id;
 
   axios
-    .get(`/user/${userID}`, axiosConfig)
+    .get(`/user/${userID}`, cfg)
     .then((response) => {
       const firstName = response.data.first_name;
       const lastName = response.data.last_name;
