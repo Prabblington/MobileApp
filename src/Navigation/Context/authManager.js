@@ -40,9 +40,7 @@ export default function AuthProvider({ children }) {
       axios.defaults.baseURL = 'http://localhost:3333/api/1.0.0';
 
       try {
-        const checkToken = JSON.stringify(
-          await AsyncStorage.getItem('X-Authorization')
-        );
+        const checkToken = await AsyncStorage.getItem('X-Authorization');
         const checkLoggedIn = JSON.parse(
           await AsyncStorage.getItem('isLoggedIn')
         );
