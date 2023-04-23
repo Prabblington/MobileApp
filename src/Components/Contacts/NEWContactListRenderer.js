@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import contactPicture from '../../images/logo2.png';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
@@ -51,10 +52,13 @@ const styles = StyleSheet.create({
 });
 
 export default function NEWContactListRenderer({ contact }) {
+  const navigation = useNavigation();
+
   return (
     <Pressable
       onPress={() => {
         console.log('ContactsListRenderer: View contact interaction options');
+        navigation.navigate('ContactProfile');
       }}
       style={styles.container}
     >

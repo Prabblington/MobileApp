@@ -1,6 +1,14 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
+
 import contactPicture from '../../images/logo2.png';
 import CustButton from '../Input/custButton';
+import {
+  addContact,
+  removeContact,
+} from '../../api/Client/Contact Management/addedContactOptions';
+import { blockContact } from '../../api/Client/Contact Management/blockContactOptions';
+import { useContext } from 'react';
+import { AuthContext } from '../../Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +66,55 @@ const styles = StyleSheet.create({
 });
 
 export default function ContactOptions() {
+  const { axiosConfig } = useContext(AuthContext);
+
+  async function handleAddContact(userID, cfg) {
+    const result = await addContact(userID, cfg);
+
+    if (result === 200) {
+      alert('Added new friend!');
+    }
+    if (result === 400) {
+      alert('You cannot add yourself!');
+    }
+    if (result === 404) {
+      alert('User not found');
+    } else {
+      alert('Something went wrong, please try again later');
+    }
+  }
+
+  async function handleRemoveContact(userID, cfg) {
+    const result = await removeContact(userID, cfg);
+
+    if (result === 200) {
+      alert('Removed contact!');
+    }
+    if (result === 400) {
+      alert('You cannot delete yourself as a contact!');
+    }
+    if (result === 404) {
+      alert('User not found');
+    } else {
+      alert('Something went wrong, please try again later');
+    }
+  }
+  async function handleBlockContact(userID, cfg) {
+    const result = await blockContact(userID, cfg);
+
+    if (result === 200) {
+      alert('Blocked contact!');
+    }
+    if (result === 400) {
+      alert('You cannot block yourself as a contact!');
+    }
+    if (result === 404) {
+      alert('User not found');
+    } else {
+      alert('Something went wrong, please try again later');
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -66,29 +123,33 @@ export default function ContactOptions() {
           {/* {image && <Image source={{ uri: image }} style={styles.userImage} />} */}
         </View>
         <View style={styles.nameBox}>
-          <Text style={styles.header}> John Smith </Text>
+          <Text style={styles.header}>
+            {/* {' '}
+            {contact.given_name + contact.family_name}{' '} */}
+            John Smith
+          </Text>
         </View>
         <View style={styles.status}>
-          <Text style={styles.subHeader}> Online: At work atm! </Text>
+          <Text style={styles.subHeader}> Online </Text>
         </View>
         <View style={styles.userOptionsContainer}>
           <View style={styles.userOptions}>
             <CustButton
-              onPress={() => console.log('button 1 pressed')}
+              onPress={() => handleAddContact()}
               title="Add Contact"
               accessibilityLabel="Add this user to your list"
               buttonText="Add Contact"
               type="Tertiary"
             />
             <CustButton
-              onPress={() => console.log('button 2 pressed')}
+              onPress={() => handleRemoveContact()}
               title="Remove Contact"
               accessibilityLabel="Remove this user from your list"
               buttonText="Remove Contact"
               type="Tertiary"
             />
             <CustButton
-              onPress={() => console.log('button 3 pressed')}
+              onPress={() => handleBlockContact}
               title="Block Contact"
               accessibilityLabel="Block this user from contacting you"
               buttonText="Block Contact"
