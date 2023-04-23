@@ -35,3 +35,5 @@ const getUser = async (cfg) => {
     console.log(e);
   }
 };
+
+export { returnCurrentUser, getUser };
