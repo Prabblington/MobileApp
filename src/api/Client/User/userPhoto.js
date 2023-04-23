@@ -25,8 +25,6 @@ async function chooseImage() {
     quality: 1,
   });
 
-  console.log(result.base64);
-
   if (!result.canceled) {
     return result;
   }
@@ -35,14 +33,15 @@ async function chooseImage() {
 }
 
 async function uploadUserPhoto(userID, photo, cfg) {
-  const result = await axios
+  await axios
     .post(`/user/${userID}/photo`, photo, cfg)
     .then(async (response) => {
-      console.log('Uploaded a photo!');
       console.log(response.status);
+      return true;
     })
     .catch(async (error) => {
       console.log(error);
+      return false;
     });
 }
 
