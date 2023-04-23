@@ -1,13 +1,14 @@
-import { FlatList, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-web';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import { useState } from 'react';
+import { useContext, useEffect, useState, useMemo } from 'react';
 
 import CustInput from '../../Components/Input/custInput';
 import CustButton from '../../Components/Input/custButton';
 import searchUser from '../../api/Client/User/searchUser';
-import ContactListRenderer from '../../Components/Contacts/contactListRender';
+import SearchListRenderer from './searchListRenderer';
+import { AuthContext } from '../../Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +28,8 @@ const styles = StyleSheet.create({
 });
 
 export default function SearchOptionScreen() {
+  const { axiosConfig } = useContext(AuthContext);
+
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
@@ -36,16 +39,40 @@ export default function SearchOptionScreen() {
   const [value, setValue] = useState('all');
   const [err, setErr] = useState(null);
 
+  const [displayResult, setDispayResult] = useState(false);
+  const [searchResult, setSearchResult] = useState(null);
+
   const handleSearchResult = async () => {
+    if (query.length === 0) {
+      setSearchResult('');
+      setDispayResult(false);
+      return;
+    }
     try {
-      const trySearch = await searchUser(query, value);
+      const sResult = await searchUser(query, value, axiosConfig);
       console.log(query);
+      setSearchResult(sResult);
+      setDispayResult(true);
       setErr(null);
     } catch (e) {
+      setDispayResult(false);
       setErr(e);
       console.warn(err);
     }
   };
+
+  const memoisedSearchListRenderer = useMemo(
+    () => <SearchListRenderer result={searchResult} />,
+    [searchResult, displayResult]
+  );
+
+  useEffect(() => {
+    if (searchResult) {
+      console.log(`displayResult: ${displayResult}`);
+      console.log(`searchResult: ${searchResult}`);
+      setDispayResult(true);
+    }
+  }, [searchResult, displayResult]);
 
   return (
     <KeyboardAvoidingView>
@@ -72,11 +99,13 @@ export default function SearchOptionScreen() {
         buttonText="Search"
       />
       <View>
-        <FlatList
-          data={handleSearchResult}
-          renderItem={({ item }) => <ContactListRenderer contact={item} />}
-          style={{ backgroundColor: 'whitesmoke' }}
-        />
+        {displayResult ? (
+          memoisedSearchListRenderer
+        ) : (
+          <View>
+            <Text> there are no search results</Text>
+          </View>
+        )}
       </View>
     </KeyboardAvoidingView>
   );

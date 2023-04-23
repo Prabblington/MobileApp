@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // GET /search
-export default function searchUser(userQuery, searchInParam, cfg) {
+export default async function searchUser(userQuery, searchInParam, cfg) {
   const queryParams = {
     q: `${userQuery}`,
     search_in: searchInParam,
@@ -11,11 +11,13 @@ export default function searchUser(userQuery, searchInParam, cfg) {
 
   // let result = {};
 
-  axios
+  const result = await axios
     .get('./search', queryParams, cfg)
     .then((response) => {
       console.log(response.data);
+
       // DO SOMETHING WITH THE RESPONSE
+      return JSON.stringify(response.data);
     })
     .catch(async (error) => {
       // DO SOMETHING WHEN AN ERROR IS THROWN
@@ -23,5 +25,5 @@ export default function searchUser(userQuery, searchInParam, cfg) {
       console.error(error);
     });
 
-  // return result;
+  return result;
 }
