@@ -63,7 +63,7 @@ export default function SearchOptionScreen() {
 
   const memoisedSearchListRenderer = useMemo(
     () => <SearchListRenderer result={searchResult} />,
-    [searchResult, displayResult]
+    [searchResult]
   );
 
   useEffect(() => {

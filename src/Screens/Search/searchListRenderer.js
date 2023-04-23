@@ -1,16 +1,17 @@
-import { FlatList, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 
 import NEWContactListRenderer from '../../Components/Contacts/NEWContactListRenderer';
 
 export default function SearchListRenderer({ result }) {
-  console.log('reached searchListRenderer');
+  if (!Array.isArray(result)) {
+    return <Text>No results found</Text>;
+  }
+
   return (
     <ScrollView>
-      <FlatList
-        data={result}
-        renderItem={({ item }) => <NEWContactListRenderer contact={item} />}
-        style={{ backgroundColor: 'whitesmoke' }}
-      />
+      {result.map((item) => (
+        <NEWContactListRenderer key={item.user_id} contact={item} />
+      ))}
     </ScrollView>
   );
 }
