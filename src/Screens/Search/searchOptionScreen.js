@@ -36,7 +36,7 @@ export default function SearchOptionScreen() {
   const [value, setValue] = useState('all');
   const [err, setErr] = useState(null);
 
-  const result = async () => {
+  const handleSearchResult = async () => {
     try {
       const trySearch = await searchUser(query, value);
       console.log(query);
@@ -66,14 +66,14 @@ export default function SearchOptionScreen() {
         setValue={setValue}
       />
       <CustButton
-        onPress={result}
+        onPress={handleSearchResult}
         title="Search Button"
         accessibilityLabel="press button to search for all users containing name"
         buttonText="Search"
       />
       <View>
         <FlatList
-          data={result}
+          data={handleSearchResult}
           renderItem={({ item }) => <ContactListRenderer contact={item} />}
           style={{ backgroundColor: 'whitesmoke' }}
         />
