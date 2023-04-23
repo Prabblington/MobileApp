@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const returnCurrentUserID = async () => {
+async function returnCurrentUserID() {
   try {
     const user = await AsyncStorage.getItem('userData');
     const parsedUser = user !== null ? await JSON.parse(user) : null;
@@ -12,9 +12,9 @@ const returnCurrentUserID = async () => {
     console.warn(e);
     return undefined;
   }
-};
+}
 
-const getUser = async (userID, cfg) => {
+async function getUser(userID, cfg) {
   try {
     axios
       .get(`/user/${userID}`, cfg)
@@ -32,6 +32,6 @@ const getUser = async (userID, cfg) => {
   } catch (e) {
     console.warn(e);
   }
-};
+}
 
 export { returnCurrentUserID, getUser };
