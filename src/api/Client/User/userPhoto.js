@@ -1,38 +1,36 @@
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 
-import { getUser } from './getUser';
-
-function getUserPhoto(userID, cfg) {
-  return axios
-    .get(`/user/${userID}/photo`, cfg)
-    .then(async (response) => response.data.message)
-    .catch(async (error) => {
-      console.log(error);
-    });
+async function getUserPhoto(userID, cfg) {
+  try {
+    const response = await axios.get(`/user/${userID}/photo`, cfg);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 }
 
-const chooseImage = async () => {
+async function chooseImage() {
   const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
-    aspect: 1,
+    aspect: [4, 3],
     quality: 1,
   });
 
+  console.log(result);
+
   if (!result.canceled) {
-    console.log(result);
     return result;
   }
   alert('you did not select an image');
   return null;
-};
+}
 
-const uploadUserPhoto = async (cfg) => {
-  const currentUser = await getUser();
-  const userID = currentUser.id;
-
-  return axios
-    .post(`/user/${userID}/photo`, cfg)
+async function uploadUserPhoto(userID, photo, cfg) {
+  axios
+    .post(`/user/${userID}/photo`, photo, cfg)
     .then(async (response) => {
       console.log('Uploaded a photo!');
       console.log(response.status);
@@ -40,6 +38,6 @@ const uploadUserPhoto = async (cfg) => {
     .catch(async (error) => {
       console.log(error);
     });
-};
+}
 
 export { getUserPhoto, uploadUserPhoto, chooseImage };

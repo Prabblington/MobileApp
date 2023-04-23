@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 });
 
 export default function ProfilePage({ user }) {
-  const { axiosConfig, axiosConfigImage } = useContext(AuthContext);
+  const { axiosConfigImage } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -91,12 +91,14 @@ export default function ProfilePage({ user }) {
 
   const handlePhotoUpload = async () => {
     const newImage = await chooseImage();
+    const currentUser = await returnCurrentUserID();
+    console.log(newImage);
 
     if (newImage !== null) {
       setImage(newImage);
 
       try {
-        uploadUserPhoto(image, axiosConfig);
+        uploadUserPhoto(currentUser, newImage, axiosConfigImage);
       } catch (e) {
         console.warn('there was a problem uploading');
         console.error(e);
