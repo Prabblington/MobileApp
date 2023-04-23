@@ -11,7 +11,7 @@ import placeholderPfp from '../../images/placeholderPfp.png';
 
 import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
-import { returnCurrentUserID, getUser } from '../../api/Client/User/getUser';
+import { returnCurrentUserID } from '../../api/Client/User/getUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -76,29 +76,26 @@ export default function ProfilePage({ user }) {
     const checkExistingPfp = async () => {
       const currentUser = await returnCurrentUserID();
       const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
-      console.log(`CurrentUser: ${currentUser}`);
-      console.log(`currentPfp: ${currentPfp}`);
 
       if (currentUser && currentPfp) {
-        console.log('pfp if reached');
-        setImage(JSON.stringify(currentPfp));
+        const imageURI = `data:image/png;base64,${currentPfp}`;
+
+        setImage(imageURI);
       } else {
         setImage(placeholderPfp);
       }
     };
     checkExistingPfp();
-  }, [setImage]);
+  }, [image]);
 
   const handlePhotoUpload = async () => {
     const newImage = await chooseImage();
     const currentUser = await returnCurrentUserID();
-    console.log(newImage);
 
     if (newImage !== null) {
-      setImage(newImage);
-
       try {
-        uploadUserPhoto(currentUser, newImage, axiosConfigImage);
+        await uploadUserPhoto(currentUser, newImage, axiosConfigImage);
+        setImage(newImage);
       } catch (e) {
         console.warn('there was a problem uploading');
         console.error(e);
@@ -112,11 +109,6 @@ export default function ProfilePage({ user }) {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.userImage}>
-          {/* <Image
-            style={styles.image}
-            // source={user.profile.image}
-            resizeMode="cover"
-          /> */}
           {image && <Image source={{ uri: image }} style={styles.userImage} />}
         </View>
         <View>
@@ -140,14 +132,14 @@ export default function ProfilePage({ user }) {
             <Text> Icon 1 </Text>
           </View>
         </View>
-        <View style={styles.save}>
+        {/* <View style={styles.save}>
           <CustButton
             onPress={() => console.log('profile saved')}
             title="Save Profile changes"
             accessibilityLabel="Select a profile photo from your device's storage"
             buttonText="Save changes"
           />
-        </View>
+        </View> */}
       </View>
     </View>
   );

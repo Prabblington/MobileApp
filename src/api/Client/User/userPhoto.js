@@ -2,13 +2,19 @@ import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 
 async function getUserPhoto(userID, cfg) {
-  try {
-    const response = await axios.get(`/user/${userID}/photo`, cfg);
-    return response.data;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
+  const result = await axios
+    .get(`/user/${userID}/photo`, cfg)
+    .then(async (response) => {
+      const imageData = response.data.assets[0].uri;
+      const imageRawImageData = imageData.split(',')[1];
+      return imageRawImageData;
+    })
+    .catch(async (error) => {
+      console.log(error);
+      return null;
+    });
+
+  return result;
 }
 
 async function chooseImage() {
@@ -19,7 +25,7 @@ async function chooseImage() {
     quality: 1,
   });
 
-  console.log(result);
+  console.log(result.base64);
 
   if (!result.canceled) {
     return result;
@@ -29,7 +35,7 @@ async function chooseImage() {
 }
 
 async function uploadUserPhoto(userID, photo, cfg) {
-  axios
+  const result = await axios
     .post(`/user/${userID}/photo`, photo, cfg)
     .then(async (response) => {
       console.log('Uploaded a photo!');
