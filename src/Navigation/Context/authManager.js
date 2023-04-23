@@ -8,6 +8,12 @@ const AuthContext = createContext({});
 export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState({});
+  const [axiosConfigImage, setAxiosConfigImage] = useState({
+    baseURL: 'http://localhost:3333/api/1.0.0',
+    headers: {
+      'Content-Type': 'image/png',
+    },
+  });
   const [axiosConfig, setAxiosConfig] = useState({
     baseURL: 'http://localhost:3333/api/1.0.0',
     headers: {
@@ -57,9 +63,18 @@ export default function AuthProvider({ children }) {
             },
           };
 
+          const configImages = {
+            baseURL: 'http://localhost:3333/api/1.0.0',
+            headers: {
+              'Content-Type': 'image/png',
+              'X-Authorization': `${checkToken}`,
+            },
+          };
+
           setUser(checkUser);
           setToken(checkToken);
           setAxiosConfig(config);
+          setAxiosConfigImage(configImages);
           setIsLoggedIn(true);
         } else {
           const config = {
@@ -83,9 +98,11 @@ export default function AuthProvider({ children }) {
     user,
     token,
     axiosConfig,
+    axiosConfigImage,
     setIsLoggedIn,
     setUser,
     setAxiosConfig,
+    setAxiosConfigImage,
     setToken,
   ]);
 
@@ -95,6 +112,8 @@ export default function AuthProvider({ children }) {
       setIsLoggedIn,
       axiosConfig,
       setAxiosConfig,
+      axiosConfigImage,
+      setAxiosConfigImage,
       user,
       setUser,
       token,
@@ -105,6 +124,8 @@ export default function AuthProvider({ children }) {
       setIsLoggedIn,
       axiosConfig,
       setAxiosConfig,
+      axiosConfigImage,
+      setAxiosConfigImage,
       user,
       setUser,
       token,

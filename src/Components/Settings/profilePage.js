@@ -69,15 +69,16 @@ const styles = StyleSheet.create({
 });
 
 export default function ProfilePage({ user }) {
-  const { axiosConfig, setAxiosConfig } = useContext(AuthContext);
+  const { axiosConfig, axiosConfigImage } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     const checkExistingPfp = async () => {
       const currentUser = await returnCurrentUserID();
-      const currentPfp = await getUserPhoto(currentUser, axiosConfig);
+      const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
       console.log(`CurrentUser: ${currentUser}`);
       console.log(`currentPfp: ${currentPfp}`);
+
       if (currentUser && currentPfp) {
         console.log('pfp if reached');
         setImage(JSON.stringify(currentPfp));

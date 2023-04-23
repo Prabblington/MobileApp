@@ -5,11 +5,8 @@ import { getUser } from './getUser';
 
 function getUserPhoto(userID, cfg) {
   return axios
-    .post(`/user/${userID}/photo`, cfg)
-    .then(async (response) => {
-      console.log(`Users photo uploaded: ${response.data}`);
-      console.log(response.status);
-    })
+    .get(`/user/${userID}/photo`, cfg)
+    .then(async (response) => response.data.message)
     .catch(async (error) => {
       console.log(error);
     });
@@ -37,7 +34,7 @@ const uploadUserPhoto = async (cfg) => {
   return axios
     .post(`/user/${userID}/photo`, cfg)
     .then(async (response) => {
-      console.log('User blocked!');
+      console.log('Uploaded a photo!');
       console.log(response.status);
     })
     .catch(async (error) => {
