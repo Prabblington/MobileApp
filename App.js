@@ -4,6 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 
 import MainNavigation from './src/Navigation/mainNavigation';
 import { AuthProvider } from './src/Navigation/Context/authManager';
+import ProfilePage from './src/Components/Settings/profilePage';
+
+import TestComponent from './src/api/TestApiFunctions/testComponent';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,8 +19,10 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
+      <ProfilePage />
       <AuthProvider>
-        <MainNavigation />
+        {/* <TestComponent /> */}
+        {/* <MainNavigation /> */}
       </AuthProvider>
       <StatusBar style="auto" />
     </SafeAreaView>
