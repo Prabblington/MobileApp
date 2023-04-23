@@ -1,12 +1,14 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const returnCurrentUser = async () => {
+const returnCurrentUserID = async () => {
   try {
     const user = await AsyncStorage.getItem('userData');
-    const parseUser = user !== null ? await JSON.parse(user) : null;
-    return parseUser;
+    const parsedUser = user !== null ? await JSON.parse(user) : null;
+    console.log(parsedUser.id);
+    return parsedUser.id;
   } catch (e) {
+    console.log('ReturnCurrentUserID ERROR');
     console.warn(e);
     return undefined;
   }
@@ -32,4 +34,4 @@ const getUser = async (userID, cfg) => {
   }
 };
 
-export { returnCurrentUser, getUser };
+export { returnCurrentUserID, getUser };

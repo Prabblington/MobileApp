@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import ChatScreen from '../Screens/chatScreen';
+import ProfilePage from '../Components/Settings/profilePage';
 
 const styles = StyleSheet.create({
   topIcons: {
@@ -89,11 +90,11 @@ export default function HomeTabNav() {
         })}
       />
       <Tab.Screen
-        name="Settings"
-        component={TEMP_COMPONENT}
+        name="Profile"
+        component={ProfilePage}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+            <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
       />

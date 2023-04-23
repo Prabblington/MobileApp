@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ProfilePage />
+      {/* <ProfilePage /> */}
       <AuthProvider>
         {/* <TestComponent /> */}
-        {/* <MainNavigation /> */}
+        <MainNavigation />
       </AuthProvider>
       <StatusBar style="auto" />
     </SafeAreaView>

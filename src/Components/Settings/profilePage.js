@@ -1,6 +1,17 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, Button, StyleSheet } from 'react-native';
+import { useContext, useEffect, useState } from 'react';
 
-import contactpfp from '../../images/logo2.png';
+import {
+  chooseImage,
+  getUserPhoto,
+  uploadUserPhoto,
+} from '../../api/Client/User/userPhoto';
+
+import placeholderPfp from '../../images/placeholderPfp.png';
+
+import CustButton from '../Input/custButton';
+import { AuthContext } from '../../Navigation/Context/authManager';
+import { returnCurrentUserID, getUser } from '../../api/Client/User/getUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -52,17 +63,65 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderRadius: 12,
   },
+  save: {
+    marginTop: 22,
+  },
 });
 
 export default function ProfilePage({ user }) {
+  const { axiosConfig, setAxiosConfig } = useContext(AuthContext);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    const checkExistingPfp = async () => {
+      const currentUser = await returnCurrentUserID();
+      const currentPfp = await getUserPhoto(currentUser, axiosConfig);
+      console.log(`CurrentUser: ${currentUser}`);
+      console.log(`currentPfp: ${currentPfp}`);
+      if (currentUser && currentPfp) {
+        console.log('pfp if reached');
+        setImage(JSON.stringify(currentPfp));
+      } else {
+        setImage(placeholderPfp);
+      }
+    };
+    checkExistingPfp();
+  }, [setImage]);
+
+  const handlePhotoUpload = async () => {
+    const newImage = await chooseImage();
+
+    if (newImage !== null) {
+      setImage(newImage);
+
+      try {
+        uploadUserPhoto(image, axiosConfig);
+      } catch (e) {
+        console.warn('there was a problem uploading');
+        console.error(e);
+      }
+    } else {
+      console.log("you haven't selected a picture");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.userImage}>
-          <Image
+          {/* <Image
             style={styles.image}
             // source={user.profile.image}
             resizeMode="cover"
+          /> */}
+          {image && <Image source={{ uri: image }} style={styles.userImage} />}
+        </View>
+        <View>
+          <CustButton
+            onPress={handlePhotoUpload}
+            title="Choose Image"
+            accessibilityLabel="Select a profile photo from your device's storage"
+            buttonText="Choose Image"
           />
         </View>
         <View style={styles.nameBox}>
@@ -77,6 +136,14 @@ export default function ProfilePage({ user }) {
             <Text> Icon 1 </Text>
             <Text> Icon 1 </Text>
           </View>
+        </View>
+        <View style={styles.save}>
+          <CustButton
+            onPress={() => console.log('profile saved')}
+            title="Save Profile changes"
+            accessibilityLabel="Select a profile photo from your device's storage"
+            buttonText="Save changes"
+          />
         </View>
       </View>
     </View>
