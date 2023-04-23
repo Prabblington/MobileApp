@@ -132,14 +132,6 @@ export default function ProfilePage({ user }) {
             <Text> Icon 1 </Text>
           </View>
         </View>
-        {/* <View style={styles.save}>
-          <CustButton
-            onPress={() => console.log('profile saved')}
-            title="Save Profile changes"
-            accessibilityLabel="Select a profile photo from your device's storage"
-            buttonText="Save changes"
-          />
-        </View> */}
       </View>
     </View>
   );

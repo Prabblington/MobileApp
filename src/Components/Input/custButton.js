@@ -20,6 +20,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'clear',
   },
 
+  buttonTertiary: {
+    justifyContent: 'center',
+    marginTop: '5%',
+    marginHorizontal: 2,
+    marginVertical: 5,
+    backgroundColor: 'clear',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 2,
+    textAlign: 'center',
+  },
+
   buttonText: {
     textAlign: 'center',
     fontWeight: 600,
@@ -35,7 +48,7 @@ export default function CustButton({
 }) {
   return (
     <Pressable
-      style={[styles.buttonMain, styles[`button${type}`]]}
+      style={[styles[`button${type}`], styles[`button${type}`]]}
       onPress={() => onPress()}
       title={title}
       accessibilityLabel={accessibilityLabel}
