@@ -15,8 +15,12 @@ import {
   storeContactAsyncStorage,
   deleteContactAsyncStorage,
 } from './contactAsyncStorage';
+import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
+import startNewChat from '../../api/Client/Chat Management/Chat Options/startNewChat';
+
 import { getUserPhoto } from '../../api/Client/User/userPhoto';
+import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
 
 const { width } = Dimensions.get('window');
 
@@ -26,7 +30,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 5,
     width: width - 30,
-    height: 70,
+    height: 80,
   },
 
   content: {
@@ -58,11 +62,16 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginRight: 10,
   },
+
+  button: {
+    flex: 1,
+    marginLeft: '65%',
+  },
 });
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
-  // const { axiosConfigImage } = useContext(AuthContext);
+  const { axiosConfigImage, axiosConfig } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -81,6 +90,22 @@ export default function ContactListRenderer({ contact }) {
     };
     checkExistingPfp();
   }, [image]);
+
+  const handleSendMessage = async () => {
+    try {
+      const initChatResponse = await startNewChat(axiosConfig);
+
+      const chatRoom = await getSingleChat(
+        initChatResponse.chat_id,
+        axiosConfig
+      );
+
+      return chatRoom;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
 
   return (
     <Pressable
@@ -108,6 +133,15 @@ export default function ContactListRenderer({ contact }) {
             </Text>
           </View>
           <Text style={styles.subHeader}>{contact.email}</Text>
+          <View style={styles.button}>
+            <CustButton
+              onPress={() => console.log('send new message')}
+              title="Send message"
+              accessibilityLabel="press this button to go to, or start a chat with this person"
+              buttonText="Send message"
+              type="Tertiary"
+            />
+          </View>
         </View>
       </View>
     </Pressable>

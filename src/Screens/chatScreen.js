@@ -2,7 +2,6 @@ import { FlatList } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 
 import ChatListRenderer from '../Components/Chats/chatListRender';
-// import chat from '../data/chats.json';
 import getChatList from '../api/Client/Chat Management/getChatList';
 import { AuthContext } from '../Navigation/Context/authManager';
 
