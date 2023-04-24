@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native-web';
 import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import CustButton from '../Components/Input/custButton';
 import UserLogout from '../api/Client/User/userLogout';
@@ -7,20 +8,21 @@ import UserLogout from '../api/Client/User/userLogout';
 import { AuthContext } from '../Navigation/Context/authManager';
 
 export default function LoggedOutScreen() {
+  const navigation = useNavigation();
   const { axiosConfig } = useContext(AuthContext);
 
   const handleLogOut = async () => {
     console.log('Log Out');
 
     try {
-      const logOut = await UserLogout(axiosConfig);
+      await UserLogout(axiosConfig);
     } catch (e) {
       console.log(e);
     }
   };
 
   const handleGoBackToHome = () => {
-    console.log('Back to home');
+    navigation.navigate('Chats');
   };
 
   return (
