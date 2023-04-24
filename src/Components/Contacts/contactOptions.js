@@ -1,5 +1,7 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { useContext, useEffect, useState } from 'react';
 
+import { AuthContext } from '../../Navigation/Context/authManager';
 import contactPicture from '../../images/logo2.png';
 import CustButton from '../Input/custButton';
 import {
@@ -7,8 +9,7 @@ import {
   removeContact,
 } from '../../api/Client/Contact Management/addedContactOptions';
 import { blockContact } from '../../api/Client/Contact Management/blockContactOptions';
-import { useContext } from 'react';
-import { AuthContext } from '../../Navigation/Context/authManager';
+import { getContactAsyncStorage } from './contactAsyncStorage';
 
 const styles = StyleSheet.create({
   container: {
@@ -67,6 +68,17 @@ const styles = StyleSheet.create({
 
 export default function ContactOptions() {
   const { axiosConfig } = useContext(AuthContext);
+  const [viewedContact, setViewedContact] = useState({});
+
+  useEffect(() => {
+    const getViewedContact = async () => {
+      const c = await getContactAsyncStorage();
+      if (viewedContact !== c) {
+        setViewedContact(c);
+      }
+    };
+    getViewedContact();
+  }, [setViewedContact]);
 
   async function handleAddContact(userID, cfg) {
     const result = await addContact(userID, cfg);
@@ -124,9 +136,7 @@ export default function ContactOptions() {
         </View>
         <View style={styles.nameBox}>
           <Text style={styles.header}>
-            {/* {' '}
-            {contact.given_name + contact.family_name}{' '} */}
-            John Smith
+            {`${viewedContact.given_name} ${viewedContact.family_name}`}
           </Text>
         </View>
         <View style={styles.status}>
@@ -135,21 +145,27 @@ export default function ContactOptions() {
         <View style={styles.userOptionsContainer}>
           <View style={styles.userOptions}>
             <CustButton
-              onPress={() => handleAddContact()}
+              onPress={() =>
+                handleAddContact(viewedContact.user_id, axiosConfig)
+              }
               title="Add Contact"
               accessibilityLabel="Add this user to your list"
               buttonText="Add Contact"
               type="Tertiary"
             />
             <CustButton
-              onPress={() => handleRemoveContact()}
+              onPress={() =>
+                handleRemoveContact(viewedContact.user_id, axiosConfig)
+              }
               title="Remove Contact"
               accessibilityLabel="Remove this user from your list"
               buttonText="Remove Contact"
               type="Tertiary"
             />
             <CustButton
-              onPress={() => handleBlockContact}
+              onPress={() =>
+                handleBlockContact(viewedContact.user_id, axiosConfig)
+              }
               title="Block Contact"
               accessibilityLabel="Block this user from contacting you"
               buttonText="Block Contact"

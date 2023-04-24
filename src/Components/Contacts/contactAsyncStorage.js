@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 async function storeContactAsyncStorage({ contact }) {
   try {
     console.log('Contact Stored');
-    console.log(`store ${contact}`);
+    console.log(`store ${JSON.stringify(contact)}`);
     await AsyncStorage.setItem('viewContactDetails', JSON.stringify(contact));
   } catch (e) {
     console.log(e);

@@ -9,6 +9,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import contactPicture from '../../images/logo2.png';
+import {
+  storeContactAsyncStorage,
+  deleteContactAsyncStorage,
+} from './contactAsyncStorage';
 
 const { width } = Dimensions.get('window');
 
@@ -59,6 +63,9 @@ export default function NEWContactListRenderer({ contact }) {
     <Pressable
       onPress={() => {
         console.log('ContactsListRenderer: View contact interaction options');
+
+        deleteContactAsyncStorage();
+        storeContactAsyncStorage({ contact });
         navigation.navigate('ContactProfile');
       }}
       style={styles.container}

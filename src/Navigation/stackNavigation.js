@@ -32,7 +32,7 @@ function AppStack() {
           name="Search for contacts"
           component={SearchOptionScreen}
         />
-        <Stack.Screen name="ContactProfile" component={ContactOptions} />
+        <Stack.Screen name="Contact Profile" component={ContactOptions} />
       </Stack.Navigator>
     </NavigationContainer>
   );
