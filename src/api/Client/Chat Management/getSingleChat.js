@@ -10,7 +10,7 @@ export default async function getSingleChat(chatID, cfg) {
   try {
     return axios
       .get(`./chat/${chatID}`, query, cfg)
-      .then((response) => response);
+      .then((response) => response.data);
   } catch (e) {
     console.log(e);
     return null;

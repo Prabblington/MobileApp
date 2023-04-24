@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import {
   FlatList,
@@ -13,7 +13,9 @@ import MessageUI from './messageUI';
 import InputUI from '../Input/inputUI';
 
 import backgroundImage from '../../images/background.png';
-import messages from '../../data/messages.json';
+// import messages from '../../data/messages.json';
+import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
+import { AuthContext } from '../../Navigation/Context/authManager';
 
 // make the background image take up the full screen
 const { height, width } = Dimensions.get('window');
@@ -41,13 +43,24 @@ const styles = StyleSheet.create({
 export default function ChatUI() {
   // get data from the chatListProp to match user to messages and correctly
   // display from the right person/group
+  const { axiosConfig } = useContext(AuthContext);
   const route = useRoute();
   const navigation = useNavigation();
+  const [messages, setMessages] = useState([]);
 
   // allows for this to only be called once
   useEffect(() => {
     navigation.setOptions({ title: route.params.name });
   }, [route.params.name]);
+
+  useEffect(() => {
+    async function fetchMessages() {
+      const result = await getSingleChat(route.params.chatRoomId, axiosConfig);
+      console.log(result);
+      setMessages(result);
+    }
+    fetchMessages();
+  }, [route.params.chatRoomId]);
 
   return (
     <KeyboardAvoidingView

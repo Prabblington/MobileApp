@@ -56,21 +56,21 @@ export default function ChatListRenderer({ chat }) {
     <Pressable
       onPress={() =>
         navigation.navigate('ChatUI', {
-          id: chat.id,
-          name: chat.user.username,
+          id: chat.chat_id,
+          name: chat.name,
         })
       }
       style={styles.container}
     >
-      <View key={chat?.id} style={styles.container}>
+      <View key={chat.chat_id} style={styles.container}>
         {/* This will be the users avatar */}
         <Image style={styles.image} source={contactPfp} />
 
         <View style={styles.content}>
           <View style={styles.row}>
-            <Text style={styles.text}>{chat.user?.username}</Text>
+            <Text style={styles.text}>{chat.name}</Text>
             <Text style={styles.subHeader}>
-              {DayJs(chat.lastMessage?.dayTimeSent).fromNow()}
+              {DayJs(chat.lastMessage?.timestamp).fromNow()}
             </Text>
           </View>
 

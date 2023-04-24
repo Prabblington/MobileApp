@@ -93,14 +93,26 @@ export default function ContactListRenderer({ contact }) {
 
   const handleSendMessage = async () => {
     try {
-      const initChatResponse = await startNewChat(axiosConfig);
+      const firstName = contact.given_name
+        ? contact.given_name
+        : contact.first_name;
+      const lastName = contact.family_name
+        ? contact.family_name
+        : contact.last_name;
 
-      const chatRoom = await getSingleChat(
-        initChatResponse.chat_id,
-        axiosConfig
-      );
+      const nameString = {
+        name: `${firstName} ${lastName}`,
+      };
 
-      return chatRoom;
+      const initChatResponse = await startNewChat(nameString, axiosConfig);
+      const chatRoomDetails = {
+        chat_id: initChatResponse.chat_id,
+        nameString,
+      };
+      console.log(initChatResponse);
+      console.log(nameString);
+
+      return chatRoomDetails;
     } catch (e) {
       console.error(e);
       return null;
@@ -135,7 +147,10 @@ export default function ContactListRenderer({ contact }) {
           <Text style={styles.subHeader}>{contact.email}</Text>
           <View style={styles.button}>
             <CustButton
-              onPress={() => console.log('send new message')}
+              onPress={async () => {
+                const chatRoom = await handleSendMessage();
+                navigation.navigate('ChatUI', chatRoom);
+              }}
               title="Send message"
               accessibilityLabel="press this button to go to, or start a chat with this person"
               buttonText="Send message"
