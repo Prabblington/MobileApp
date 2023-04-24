@@ -6,7 +6,9 @@ export default async function getChatList(cfg) {
       console.log(response.data);
       console.log(response.status);
     });
+    return chats;
   } catch (e) {
     console.log(e);
+    return null;
   }
 }

@@ -7,6 +7,7 @@ async function sendMessage(userID, message, cfg) {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
+        return response.data;
       });
   } catch (e) {
     console.log(e);
@@ -21,6 +22,7 @@ async function updateMessage(userID, messageID, message, cfg) {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
+        return response.data;
       });
   } catch (e) {
     console.log(e);
@@ -35,6 +37,7 @@ async function deleteMessage(userID, messageID, cfg) {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
+        return response.data;
       });
   } catch (e) {
     console.log(e);
