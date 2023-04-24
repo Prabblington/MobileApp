@@ -69,7 +69,7 @@ export default function SearchOptionScreen() {
   useEffect(() => {
     if (searchResult) {
       console.log(`displayResult: ${displayResult}`);
-      console.log(`searchResult: ${searchResult}`);
+      console.log(`searchResult: ${JSON.stringify(searchResult)}`);
       setDispayResult(true);
     }
   }, [searchResult, displayResult]);
