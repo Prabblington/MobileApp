@@ -6,6 +6,7 @@ function getBlockedContacts(cfg) {
     .then(async (response) => {
       console.log(`Users blocked: ${response.data}`);
       console.log(response.status);
+      return response;
     })
     .catch(async (error) => {
       console.log(error);
@@ -18,6 +19,7 @@ function blockContact(userID, cfg) {
     .then(async (response) => {
       console.log('User blocked!');
       console.log(response.status);
+      return response.status;
     })
     .catch(async (error) => {
       console.log(error);
@@ -30,6 +32,7 @@ function unblockContact(userID, cfg) {
     .then(async (response) => {
       console.log('User unblocked!');
       console.log(response.status);
+      return response.status;
     })
     .catch(async (error) => {
       console.log(error);
