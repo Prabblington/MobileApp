@@ -69,15 +69,15 @@ export default function ContactListRenderer({ contact }) {
     const checkExistingPfp = async () => {
       const currentUser = contact.user_id;
       console.log(`userID = ${currentUser}`);
-      const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+      // const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
 
-      if (currentUser && currentPfp) {
-        const imageURI = `data:image/png;base64,${currentPfp}`;
+      // if (currentUser && currentPfp) {
+      //   const imageURI = `data:image/png;base64,${currentPfp}`;
 
-        setImage(imageURI);
-      } else {
-        setImage(placeholderPfp);
-      }
+      //   setImage(imageURI);
+      // } else {
+      setImage(placeholderPfp);
+      // }
     };
     checkExistingPfp();
   }, [image]);
