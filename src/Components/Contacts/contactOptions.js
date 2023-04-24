@@ -142,8 +142,14 @@ export default function ContactOptions() {
         </View>
         <View style={styles.nameBox}>
           <Text style={styles.header}>
-            {`${viewedContact.given_name} ${viewedContact.family_name}`}
+            {viewedContact.given_name
+              ? viewedContact.given_name
+              : viewedContact.first_name}{' '}
+            {viewedContact.family_name
+              ? viewedContact.family_name
+              : viewedContact.last_name}
           </Text>
+          <Text style={styles.header}> </Text>
         </View>
         <View style={styles.status}>
           <Text style={styles.subHeader}> Online </Text>

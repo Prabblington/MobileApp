@@ -85,8 +85,6 @@ export default function ContactListRenderer({ contact }) {
   return (
     <Pressable
       onPress={() => {
-        console.log('ContactsListRenderer: View contact interaction options');
-
         deleteContactAsyncStorage();
         storeContactAsyncStorage({ contact });
         navigation.navigate('ContactProfile');
