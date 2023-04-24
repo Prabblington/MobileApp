@@ -103,31 +103,6 @@ export default function HomeTabNav() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),
-          headerRight: () => (
-            <View style={styles.topIcons}>
-              <Entypo
-                onPress={() => navigation.navigate('Search for contacts')}
-                name="magnifying-glass"
-                size={22}
-                color="royalblue"
-                style={{ marginRight: 15 }}
-              />
-              <Entypo
-                onPress={() => navigation.navigate('Contacts')}
-                name="users"
-                size={22}
-                color="royalblue"
-                style={{ marginRight: 15 }}
-              />
-              <Entypo
-                onPress={() => navigation.navigate('Logged Out')}
-                name="align-right"
-                size={22}
-                color="royalblue"
-                style={{ marginRight: 15 }}
-              />
-            </View>
-          ),
         })}
       />
     </Tab.Navigator>
