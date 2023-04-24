@@ -21,6 +21,7 @@ import startNewChat from '../../api/Client/Chat Management/Chat Options/startNew
 
 import { getUserPhoto } from '../../api/Client/User/userPhoto';
 import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
+import addContactToChat from '../../api/Client/Chat Management/Chat Options/addContactToChat';
 
 const { width } = Dimensions.get('window');
 
@@ -71,7 +72,8 @@ const styles = StyleSheet.create({
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
-  const { axiosConfigImage, axiosConfig } = useContext(AuthContext);
+  const { axiosConfigImage, axiosConfig, axiosConfigMessage } =
+    useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -105,17 +107,25 @@ export default function ContactListRenderer({ contact }) {
       };
 
       const initChatResponse = await startNewChat(nameString, axiosConfig);
+
       const chatRoomDetails = {
         chat_id: initChatResponse.chat_id,
+        user_id: contact.user_id,
         nameString,
       };
-      console.log(initChatResponse);
+      console.log(JSON.stringify(chatRoomDetails.chat_id));
       console.log(nameString);
 
-      return chatRoomDetails;
+      // await addContactToChat(
+      //   chatRoomDetails.chat_id,
+      //   chatRoomDetails.user_id,
+      //   axiosConfigMessage
+      // );
+
+      // return chatRoomDetails;
     } catch (e) {
       console.error(e);
-      return null;
+      // return null;
     }
   };
 
@@ -147,10 +157,12 @@ export default function ContactListRenderer({ contact }) {
           <Text style={styles.subHeader}>{contact.email}</Text>
           <View style={styles.button}>
             <CustButton
-              onPress={async () => {
-                const chatRoom = await handleSendMessage();
-                navigation.navigate('ChatUI', chatRoom);
-              }}
+              onPress={
+                async () =>
+                  // const chatRoom = await handleSendMessage();
+                  handleSendMessage()
+                // navigation.navigate('ChatUI', chatRoom);
+              }
               title="Send message"
               accessibilityLabel="press this button to go to, or start a chat with this person"
               buttonText="Send message"

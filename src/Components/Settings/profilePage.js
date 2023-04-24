@@ -79,8 +79,6 @@ export default function ProfilePage() {
       const uData = await getUser(currentUser, axiosConfig);
       const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
 
-      console.log(JSON.stringify(uData));
-
       if (currentUser && currentPfp) {
         const imageURI = `data:image/png;base64,${currentPfp}`;
 

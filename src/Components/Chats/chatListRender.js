@@ -75,7 +75,7 @@ export default function ChatListRenderer({ chat }) {
           </View>
 
           <Text style={styles.subHeader} numberOfLines={2}>
-            {chat.lastMessage?.text}
+            {chat.lastMessage?.message}
           </Text>
         </View>
       </View>

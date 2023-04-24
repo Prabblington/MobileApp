@@ -20,6 +20,12 @@ export default function AuthProvider({ children }) {
       'Content-Type': 'application/json',
     },
   });
+  const [axiosConfigMessages, setAxiosConfigMessages] = useState({
+    baseURL: 'http://localhost:3333/api/1.0.0',
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8 ',
+    },
+  });
   const [token, setToken] = useState(null);
   const [err, setErr] = useState('');
 
@@ -118,6 +124,8 @@ export default function AuthProvider({ children }) {
       setUser,
       token,
       setToken,
+      axiosConfigMessages,
+      setAxiosConfigMessages,
     }),
     [
       isLoggedIn,
@@ -130,6 +138,8 @@ export default function AuthProvider({ children }) {
       setUser,
       token,
       setToken,
+      axiosConfigMessages,
+      setAxiosConfigMessages,
     ]
   );
 

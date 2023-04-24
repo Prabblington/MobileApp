@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function getSingleChat(chatID, cfg) {
   const query = {
-    q: `${chatID}`,
+    chat_id: `${chatID}`,
     limit: 20,
     offset: 0,
   };
