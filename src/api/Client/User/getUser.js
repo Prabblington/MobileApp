@@ -10,7 +10,7 @@ async function returnCurrentUserID() {
   } catch (e) {
     console.log('ReturnCurrentUserID ERROR');
     console.warn(e);
-    return undefined;
+    return null;
   }
 }
 
