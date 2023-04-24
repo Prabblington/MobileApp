@@ -81,48 +81,54 @@ export default function ContactOptions() {
   }, [setViewedContact]);
 
   async function handleAddContact(userID, cfg) {
-    const result = await addContact(userID, cfg);
+    try {
+      const result = await addContact(userID, cfg);
 
-    if (result === 200) {
-      alert('Added new friend!');
-    }
-    if (result === 400) {
-      alert('You cannot add yourself!');
-    }
-    if (result === 404) {
-      alert('User not found');
-    } else {
+      if (result === 200) {
+        alert('Added new friend!');
+      }
+      if (result === 400) {
+        alert('You cannot add yourself!');
+      }
+      if (result === 404) {
+        alert('User not found');
+      }
+    } catch (e) {
       alert('Something went wrong, please try again later');
     }
   }
 
   async function handleRemoveContact(userID, cfg) {
-    const result = await removeContact(userID, cfg);
+    try {
+      const result = await removeContact(userID, cfg);
 
-    if (result === 200) {
-      alert('Removed contact!');
-    }
-    if (result === 400) {
-      alert('You cannot delete yourself as a contact!');
-    }
-    if (result === 404) {
-      alert('User not found');
-    } else {
+      if (result === 200) {
+        alert('Removed contact!');
+      }
+      if (result === 400) {
+        alert('You cannot delete yourself as a contact!');
+      }
+      if (result === 404) {
+        alert('User not found');
+      }
+    } catch (e) {
       alert('Something went wrong, please try again later');
     }
   }
   async function handleBlockContact(userID, cfg) {
-    const result = await blockContact(userID, cfg);
+    try {
+      const result = await blockContact(userID, cfg);
 
-    if (result === 200) {
-      alert('Blocked contact!');
-    }
-    if (result === 400) {
-      alert('You cannot block yourself as a contact!');
-    }
-    if (result === 404) {
-      alert('User not found');
-    } else {
+      if (result === 200) {
+        alert('Blocked contact!');
+      }
+      if (result === 400) {
+        alert('You cannot block yourself as a contact!');
+      }
+      if (result === 404) {
+        alert('User not found');
+      }
+    } catch (e) {
       alert('Something went wrong, please try again later');
     }
   }
