@@ -9,8 +9,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
+import { useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import contactPfp from '../../images/logo2.png';
+import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
+import { AuthContext } from '../../Navigation/Context/authManager';
 
 DayJs.extend(RelativeTime);
 
@@ -52,14 +56,28 @@ const styles = StyleSheet.create({
 
 export default function ChatListRenderer({ chat }) {
   const navigation = useNavigation();
+  const { axiosConfig } = useContext(AuthContext);
+
+  async function getChatToRender(chatID) {
+    try {
+      const chatData = await getSingleChat(chatID, axiosConfig);
+
+      if (await AsyncStorage.getItem('chatData')) {
+        await AsyncStorage.delete('chatData', chatData);
+      }
+
+      await AsyncStorage.setItem('chatData', chatData);
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
   return (
     <Pressable
-      onPress={() =>
-        navigation.navigate('ChatUI', {
-          id: chat.chat_id,
-          name: chat.name,
-        })
-      }
+      onPress={() => {
+        getChatToRender(chat.chat_id, axiosConfig);
+        navigation.navigate('ChatUI');
+      }}
       style={styles.container}
     >
       <View key={chat.chat_id} style={styles.container}>

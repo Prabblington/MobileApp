@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MessageUI from './messageUI';
 import InputUI from '../Input/inputUI';
 
@@ -46,21 +47,25 @@ export default function ChatUI() {
   const { axiosConfig } = useContext(AuthContext);
   const route = useRoute();
   const navigation = useNavigation();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
+  const [chatData, setChatData] = useState({});
 
   // allows for this to only be called once
   useEffect(() => {
-    navigation.setOptions({ title: route.params.name });
-  }, [route.params.name]);
+    async function getChatData() {
+      const asyncChatData = await JSON.parse(AsyncStorage.getItem('chatData'));
+      if (chatData !== asyncChatData) {
+        console.log(asyncChatData);
+        console.log('loading messages...');
 
-  useEffect(() => {
-    async function fetchMessages() {
-      const result = await getSingleChat(route.params.chatRoomId, axiosConfig);
-      console.log(result);
-      setMessages(result);
+        navigation.setOptions({ title: asyncChatData.name });
+
+        setChatData(asyncChatData);
+        setMessages(asyncChatData.messages);
+      }
     }
-    fetchMessages();
-  }, [route.params.chatRoomId]);
+    getChatData();
+  }, []);
 
   return (
     <KeyboardAvoidingView
