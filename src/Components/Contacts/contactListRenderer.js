@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    flex: 1,
+    // flex: 1,
     fontWeight: 'bold',
   },
 
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function NEWContactListRenderer({ contact }) {
+export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
 
   return (
@@ -76,8 +76,13 @@ export default function NEWContactListRenderer({ contact }) {
 
         <View style={styles.content}>
           <View style={styles.row}>
-            <Text style={styles.text}>{contact.given_name}</Text>
-            <Text style={styles.text}>{contact.family_name}</Text>
+            <Text style={styles.text}>
+              {contact.given_name ? contact.given_name : contact.first_name}
+            </Text>
+            <Text> </Text>
+            <Text style={styles.text}>
+              {contact.family_name ? contact.family_name : contact.last_name}
+            </Text>
           </View>
           <Text style={styles.subHeader}>{contact.email}</Text>
         </View>

@@ -1,6 +1,6 @@
 import { Text, ScrollView } from 'react-native';
 
-import NEWContactListRenderer from '../../Components/Contacts/NEWContactListRenderer';
+import ContactListRenderer from '../../Components/Contacts/contactListRenderer';
 
 export default function SearchListRenderer({ result }) {
   if (!Array.isArray(result)) {
@@ -10,7 +10,7 @@ export default function SearchListRenderer({ result }) {
   return (
     <ScrollView>
       {result.map((item) => (
-        <NEWContactListRenderer key={item.user_id} contact={item} />
+        <ContactListRenderer key={item.user_id} contact={item} />
       ))}
     </ScrollView>
   );

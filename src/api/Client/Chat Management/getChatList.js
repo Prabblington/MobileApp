@@ -3,9 +3,9 @@ import axios from 'axios';
 export default async function getChatList(cfg) {
   try {
     const chats = await axios.get('./chat', cfg).then((response) => {
-      console.log(response.data);
+      console.log(`response.data: ${response.data}`);
       console.log(response.status);
-      return response;
+      return response.data;
     });
     return chats;
   } catch (e) {
