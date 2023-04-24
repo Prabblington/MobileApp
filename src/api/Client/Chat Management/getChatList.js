@@ -5,6 +5,7 @@ export default async function getChatList(cfg) {
     const chats = await axios.get('./chat', cfg).then((response) => {
       console.log(response.data);
       console.log(response.status);
+      return response;
     });
     return chats;
   } catch (e) {

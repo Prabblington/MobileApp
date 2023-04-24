@@ -7,6 +7,7 @@ export default async function addContactToChat(chatID, userID, cfg) {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
+        return response.status;
       });
   } catch (e) {
     console.log(e);
