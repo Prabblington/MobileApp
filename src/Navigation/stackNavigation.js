@@ -33,8 +33,8 @@ function AppStack() {
           name="Search for contacts"
           component={SearchOptionScreen}
         />
-        <Stack.Screen name="ContactProfile" component={ContactOptions} />
-        <Stack.Screen name="LoggedOut" component={LoggedOutScreen} />
+        <Stack.Screen name="Contact Profile" component={ContactOptions} />
+        <Stack.Screen name="Logged Out" component={LoggedOutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
-  const { axiosConfigImage } = useContext(AuthContext);
+  // const { axiosConfigImage } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function ContactListRenderer({ contact }) {
       onPress={() => {
         deleteContactAsyncStorage();
         storeContactAsyncStorage({ contact });
-        navigation.navigate('ContactProfile');
+        navigation.navigate('Contact Profile');
       }}
       style={styles.container}
     >
