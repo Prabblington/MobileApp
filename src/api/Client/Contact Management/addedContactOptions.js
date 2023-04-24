@@ -17,12 +17,12 @@ function addContact(userID, cfg) {
 }
 
 function removeContact(userID, cfg) {
-  console.log('User removed!');
   return axios
     .delete(`/user/${userID}/contact`, cfg)
     .then(async (response) => {
       console.log('User deleted!');
       console.log(response.status);
+      return response.status;
     })
     .catch(async (error) => {
       console.log(error);
