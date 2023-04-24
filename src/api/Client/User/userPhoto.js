@@ -6,6 +6,10 @@ async function getUserPhoto(userID, cfg) {
     .get(`/user/${userID}/photo`, cfg)
     .then(async (response) => {
       const imageData = response.data.assets[0].uri;
+
+      // use this one for contacts maybe? still getting error
+      // const imageData = response.data;
+
       const imageRawImageData = imageData.split(',')[1];
       return imageRawImageData;
     })

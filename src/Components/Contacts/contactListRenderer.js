@@ -6,13 +6,17 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import contactPicture from '../../images/logo2.png';
+import placeholderPfp from '../../images/placeholderPfp.png';
+
 import {
   storeContactAsyncStorage,
   deleteContactAsyncStorage,
 } from './contactAsyncStorage';
+import { AuthContext } from '../../Navigation/Context/authManager';
+import { getUserPhoto } from '../../api/Client/User/userPhoto';
 
 const { width } = Dimensions.get('window');
 
@@ -58,6 +62,25 @@ const styles = StyleSheet.create({
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
+  const { axiosConfigImage } = useContext(AuthContext);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    const checkExistingPfp = async () => {
+      const currentUser = contact.user_id;
+      console.log(`userID = ${currentUser}`);
+      const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+
+      if (currentUser && currentPfp) {
+        const imageURI = `data:image/png;base64,${currentPfp}`;
+
+        setImage(imageURI);
+      } else {
+        setImage(placeholderPfp);
+      }
+    };
+    checkExistingPfp();
+  }, [image]);
 
   return (
     <Pressable
@@ -72,7 +95,9 @@ export default function ContactListRenderer({ contact }) {
     >
       <View key={contact.user_id} style={styles.container}>
         {/* This will be the users avatar */}
-        <Image style={styles.image} source={contactPicture} />
+        <View style={styles.image}>
+          {image && <Image source={{ uri: image }} style={styles.userImage} />}
+        </View>
 
         <View style={styles.content}>
           <View style={styles.row}>
