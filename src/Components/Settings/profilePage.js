@@ -1,4 +1,4 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, useAnimatedValue } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 
 import {
@@ -11,7 +11,7 @@ import placeholderPfp from '../../images/placeholderPfp.png';
 
 import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
-import { returnCurrentUserID } from '../../api/Client/User/getUser';
+import { getUser, returnCurrentUserID } from '../../api/Client/User/getUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,14 +68,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ProfilePage({ user }) {
-  const { axiosConfigImage } = useContext(AuthContext);
+export default function ProfilePage() {
+  const { axiosConfigImage, axiosConfig } = useContext(AuthContext);
   const [image, setImage] = useState(null);
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const checkExistingPfp = async () => {
       const currentUser = await returnCurrentUserID();
+      const uData = await getUser(currentUser, axiosConfig);
       const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+
+      console.log(JSON.stringify(uData));
 
       if (currentUser && currentPfp) {
         const imageURI = `data:image/png;base64,${currentPfp}`;
@@ -84,6 +88,7 @@ export default function ProfilePage({ user }) {
       } else {
         setImage(placeholderPfp);
       }
+      setUserData(uData);
     };
     checkExistingPfp();
   }, [image]);
@@ -120,18 +125,20 @@ export default function ProfilePage({ user }) {
           />
         </View>
         <View style={styles.nameBox}>
-          <Text style={styles.header}> John Smith </Text>
+          <Text style={styles.header}>
+            {`${userData.first_name} ${userData.last_name}`}
+          </Text>
         </View>
         <View style={styles.status}>
           <Text style={styles.subHeader}> Online: At work atm! </Text>
         </View>
-        <View style={styles.userOptionsContainer}>
+        {/* <View style={styles.userOptionsContainer}>
           <View style={styles.userOptions}>
             <Text> Icon 1 </Text>
             <Text> Icon 1 </Text>
             <Text> Icon 1 </Text>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
   );

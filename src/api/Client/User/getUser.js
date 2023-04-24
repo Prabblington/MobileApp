@@ -16,21 +16,10 @@ async function returnCurrentUserID() {
 
 async function getUser(userID, cfg) {
   try {
-    axios
-      .get(`/user/${userID}`, cfg)
-      .then((response) => {
-        const firstName = response.data.first_name;
-        const lastName = response.data.last_name;
-        const { email } = response.data;
-        console.log(`User ${userID} data: ${firstName} ${lastName} ${email}`);
-        return { firstName, lastName, email };
-      })
-      .catch((error) => {
-        console.warn(error);
-        return null;
-      });
+    return axios.get(`/user/${userID}`, cfg).then((response) => response.data);
   } catch (e) {
     console.warn(e);
+    return null;
   }
 }
 
