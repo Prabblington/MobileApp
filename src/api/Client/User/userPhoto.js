@@ -23,7 +23,7 @@ async function getUserPhoto(userID, cfg) {
   return result;
 }
 
-async function checkIfPhotoExists() {
+async function checkIfImageExists() {
   const imageExists = await AsyncStorage.getItem('userPhoto');
 
   if (imageExists) {
@@ -64,4 +64,4 @@ async function uploadUserPhoto(userID, photo, cfg) {
     });
 }
 
-export { getUserPhoto, uploadUserPhoto, chooseImage, checkIfPhotoExists };
+export { getUserPhoto, uploadUserPhoto, chooseImage, checkIfImageExists };

@@ -5,7 +5,7 @@ import {
   chooseImage,
   getUserPhoto,
   uploadUserPhoto,
-  checkIfPhotoExists,
+  checkIfImageExists,
 } from '../api/Client/User/userPhoto';
 
 import placeholderPfp from '../images/placeholderPfp.png';
@@ -74,47 +74,33 @@ const styles = StyleSheet.create({
 });
 
 export default function ProfilePage() {
-  const { axiosConfigImage } = useContext(AuthContext);
+  const { axiosConfigImage, axiosConfig } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const checkExistingData = async () => {
-      const imageExists = await checkIfPhotoExists();
+      const imageExists = await checkIfImageExists();
       const userExists = await checkIfCurrentUserExistsLocally();
 
-      if (userExists) {
-        console.log(JSON.stringify(userExists));
+      if (userExists === null) {
+        const getUserID = await returnCurrentUserID();
+        const userDetails = await getUser(getUserID, axiosConfig);
+        setUserData(userDetails);
+      } else {
+        console.log('user exists locally');
         setUserData(userExists);
-      } else if (!userExists) {
-        setUserData({});
-        console.log('something wrong with userStorage on login');
       }
 
       if (imageExists) {
         const imageURI = `data:image/png;base64,${imageExists}`;
-        console.log(JSON.stringify(imageExists));
+        console.log('Image present');
         setImage(imageURI);
       } else if (!imageExists) {
+        console.log('No image present, defaulting to placeholderPfp');
         setImage(placeholderPfp);
-      } else {
-        console.log('image logic is wrong somewhere');
       }
-
-      //   const currentUser = await returnCurrentUserID();
-      //   const uData = await getUser(currentUser, axiosConfig);
-      //   const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
-
-      //   if (currentUser && currentPfp) {
-      //     const imageURI = `data:image/png;base64,${currentPfp}`;
-      //     console.log('hmmm 1');
-      //     setImage(imageURI);
-      //   } else {
-      //     setImage(placeholderPfp);
-      //   }
-      //   setUserData(uData);
     };
-    console.log('hmmm 2');
     checkExistingData();
   }, [image]);
 
