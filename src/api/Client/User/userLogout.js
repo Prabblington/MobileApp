@@ -7,9 +7,11 @@ export default function UserLogout(cfg) {
     .post('/logout', cfg)
     .then(async (response) => {
       if (response.status === 200) {
-        await AsyncStorage.removeItem('userData');
         await AsyncStorage.removeItem('X-Authorization');
         await AsyncStorage.setItem('isLoggedIn', false);
+        await AsyncStorage.removeItem('userData');
+        await AsyncStorage.removeItem('userPublicData');
+        await AsyncStorage.removeItem('userPhoto');
         axios.defaults.headers.common['X-Authorization'] = '';
 
         console.log('Signing out!');

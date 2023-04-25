@@ -23,6 +23,15 @@ async function getUserPhoto(userID, cfg) {
   return result;
 }
 
+async function checkIfPhotoExists() {
+  const imageExists = await AsyncStorage.getItem('userPhoto');
+
+  if (imageExists) {
+    return imageExists;
+  }
+  return false;
+}
+
 async function chooseImage() {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -32,6 +41,8 @@ async function chooseImage() {
   });
 
   if (!result.canceled) {
+    await AsyncStorage.removeItem('userPhoto');
+    await AsyncStorage.setItem('userPhoto', result);
     return result;
   }
   alert('you did not select an image');
@@ -39,6 +50,8 @@ async function chooseImage() {
 }
 
 async function uploadUserPhoto(userID, photo, cfg) {
+  await AsyncStorage.setItem('userPhoto', photo);
+
   await axios
     .post(`/user/${userID}/photo`, photo, cfg)
     .then(async (response) => {
@@ -51,4 +64,4 @@ async function uploadUserPhoto(userID, photo, cfg) {
     });
 }
 
-export { getUserPhoto, uploadUserPhoto, chooseImage };
+export { getUserPhoto, uploadUserPhoto, chooseImage, checkIfPhotoExists };

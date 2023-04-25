@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 
 export default function LoggedOutScreen() {
   const navigation = useNavigation();
-  const { axiosConfig } = useContext(AuthContext);
+  const { axiosConfig, resetAuth } = useContext(AuthContext);
 
   const handleLogOut = async () => {
     console.log('Log Out');

@@ -5,13 +5,18 @@ import {
   chooseImage,
   getUserPhoto,
   uploadUserPhoto,
+  checkIfPhotoExists,
 } from '../api/Client/User/userPhoto';
 
 import placeholderPfp from '../images/placeholderPfp.png';
 
 import CustButton from '../Components/Input/custButton';
 import { AuthContext } from '../Navigation/Context/authManager';
-import { getUser, returnCurrentUserID } from '../api/Client/User/getUser';
+import {
+  checkIfCurrentUserExistsLocally,
+  getUser,
+  returnCurrentUserID,
+} from '../api/Client/User/getUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,27 +74,48 @@ const styles = StyleSheet.create({
 });
 
 export default function ProfilePage() {
-  const { axiosConfigImage, axiosConfig } = useContext(AuthContext);
+  const { axiosConfigImage } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const checkExistingPfp = async () => {
-      const currentUser = await returnCurrentUserID();
-      const uData = await getUser(currentUser, axiosConfig);
-      const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+    const checkExistingData = async () => {
+      const imageExists = await checkIfPhotoExists();
+      const userExists = await checkIfCurrentUserExistsLocally();
 
-      if (currentUser && currentPfp) {
-        const imageURI = `data:image/png;base64,${currentPfp}`;
-        console.log('hmmm 1');
-        setImage(imageURI);
-      } else {
-        setImage(placeholderPfp);
+      if (userExists) {
+        console.log(JSON.stringify(userExists));
+        setUserData(userExists);
+      } else if (!userExists) {
+        setUserData({});
+        console.log('something wrong with userStorage on login');
       }
-      setUserData(uData);
+
+      if (imageExists) {
+        const imageURI = `data:image/png;base64,${imageExists}`;
+        console.log(JSON.stringify(imageExists));
+        setImage(imageURI);
+      } else if (!imageExists) {
+        setImage(placeholderPfp);
+      } else {
+        console.log('image logic is wrong somewhere');
+      }
+
+      //   const currentUser = await returnCurrentUserID();
+      //   const uData = await getUser(currentUser, axiosConfig);
+      //   const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+
+      //   if (currentUser && currentPfp) {
+      //     const imageURI = `data:image/png;base64,${currentPfp}`;
+      //     console.log('hmmm 1');
+      //     setImage(imageURI);
+      //   } else {
+      //     setImage(placeholderPfp);
+      //   }
+      //   setUserData(uData);
     };
     console.log('hmmm 2');
-    checkExistingPfp();
+    checkExistingData();
   }, [image]);
 
   const handlePhotoUpload = async () => {

@@ -31,8 +31,10 @@ export default function AuthProvider({ children }) {
 
   const resetAuth = async () => {
     await AsyncStorage.removeItem('X-Authorization');
-    await AsyncStorage.removeItem('isLoggedIn');
+    await AsyncStorage.setItem('isLoggedIn', false);
     await AsyncStorage.removeItem('userData');
+    await AsyncStorage.removeItem('userPublicData');
+    await AsyncStorage.removeItem('userPhoto');
 
     setIsLoggedIn(false);
     setUser(null);
