@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function getUserPhoto(userID, cfg) {
   const result = await axios
@@ -11,6 +12,7 @@ async function getUserPhoto(userID, cfg) {
       // const imageData = response.data;
 
       const imageRawImageData = imageData.split(',')[1];
+      await AsyncStorage.setItem('userPhoto', imageRawImageData);
       return imageRawImageData;
     })
     .catch(async (error) => {
