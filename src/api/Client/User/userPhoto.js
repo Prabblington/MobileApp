@@ -6,14 +6,20 @@ async function getUserPhoto(userID, cfg) {
   const result = await axios
     .get(`/user/${userID}/photo`, cfg)
     .then(async (response) => {
-      const imageData = response.data.assets[0].uri;
+      // const imageData = response.data.assets[0].uri;
 
       // use this one for contacts maybe? still getting error
       // const imageData = response.data;
 
-      const imageRawImageData = imageData.split(',')[1];
-      await AsyncStorage.setItem('userPhoto', imageRawImageData);
-      return imageRawImageData;
+      // const imageRawImageData = imageData.split(',')[1];
+
+      const imageExtension = response.uri.split(',').pop;
+      let picture = await response;
+      picture = await picture.blob();
+
+      const storedImage = await new File([picture], `photo.${imageExtension}`);
+
+      return storedImage;
     })
     .catch(async (error) => {
       console.log(error);
@@ -23,35 +29,29 @@ async function getUserPhoto(userID, cfg) {
   return result;
 }
 
-async function checkIfImageExists() {
-  const imageExists = await AsyncStorage.getItem('userPhoto');
-
-  if (imageExists) {
-    return imageExists;
-  }
-  return false;
-}
-
 async function chooseImage() {
-  const result = await ImagePicker.launchImageLibraryAsync({
+  const image = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
     aspect: [4, 3],
     quality: 1,
   });
 
-  if (!result.canceled) {
+  const imageExtension = image.uri.split(',').pop;
+  let picture = await image;
+  picture = await picture.blob();
+
+  const storedImage = await new File([picture], `photo.${imageExtension}`);
+
+  if (!image.canceled) {
     await AsyncStorage.removeItem('userPhoto');
-    await AsyncStorage.setItem('userPhoto', result);
-    return result;
+    return { image, storedImage };
   }
   alert('you did not select an image');
   return null;
 }
 
 async function uploadUserPhoto(userID, photo, cfg) {
-  await AsyncStorage.setItem('userPhoto', photo);
-
   await axios
     .post(`/user/${userID}/photo`, photo, cfg)
     .then(async (response) => {
@@ -64,4 +64,4 @@ async function uploadUserPhoto(userID, photo, cfg) {
     });
 }
 
-export { getUserPhoto, uploadUserPhoto, chooseImage, checkIfImageExists };
+export { getUserPhoto, uploadUserPhoto, chooseImage };

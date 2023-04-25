@@ -80,7 +80,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const checkExistingData = async () => {
-      const imageExists = await checkIfImageExists();
+      // const imageExists = await checkIfImageExists();
       const userExists = await checkIfCurrentUserExistsLocally();
 
       if (userExists === null) {
@@ -89,17 +89,23 @@ export default function ProfilePage() {
         setUserData(userDetails);
       } else {
         console.log('user exists locally');
+
+        const getExistingPhoto = await getUserPhoto(
+          userData.user_id,
+          axiosConfigImage
+        );
+        //WRITE CONDITIONAL FOR EXISTING PHOTO AND THEN FIND A WAY TO DELETE OR OVERWRITE THE FILE!!
+        setImage(getExistingPhoto.uri);
         setUserData(userExists);
       }
 
-      if (imageExists) {
-        const imageURI = `data:image/png;base64,${imageExists}`;
-        console.log('Image present');
-        setImage(imageURI);
-      } else if (!imageExists) {
-        console.log('No image present, defaulting to placeholderPfp');
-        setImage(placeholderPfp);
-      }
+      // if (imageExists) {
+      //   const imageURI = `data:image/png;base64,${imageExists}`;
+      //   setImage(imageURI);
+      // } else if (!imageExists) {
+      //   console.log('No image present, defaulting to placeholderPfp');
+      //   setImage(placeholderPfp);
+      // }
     };
     checkExistingData();
   }, [image]);
