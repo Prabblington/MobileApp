@@ -10,6 +10,9 @@ let userData = {
 };
 
 // DUMMY DATA
+// abs.lang@gmail.com
+// Password@123
+
 const loginUserData = {
   email: 'ashley.williams@mmu.ac.uk',
   password: 'Wr3xh4m!',
@@ -41,7 +44,8 @@ export default function userLogin(email, password, cfg) {
 
       return true;
     })
-    .catch(async () => {
+    .catch(async (e) => {
+      console.log(e);
       await AsyncStorage.setItem('isLoggedIn', false);
       return false;
     });

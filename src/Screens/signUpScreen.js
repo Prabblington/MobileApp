@@ -98,6 +98,7 @@ export default function SignUp() {
   const signUp = async () => {
     try {
       if (handleValidation() === true) {
+        console.log('validation working');
         const successful = await userSignup(
           firstName,
           lastName,

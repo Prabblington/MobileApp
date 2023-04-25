@@ -1,7 +1,13 @@
 import axios from 'axios';
-
+// Password@123
 // POST /user
-export default function userSignup(firstName, lastName, email, password, cfg) {
+export default async function userSignup(
+  firstName,
+  lastName,
+  email,
+  password,
+  cfg
+) {
   const userData = {
     first_name: firstName,
     last_name: lastName,
@@ -9,12 +15,12 @@ export default function userSignup(firstName, lastName, email, password, cfg) {
     password,
   };
 
-  axios
+  const result = await axios
     .post('/user', userData, cfg)
     .then(async (response) => {
-      await response.data;
+      console.log(response.data);
 
-      return true;
+      return response.status;
     })
     .catch((error) => {
       console.warn(error);

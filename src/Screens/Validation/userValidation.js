@@ -1,4 +1,4 @@
-const EMAIL_VALIDATION = /^\[A-z\][A-z0-9-_]{3,23}$/;
+const EMAIL_VALIDATION = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PASSWORD_VALIDATION =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 

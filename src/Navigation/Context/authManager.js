@@ -43,6 +43,18 @@ export default function AuthProvider({ children }) {
         'Content-Type': 'application/json',
       },
     });
+    setAxiosConfigImage({
+      baseURL: 'http://localhost:3333/api/1.0.0',
+      headers: {
+        'Content-Type': 'image/png',
+      },
+    });
+    setAxiosConfigMessages({
+      baseURL: 'http://localhost:3333/api/1.0.0',
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8 ',
+      },
+    });
   };
 
   useEffect(() => {
@@ -90,7 +102,7 @@ export default function AuthProvider({ children }) {
             },
           };
           setIsLoggedIn(false);
-          setAxiosConfig(JSON.stringify(config));
+          setAxiosConfig(config);
         }
       } catch (e) {
         setErr(e);
@@ -99,18 +111,7 @@ export default function AuthProvider({ children }) {
       }
     };
     checkAuth();
-  }, [
-    isLoggedIn,
-    user,
-    token,
-    axiosConfig,
-    axiosConfigImage,
-    setIsLoggedIn,
-    setUser,
-    setAxiosConfig,
-    setAxiosConfigImage,
-    setToken,
-  ]);
+  }, [isLoggedIn, user, token, setIsLoggedIn, setUser, setToken]);
 
   const auth = useMemo(
     () => ({
