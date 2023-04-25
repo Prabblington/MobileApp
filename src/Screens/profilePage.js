@@ -1,5 +1,5 @@
 import { View, Image, Text, StyleSheet } from 'react-native';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import {
   chooseImage,
@@ -73,7 +73,7 @@ export default function ProfilePage() {
   const [image, setImage] = useState(null);
   const [userData, setUserData] = useState({});
 
-  useEffect(() => {
+  useMemo(() => {
     const checkExistingPfp = async () => {
       const currentUser = await returnCurrentUserID();
       const uData = await getUser(currentUser, axiosConfig);
