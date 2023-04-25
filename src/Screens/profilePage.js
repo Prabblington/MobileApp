@@ -1,17 +1,17 @@
-import { View, Image, Text, StyleSheet, useAnimatedValue } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 
 import {
   chooseImage,
   getUserPhoto,
   uploadUserPhoto,
-} from '../../api/Client/User/userPhoto';
+} from '../api/Client/User/userPhoto';
 
-import placeholderPfp from '../../images/placeholderPfp.png';
+import placeholderPfp from '../images/placeholderPfp.png';
 
-import CustButton from '../Input/custButton';
-import { AuthContext } from '../../Navigation/Context/authManager';
-import { getUser, returnCurrentUserID } from '../../api/Client/User/getUser';
+import CustButton from '../Components/Input/custButton';
+import { AuthContext } from '../Navigation/Context/authManager';
+import { getUser, returnCurrentUserID } from '../api/Client/User/getUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -81,13 +81,14 @@ export default function ProfilePage() {
 
       if (currentUser && currentPfp) {
         const imageURI = `data:image/png;base64,${currentPfp}`;
-
+        console.log('hmmm 1');
         setImage(imageURI);
       } else {
         setImage(placeholderPfp);
       }
       setUserData(uData);
     };
+    console.log('hmmm 2');
     checkExistingPfp();
   }, [image]);
 

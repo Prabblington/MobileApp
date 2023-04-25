@@ -7,7 +7,7 @@ import ContactScreen from '../Screens/contactScreen';
 import Login from '../Screens/loginScreen';
 import SignUp from '../Screens/signUpScreen';
 import SearchOptionScreen from '../Screens/Search/searchOptionScreen';
-import ContactOptions from '../Components/Contacts/contactOptions';
+import ContactProfile from '../Components/Contacts/contactProfile';
 import LoggedOutScreen from '../Screens/loggedOutScreen';
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +33,7 @@ function AppStack() {
           name="Search for contacts"
           component={SearchOptionScreen}
         />
-        <Stack.Screen name="Contact Profile" component={ContactOptions} />
+        <Stack.Screen name="Contact Profile" component={ContactProfile} />
         <Stack.Screen name="Logged Out" component={LoggedOutScreen} />
       </Stack.Navigator>
     </NavigationContainer>

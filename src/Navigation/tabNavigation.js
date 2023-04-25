@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 import ChatScreen from '../Screens/chatScreen';
-import ProfilePage from '../Components/Settings/profilePage';
+import ProfilePage from '../Screens/profilePage';
 
 const styles = StyleSheet.create({
   topIcons: {

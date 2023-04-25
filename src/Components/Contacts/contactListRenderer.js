@@ -17,11 +17,11 @@ import {
 } from './contactAsyncStorage';
 import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
-import startNewChat from '../../api/Client/Chat Management/Chat Options/startNewChat';
+import startNewChat from '../../api/Client/Chat Management/startNewChat';
 
 import { getUserPhoto } from '../../api/Client/User/userPhoto';
 import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
-import addContactToChat from '../../api/Client/Chat Management/Chat Options/addContactToChat';
+import addContactToChat from '../../api/Client/Chat Management/addContactToChat';
 
 const { width } = Dimensions.get('window');
 
@@ -93,41 +93,41 @@ export default function ContactListRenderer({ contact }) {
   //   checkExistingPfp();
   // }, []);
 
-  const handleSendMessage = async () => {
-    try {
-      const firstName = contact.given_name
-        ? contact.given_name
-        : contact.first_name;
-      const lastName = contact.family_name
-        ? contact.family_name
-        : contact.last_name;
+  // const handleSendMessage = async () => {
+  //   try {
+  //     const firstName = contact.given_name
+  //       ? contact.given_name
+  //       : contact.first_name;
+  //     const lastName = contact.family_name
+  //       ? contact.family_name
+  //       : contact.last_name;
 
-      const nameString = {
-        name: `${firstName} ${lastName}`,
-      };
+  //     const nameString = {
+  //       name: `${firstName} ${lastName}`,
+  //     };
 
-      const initChatResponse = await startNewChat(nameString, axiosConfig);
+  //     const initChatResponse = await startNewChat(nameString, axiosConfig);
 
-      const chatRoomDetails = {
-        chat_id: initChatResponse.chat_id,
-        user_id: contact.user_id,
-        nameString,
-      };
-      console.log(JSON.stringify(chatRoomDetails.chat_id));
-      console.log(nameString);
+  //     const chatRoomDetails = {
+  //       chat_id: initChatResponse.chat_id,
+  //       user_id: contact.user_id,
+  //       nameString,
+  //     };
+  //     console.log(JSON.stringify(chatRoomDetails.chat_id));
+  //     console.log(nameString);
 
-      await addContactToChat(
-        chatRoomDetails.chat_id,
-        chatRoomDetails.user_id,
-        axiosConfigMessage
-      );
+  //     await addContactToChat(
+  //       chatRoomDetails.chat_id,
+  //       chatRoomDetails.user_id,
+  //       axiosConfigMessage
+  //     );
 
-      return chatRoomDetails;
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  };
+  //     return chatRoomDetails;
+  //   } catch (e) {
+  //     console.error(e);
+  //     return null;
+  //   }
+  // };
 
   return (
     <Pressable
