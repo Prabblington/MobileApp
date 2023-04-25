@@ -76,22 +76,22 @@ export default function ContactListRenderer({ contact }) {
     useContext(AuthContext);
   const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    const checkExistingPfp = async () => {
-      const currentUser = contact.user_id;
-      console.log(`userID = ${currentUser}`);
-      // const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
+  // useEffect(() => {
+  //   const checkExistingPfp = async () => {
+  //     const currentUser = contact.user_id;
+  //     console.log(`userID = ${currentUser}`);
+  //     // const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
 
-      // if (currentUser && currentPfp) {
-      //   const imageURI = `data:image/png;base64,${currentPfp}`;
+  //     // if (currentUser && currentPfp) {
+  //     //   const imageURI = `data:image/png;base64,${currentPfp}`;
 
-      //   setImage(imageURI);
-      // } else {
-      setImage(placeholderPfp);
-      // }
-    };
-    checkExistingPfp();
-  }, [image]);
+  //     //   setImage(imageURI);
+  //     // } else {
+  //     setImage(placeholderPfp);
+  //     // }
+  //   };
+  //   checkExistingPfp();
+  // }, []);
 
   const handleSendMessage = async () => {
     try {
@@ -156,7 +156,7 @@ export default function ContactListRenderer({ contact }) {
           </View>
           <Text style={styles.subHeader}>{contact.email}</Text>
           <View style={styles.button}>
-            <CustButton
+            {/* <CustButton
               onPress={async () => {
                 const chatRoom = await handleSendMessage();
                 navigation.navigate('ChatUI', chatRoom);
@@ -165,7 +165,7 @@ export default function ContactListRenderer({ contact }) {
               accessibilityLabel="press this button to go to, or start a chat with this person"
               buttonText="Send message"
               type="Tertiary"
-            />
+            /> */}
           </View>
         </View>
       </View>

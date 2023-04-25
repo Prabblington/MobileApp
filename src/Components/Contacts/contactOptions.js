@@ -76,9 +76,10 @@ export default function ContactOptions() {
       if (viewedContact !== c) {
         setViewedContact(c);
       }
+      console.log('is it looping?');
     };
     getViewedContact();
-  }, [setViewedContact]);
+  }, []);
 
   async function handleAddContact(userID, cfg) {
     try {

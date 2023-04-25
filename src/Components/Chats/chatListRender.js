@@ -74,10 +74,10 @@ export default function ChatListRenderer({ chat }) {
 
   return (
     <Pressable
-      onPress={() => {
-        getChatToRender(chat.chat_id, axiosConfig);
-        navigation.navigate('ChatUI');
-      }}
+      // onPress={() => {
+      //   getChatToRender(chat.chat_id, axiosConfig);
+      //   navigation.navigate('ChatUI');
+      // }}
       style={styles.container}
     >
       <View key={chat.chat_id} style={styles.container}>
