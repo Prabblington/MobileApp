@@ -9,13 +9,12 @@ import {
   Platform,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import MessageUI from './messageUI';
 import InputUI from '../Input/inputUI';
 
 import backgroundImage from '../../images/background.png';
 // import messages from '../../data/messages.json';
-import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
+import { getLocalChatStorage } from '../../api/Client/Chat Management/getSingleChat';
 import { AuthContext } from '../../Navigation/Context/authManager';
 
 // make the background image take up the full screen
@@ -53,9 +52,9 @@ export default function ChatUI() {
   // allows for this to only be called once
   useEffect(() => {
     async function getChatData() {
-      const asyncChatData = await AsyncStorage.getItem('chatData');
+      const asyncChatData = await getLocalChatStorage();
+      console.log(`ChatUI async: ${asyncChatData.name}`);
       if (chatData !== asyncChatData) {
-        console.log(asyncChatData);
         console.log('loading messages...');
 
         navigation.setOptions({ title: asyncChatData.name });
@@ -65,7 +64,7 @@ export default function ChatUI() {
       }
     }
     getChatData();
-  }, []);
+  }, [setChatData, setMessages, navigation]);
 
   return (
     <KeyboardAvoidingView

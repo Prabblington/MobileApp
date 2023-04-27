@@ -17,3 +17,13 @@ export default async function getSingleChat(chatID, cfg) {
     return null;
   }
 }
+
+async function getLocalChatStorage() {
+  const result = await AsyncStorage.getItem('chatData');
+  if (result) {
+    return JSON.parse(result);
+  }
+  return null;
+}
+
+export { getSingleChat, getLocalChatStorage };
