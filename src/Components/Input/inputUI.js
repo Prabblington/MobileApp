@@ -43,8 +43,8 @@ export default function InputUI() {
 
   // check if the send button is working
   const onSend = async () => {
-    // write sendMessage here
     const result = sendMessage(user.id, message, axiosConfig);
+
     if (result.status === 200) {
       console.log('message sent!');
       console.log(result.data);
