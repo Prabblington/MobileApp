@@ -12,7 +12,6 @@ export default function ChatScreen() {
   useEffect(() => {
     async function getChats() {
       const result = await getChatList(axiosConfig);
-      console.log(result);
       setChatList(result);
       console.log(JSON.stringify(result));
     }

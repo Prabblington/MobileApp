@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import { useContext } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import contactPfp from '../../images/logo2.png';
 import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
@@ -60,24 +59,26 @@ export default function ChatListRenderer({ chat }) {
 
   async function getChatToRender(chatID) {
     try {
-      const chatData = await getSingleChat(chatID, axiosConfig);
+      const result = await getSingleChat(chatID, axiosConfig);
 
-      if (await AsyncStorage.getItem('chatData')) {
-        await AsyncStorage.delete('chatData', chatData);
-      }
-
-      await AsyncStorage.setItem('chatData', chatData);
+      return result;
     } catch (e) {
       console.warn(e);
     }
+    return null;
   }
 
   return (
     <Pressable
-      // onPress={() => {
-      //   getChatToRender(chat.chat_id, axiosConfig);
-      //   navigation.navigate('ChatUI');
-      // }}
+      onPress={async () => {
+        const result = await getChatToRender(chat.chat_id, axiosConfig);
+        if (result !== null) {
+          console.log(JSON.stringify(result));
+          navigation.navigate('ChatUI', result);
+        } else {
+          console.log('something went wrong');
+        }
+      }}
       style={styles.container}
     >
       <View key={chat.chat_id} style={styles.container}>

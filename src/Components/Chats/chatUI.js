@@ -53,7 +53,7 @@ export default function ChatUI() {
   // allows for this to only be called once
   useEffect(() => {
     async function getChatData() {
-      const asyncChatData = await JSON.parse(AsyncStorage.getItem('chatData'));
+      const asyncChatData = await AsyncStorage.getItem('chatData');
       if (chatData !== asyncChatData) {
         console.log(asyncChatData);
         console.log('loading messages...');
