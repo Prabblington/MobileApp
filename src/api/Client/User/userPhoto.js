@@ -1,25 +1,22 @@
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import RNFS from 'react-native-fs';
 
 async function getUserPhoto(userID, cfg) {
   const result = await axios
     .get(`/user/${userID}/photo`, cfg)
     .then(async (response) => {
-      // const imageData = response.data.assets[0].uri;
+      const imageData = response.data.assets[0].uri;
 
       // use this one for contacts maybe? still getting error
       // const imageData = response.data;
 
-      // const imageRawImageData = imageData.split(',')[1];
+      const imageRawImageData = imageData.split(',')[1];
+      console.log(JSON.stringify(imageRawImageData));
 
-      const imageExtension = response.uri.split(',').pop;
-      let picture = await response;
-      picture = await picture.blob();
+      // const imageExtension = response.uri.split(',').pop;
 
-      const storedImage = await new File([picture], `photo.${imageExtension}`);
-
-      return storedImage;
+      return imageRawImageData;
     })
     .catch(async (error) => {
       console.log(error);
@@ -27,6 +24,18 @@ async function getUserPhoto(userID, cfg) {
     });
 
   return result;
+}
+
+async function onImageSelected(selected) {
+  const imagePath = selected.uri;
+  const imageContents = await RNFS.readFile(imagePath, 'base64');
+
+  const fileName = 'userPfp.png'; // change the file name to your liking
+  const assetsPath = `${RNFS.DocumentDirectoryPath}/assets/${fileName}`;
+  await RNFS.writeFile(assetsPath, imageContents, 'base64');
+
+  const userImagesPath = '../../../images';
+  await RNFS.copyFile(imagePath, userImagesPath);
 }
 
 async function chooseImage() {
@@ -37,15 +46,13 @@ async function chooseImage() {
     quality: 1,
   });
 
-  const imageExtension = image.uri.split(',').pop;
-  let picture = await image;
-  picture = await picture.blob();
-
-  const storedImage = await new File([picture], `photo.${imageExtension}`);
-
   if (!image.canceled) {
-    await AsyncStorage.removeItem('userPhoto');
-    return { image, storedImage };
+    try {
+      const imagePath = await onImageSelected(image);
+      return imagePath;
+    } catch (e) {
+      console.log(e);
+    }
   }
   alert('you did not select an image');
   return null;

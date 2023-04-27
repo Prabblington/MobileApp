@@ -5,9 +5,7 @@ import {
   chooseImage,
   getUserPhoto,
   uploadUserPhoto,
-  checkIfImageExists,
 } from '../api/Client/User/userPhoto';
-
 import placeholderPfp from '../images/placeholderPfp.png';
 
 import CustButton from '../Components/Input/custButton';
@@ -90,13 +88,15 @@ export default function ProfilePage() {
       } else {
         console.log('user exists locally');
 
-        const getExistingPhoto = await getUserPhoto(
-          userData.user_id,
-          axiosConfigImage
-        );
-        //WRITE CONDITIONAL FOR EXISTING PHOTO AND THEN FIND A WAY TO DELETE OR OVERWRITE THE FILE!!
-        setImage(getExistingPhoto.uri);
-        setUserData(userExists);
+        if()
+
+        // const getExistingPhoto = await getUserPhoto(
+        //   userData.user_id,
+        //   axiosConfigImage
+        // );
+        // WRITE CONDITIONAL FOR EXISTING PHOTO AND THEN FIND A WAY TO DELETE OR OVERWRITE THE FILE!!
+        // setImage(getExistingPhoto.uri);
+        // setUserData(userExists);
       }
 
       // if (imageExists) {
