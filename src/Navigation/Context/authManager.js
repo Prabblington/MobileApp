@@ -27,6 +27,7 @@ export default function AuthProvider({ children }) {
     },
   });
   const [token, setToken] = useState(null);
+  const [userProfilePhoto, setUserProfilePhoto] = useState(null);
   const [err, setErr] = useState('');
 
   const resetAuth = async () => {
@@ -129,6 +130,8 @@ export default function AuthProvider({ children }) {
       setToken,
       axiosConfigMessages,
       setAxiosConfigMessages,
+      userProfilePhoto,
+      setUserProfilePhoto,
     }),
     [
       isLoggedIn,
@@ -143,6 +146,8 @@ export default function AuthProvider({ children }) {
       setToken,
       axiosConfigMessages,
       setAxiosConfigMessages,
+      userProfilePhoto,
+      setUserProfilePhoto,
     ]
   );
 
