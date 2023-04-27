@@ -76,7 +76,6 @@ export default function ContactOptions() {
       if (viewedContact !== c) {
         setViewedContact(c);
       }
-      console.log('is it looping?');
     };
     getViewedContact();
   }, []);
@@ -186,14 +185,6 @@ export default function ContactOptions() {
             />
           </View>
         </View>
-        {/* <View style={styles.save}>
-          <CustButton
-            onPress={() => console.log('profile saved')}
-            title="Save Profile changes"
-            accessibilityLabel="Select a profile photo from your device's storage"
-            buttonText="Save changes"
-          />
-        </View> */}
       </View>
     </View>
   );

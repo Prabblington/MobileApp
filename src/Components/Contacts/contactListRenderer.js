@@ -19,7 +19,7 @@ import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
 import startNewChat from '../../api/Client/Chat Management/startNewChat';
 
-// import { getUserPhoto } from '../../api/Client/User/userPhoto';
+import { getUserPhoto } from '../../api/Client/User/userPhoto';
 import addContactToChat from '../../api/Client/Chat Management/addContactToChat';
 
 const { width } = Dimensions.get('window');
@@ -71,13 +71,17 @@ const styles = StyleSheet.create({
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
-  const { axiosConfig, axiosConfigMessage } = useContext(AuthContext);
+  const { axiosConfig, axiosConfigMessage, axiosConfigImage } =
+    useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     const checkExistingPfp = async () => {
       const currentUser = contact.user_id;
-      console.log(`userID = ${currentUser}`);
+
+      // Commented out because the requests are too much for my pc to handle, it
+      // freezes the app
+
       // const currentPfp = await getUserPhoto(currentUser, axiosConfigImage);
 
       // if (currentUser && currentPfp) {
@@ -111,8 +115,6 @@ export default function ContactListRenderer({ contact }) {
         user_id: await contact.user_id,
         nameString,
       };
-      console.log(JSON.stringify(chatRoomDetails.chat_id));
-      console.log(nameString);
 
       await addContactToChat(
         chatRoomDetails.chat_id,
@@ -137,7 +139,6 @@ export default function ContactListRenderer({ contact }) {
       style={styles.container}
     >
       <View key={contact.user_id} style={styles.container}>
-        {/* This will be the users avatar */}
         <View style={styles.image}>
           {image && <Image source={{ uri: image }} style={styles.userImage} />}
         </View>

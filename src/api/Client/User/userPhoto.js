@@ -12,7 +12,6 @@ async function getUserPhoto(userID, cfg) {
       // const imageData = response.data;
 
       const imageRawImageData = imageData.split(',')[1];
-      console.log(JSON.stringify(imageRawImageData));
 
       return imageRawImageData;
     })
@@ -31,7 +30,7 @@ async function checkIfImageExists(imagePath) {
     });
     return image;
   } catch (e) {
-    console.log(e);
+    console.warn(e);
   }
   return null;
 }

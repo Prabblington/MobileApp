@@ -50,7 +50,7 @@ export default function SearchOptionScreen() {
     }
     try {
       const sResult = await searchUser(query, value, axiosConfig);
-      console.log(query);
+
       setSearchResult(sResult);
       setDispayResult(true);
       setErr(null);
@@ -68,8 +68,6 @@ export default function SearchOptionScreen() {
 
   useEffect(() => {
     if (searchResult) {
-      console.log(`displayResult: ${displayResult}`);
-      console.log(`searchResult: ${JSON.stringify(searchResult)}`);
       setDispayResult(true);
     }
   }, [searchResult, displayResult]);
