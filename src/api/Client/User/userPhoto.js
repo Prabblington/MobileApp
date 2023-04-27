@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
-import RNFS from 'react-native-fs';
+import * as FileSystem from 'expo-file-system';
 
 async function getUserPhoto(userID, cfg) {
   const result = await axios
@@ -14,8 +14,6 @@ async function getUserPhoto(userID, cfg) {
       const imageRawImageData = imageData.split(',')[1];
       console.log(JSON.stringify(imageRawImageData));
 
-      // const imageExtension = response.uri.split(',').pop;
-
       return imageRawImageData;
     })
     .catch(async (error) => {
@@ -28,7 +26,10 @@ async function getUserPhoto(userID, cfg) {
 
 async function checkIfImageExists(imagePath) {
   try {
-    return await RNFS.readFile(imagePath, 'base64');
+    const image = await FileSystem.readAsStringAsync(imagePath, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+    return image;
   } catch (e) {
     console.log(e);
   }
@@ -37,19 +38,20 @@ async function checkIfImageExists(imagePath) {
 
 async function onImageSelected(selected) {
   const imagePath = selected.uri;
-  const imageContents = await RNFS.readFile(imagePath, 'base64');
+  const imageContents = await FileSystem.readAsStringAsync(imagePath, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
 
   const fileName = 'userPfp.png'; // change the file name to your liking
-  const assetsPath = `${RNFS.DocumentDirectoryPath}/assets/${fileName}`;
-  const userImagesPath = '../../../images';
+  const userImagesPath = `${FileSystem.documentDirectory}images/${fileName}`;
 
   if (checkIfImageExists) {
-    await RNFS.unlink(assetsPath);
-    await RNFS.unlink(imagePath);
+    await FileSystem.deleteAsync(userImagesPath);
   }
 
-  await RNFS.writeFile(assetsPath, imageContents, 'base64');
-  await RNFS.copyFile(imagePath, userImagesPath);
+  await FileSystem.writeAsStringAsync(userImagesPath, imageContents, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
 }
 
 async function chooseImage() {
