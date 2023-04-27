@@ -76,7 +76,7 @@ export default function ChatListRenderer({ chat }) {
           console.log(JSON.stringify(result));
           navigation.navigate('ChatUI', result);
         } else {
-          console.log('something went wrong');
+          console.warn('something went wrong');
         }
       }}
       style={styles.container}
