@@ -80,10 +80,10 @@ export default function ProfilePage() {
   useEffect(() => {
     const checkExistingData = async () => {
       const imageExists = await checkIfImageExists(`../images/userPfp.png`);
+      const getUserID = await returnCurrentUserID();
       const userExists = await checkIfCurrentUserExistsLocally();
 
       if (userExists === null) {
-        const getUserID = await returnCurrentUserID();
         const userDetails = await getUser(getUserID, axiosConfig);
         setUserData(userDetails);
       } else {
@@ -92,7 +92,11 @@ export default function ProfilePage() {
       if (imageExists) {
         setImage(imageExists);
       } else if (!imageExists) {
-        setImage(placeholderPfp);
+        const getServerPic = await getUserPhoto(userData.user_id, axiosConfig);
+        setImage(getServerPic);
+        if (getServerPic === null) {
+          setImage(placeholderPfp);
+        }
       }
     };
     checkExistingData();
