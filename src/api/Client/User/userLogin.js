@@ -9,20 +9,16 @@ let userData = {
   password: '',
 };
 
-// DUMMY DATA
-// abs.lang@gmail.com
-// Password@123
-
-const loginUserData = {
-  email: 'ashley.williams@mmu.ac.uk',
-  password: 'Wr3xh4m!',
-};
-const user8 = {
-  first_name: 'Lemmony',
-  last_name: 'Snickett',
-  email: 'Lemony.snickers@gmail.com',
-  password: 'Gkls56@0',
-};
+// const loginUserData = {
+//   email: 'ashley.williams@mmu.ac.uk',
+//   password: 'Wr3xh4m!',
+// };
+// const user8 = {
+//   first_name: 'Lemmony',
+//   last_name: 'Snickett',
+//   email: 'Lemony.snickers@gmail.com',
+//   password: 'Gkls56@0',
+// };
 
 // POST /login
 export default function userLogin(email, password, cfg) {

@@ -20,7 +20,6 @@ import { AuthContext } from '../../Navigation/Context/authManager';
 import startNewChat from '../../api/Client/Chat Management/startNewChat';
 
 import { getUserPhoto } from '../../api/Client/User/userPhoto';
-import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
 import addContactToChat from '../../api/Client/Chat Management/addContactToChat';
 
 const { width } = Dimensions.get('window');
@@ -72,8 +71,7 @@ const styles = StyleSheet.create({
 
 export default function ContactListRenderer({ contact }) {
   const navigation = useNavigation();
-  const { axiosConfigImage, axiosConfig, axiosConfigMessage } =
-    useContext(AuthContext);
+  const { axiosConfig, axiosConfigMessage } = useContext(AuthContext);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
