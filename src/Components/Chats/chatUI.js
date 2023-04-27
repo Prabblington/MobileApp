@@ -46,7 +46,6 @@ export default function ChatUI() {
   const { axiosConfig } = useContext(AuthContext);
   const route = useRoute();
   const navigation = useNavigation();
-  const [messages, setMessages] = useState({});
   const [chatData, setChatData] = useState({});
 
   // allows for this to only be called once
@@ -60,11 +59,10 @@ export default function ChatUI() {
         navigation.setOptions({ title: asyncChatData.name });
 
         setChatData(asyncChatData);
-        setMessages(asyncChatData.messages);
       }
     }
     getChatData();
-  }, [setChatData, setMessages, navigation]);
+  }, [setChatData, navigation]);
 
   return (
     <KeyboardAvoidingView
@@ -75,7 +73,7 @@ export default function ChatUI() {
       <ImageBackground source={backgroundImage} style={styles.background}>
         <FlatList
           style={styles.list}
-          data={messages}
+          data={chatData}
           renderItem={({ item }) => <MessageUI message={item} />}
         />
         <InputUI />

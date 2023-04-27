@@ -7,7 +7,7 @@ async function sendMessage(userID, message, cfg) {
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
-        return response.data;
+        return response;
       });
   } catch (e) {
     console.log(e);

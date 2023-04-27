@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { StyleSheet, TextInput, SafeAreaView } from 'react-native';
 
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+
+import { sendMessage } from '../../api/Client/Chat Management/messages';
+import { AuthContext } from '../../Navigation/Context/authManager';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,13 +38,22 @@ const styles = StyleSheet.create({
 });
 
 export default function InputUI() {
-  // state data
-  const [newText, setNewText] = useState('');
+  const { axiosConfig, user } = useContext(AuthContext);
+  const [message, setNewMessage] = useState('');
 
   // check if the send button is working
-  const onSend = () => {
-    console.warn('Sending a new message:', newText);
-    setNewText('');
+  const onSend = async () => {
+    // write sendMessage here
+    const result = sendMessage(user.id, message, axiosConfig);
+    if (result.status === 200) {
+      console.log('message sent!');
+      console.log(result.data);
+    } else if (result.status === 500) {
+      console.warn('Server error');
+    }
+
+    console.warn('Sending a new message:', setNewMessage);
+    setNewMessage('');
   };
 
   return (
@@ -49,9 +61,9 @@ export default function InputUI() {
       <AntDesign name="plus" size={20} color="royalblue" />
 
       <TextInput
-        value={newText}
+        value={message}
         style={styles.input}
-        onChangeText={setNewText}
+        onChangeText={setNewMessage}
         placeholder="type your message"
       />
 
