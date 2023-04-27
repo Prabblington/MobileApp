@@ -19,7 +19,7 @@ import CustButton from '../Input/custButton';
 import { AuthContext } from '../../Navigation/Context/authManager';
 import startNewChat from '../../api/Client/Chat Management/startNewChat';
 
-import { getUserPhoto } from '../../api/Client/User/userPhoto';
+// import { getUserPhoto } from '../../api/Client/User/userPhoto';
 import addContactToChat from '../../api/Client/Chat Management/addContactToChat';
 
 const { width } = Dimensions.get('window');
@@ -108,7 +108,7 @@ export default function ContactListRenderer({ contact }) {
 
       const chatRoomDetails = {
         chat_id: initChatResponse.chat_id,
-        user_id: contact.user_id,
+        user_id: await contact.user_id,
         nameString,
       };
       console.log(JSON.stringify(chatRoomDetails.chat_id));
@@ -129,9 +129,9 @@ export default function ContactListRenderer({ contact }) {
 
   return (
     <Pressable
-      onPress={() => {
-        deleteContactAsyncStorage();
-        storeContactAsyncStorage({ contact });
+      onPress={async () => {
+        await deleteContactAsyncStorage();
+        await storeContactAsyncStorage({ contact });
         navigation.navigate('Contact Profile');
       }}
       style={styles.container}

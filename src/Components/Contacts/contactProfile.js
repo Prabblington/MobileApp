@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from '../../Navigation/Context/authManager';
-import contactPicture from '../../images/logo2.png';
+import contactPicture from '../../images/placeholderPfp.png';
 import CustButton from '../Input/custButton';
 import {
   addContact,

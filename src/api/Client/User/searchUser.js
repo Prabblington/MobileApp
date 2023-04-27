@@ -9,8 +9,6 @@ export default async function searchUser(userQuery, searchInParam, cfg) {
     offset: 0,
   };
 
-  // let result = {};
-
   const result = await axios
     .get('./search', queryParams, cfg)
     .then((response) => response.data)

@@ -87,14 +87,11 @@ export default function ProfilePage() {
         const userDetails = await getUser(getUserID, axiosConfig);
         setUserData(userDetails);
       } else {
-        console.log('user exists locally');
         setUserData(userExists);
       }
       if (imageExists) {
-        console.log('ITS HERE');
         setImage(imageExists);
       } else if (!imageExists) {
-        console.log('No image present, defaulting to placeholderPfp');
         setImage(placeholderPfp);
       }
     };
@@ -111,10 +108,7 @@ export default function ProfilePage() {
         setImage(newImage);
       } catch (e) {
         console.warn('there was a problem uploading');
-        console.error(e);
       }
-    } else {
-      console.log("you haven't selected a picture");
     }
   };
 

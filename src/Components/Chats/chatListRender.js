@@ -11,8 +11,8 @@ import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 import { useContext } from 'react';
 
-import contactPfp from '../../images/logo2.png';
-import getSingleChat from '../../api/Client/Chat Management/getSingleChat';
+import contactPfp from '../../images/placeholderPfp.png';
+import { getSingleChat } from '../../api/Client/Chat Management/getSingleChat';
 import { AuthContext } from '../../Navigation/Context/authManager';
 
 DayJs.extend(RelativeTime);
