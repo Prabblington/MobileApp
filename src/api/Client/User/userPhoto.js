@@ -26,15 +26,29 @@ async function getUserPhoto(userID, cfg) {
   return result;
 }
 
+async function checkIfImageExists(imagePath) {
+  try {
+    return await RNFS.readFile(imagePath, 'base64');
+  } catch (e) {
+    console.log(e);
+  }
+  return null;
+}
+
 async function onImageSelected(selected) {
   const imagePath = selected.uri;
   const imageContents = await RNFS.readFile(imagePath, 'base64');
 
   const fileName = 'userPfp.png'; // change the file name to your liking
   const assetsPath = `${RNFS.DocumentDirectoryPath}/assets/${fileName}`;
-  await RNFS.writeFile(assetsPath, imageContents, 'base64');
-
   const userImagesPath = '../../../images';
+
+  if (checkIfImageExists) {
+    await RNFS.unlink(assetsPath);
+    await RNFS.unlink(imagePath);
+  }
+
+  await RNFS.writeFile(assetsPath, imageContents, 'base64');
   await RNFS.copyFile(imagePath, userImagesPath);
 }
 
@@ -71,4 +85,4 @@ async function uploadUserPhoto(userID, photo, cfg) {
     });
 }
 
-export { getUserPhoto, uploadUserPhoto, chooseImage };
+export { getUserPhoto, uploadUserPhoto, chooseImage, checkIfImageExists };
