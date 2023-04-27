@@ -77,7 +77,7 @@ export default function ContactListRenderer({ contact }) {
 
   useEffect(() => {
     const checkExistingPfp = async () => {
-      const currentUser = contact.user_id;
+      // const currentUser = contact.user_id;
 
       // Commented out because the requests are too much for my pc to handle, it
       // freezes the app
