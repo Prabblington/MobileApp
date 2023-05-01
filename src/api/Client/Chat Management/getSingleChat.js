@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default async function getSingleChat(chatID, cfg) {
   try {
     const result = async () =>
-      axios.get(`./chat/${chatID}`, cfg).then((response) => response.data);
+      axios.get(`/chat/${chatID}`, cfg).then((response) => response.data);
     if (await AsyncStorage.getItem('chatData')) {
       await AsyncStorage.removeItem('chatData');
     }

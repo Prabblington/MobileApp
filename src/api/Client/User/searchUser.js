@@ -10,7 +10,7 @@ export default async function searchUser(userQuery, searchInParam, cfg) {
   };
 
   const result = await axios
-    .get('./search', queryParams, cfg)
+    .get('/search', queryParams, cfg)
     .then((response) => response.data)
     .catch(async (error) => {
       console.error(error);

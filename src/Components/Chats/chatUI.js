@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   FlatList,
@@ -8,14 +8,13 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import MessageUI from './messageUI';
 import InputUI from '../Input/inputUI';
 
 import backgroundImage from '../../images/background.png';
 // import messages from '../../data/messages.json';
 import { getLocalChatStorage } from '../../api/Client/Chat Management/getSingleChat';
-import { AuthContext } from '../../Navigation/Context/authManager';
 
 // make the background image take up the full screen
 const { height, width } = Dimensions.get('window');
@@ -43,8 +42,6 @@ const styles = StyleSheet.create({
 export default function ChatUI() {
   // get data from the chatListProp to match user to messages and correctly
   // display from the right person/group
-  const { axiosConfig } = useContext(AuthContext);
-  const route = useRoute();
   const navigation = useNavigation();
   const [chatData, setChatData] = useState({});
 
