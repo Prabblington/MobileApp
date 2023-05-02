@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import MainNavigation from './src/Navigation/mainNavigation';
 import { AuthProvider } from './src/Navigation/Context/authManager';
 
-import searchUser from './src/api/Client/User/searchUser';
+// import searchUser from './src/api/Client/User/searchUser';
 
 const styles = StyleSheet.create({
   container: {

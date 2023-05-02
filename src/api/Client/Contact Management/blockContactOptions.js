@@ -2,9 +2,9 @@ import axios from 'axios';
 
 function getBlockedContacts(cfg) {
   return axios
-    .post(`/blocked`, cfg)
+    .get(`/blocked`, cfg)
     .then(async (response) => {
-      console.log(`Users blocked: ${response.data}`);
+      console.log(`Users blocked: ${JSON.stringify(response.data)}`);
       console.log(response.status);
       return response;
     })

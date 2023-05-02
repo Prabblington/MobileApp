@@ -1,17 +1,30 @@
 import { useContext, useMemo } from 'react';
+import { View } from 'react-native-web';
 import { AuthContext } from './Context/authManager';
 import { AppStack, LoginStack } from './stackNavigation';
 
-const MainNavigation = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+import TestComponent from '../api/testComponent';
 
-  const mainNavigation = useMemo(() => {
-    console.log(isLoggedIn);
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <>{isLoggedIn ? <AppStack /> : <LoginStack />}</>;
-  }, [isLoggedIn]);
+// abslang@gmail.com
 
-  return mainNavigation;
-};
+function MainNavigation() {
+  return (
+    <View>
+      <TestComponent />
+    </View>
+  );
+}
+
+// const MainNavigation = () => {
+//   const { isLoggedIn } = useContext(AuthContext);
+
+//   const mainNavigation = useMemo(() => {
+//     console.log(isLoggedIn);
+//     // eslint-disable-next-line react/jsx-no-useless-fragment
+//     return <>{isLoggedIn ? <AppStack /> : <LoginStack />}</>;
+//   }, [isLoggedIn]);
+
+//   return mainNavigation;
+// };
 
 export default MainNavigation;
