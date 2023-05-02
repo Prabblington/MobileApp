@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InputUI() {
+export default function InputUI({ onSend }) {
   const { axiosConfig } = useContext(AuthContext);
   const [message, setNewMessage] = useState('');
 
   // check if the send button is working
-  const onSend = async () => {
+  const handleSend = async () => {
     const chatID = await getLocalChatID();
     const messageData = {
       message,
@@ -53,6 +53,7 @@ export default function InputUI() {
 
     if (result.status === 200) {
       console.log('message sent!');
+      onSend();
     } else if (result.status === 500) {
       console.warn('Server error');
     }
@@ -71,7 +72,7 @@ export default function InputUI() {
       />
 
       <MaterialIcons
-        onPress={onSend}
+        onPress={handleSend}
         style={styles.send}
         name="send"
         size={16}

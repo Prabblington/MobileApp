@@ -3,6 +3,7 @@ import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { returnCurrentUserID } from '../../api/Client/User/getUser';
+import { useEffect, useState } from 'react';
 
 DayJs.extend(RelativeTime);
 
@@ -34,20 +35,25 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MessageUI({ chatData }) {
-  async function checkIsUser() {
-    const currentUser = await returnCurrentUserID();
-    const isUser = () => chatData.user_id === currentUser;
-    return isUser();
-  }
+export default function MessageUI({ message }) {
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    const checkIsUser = async () => {
+      const currentUser = await returnCurrentUserID();
+      const otherUser = await JSON.stringify(message.author.user_id);
+      setIsUser(currentUser === otherUser);
+    };
+    checkIsUser();
+  }, [message]);
 
   return (
     <KeyboardAvoidingView
       style={[
         styles.container,
         {
-          backgroundColor: checkIsUser() ? 'azure' : 'darkcyan',
-          alignSelf: checkIsUser() ? 'flex-end' : 'flex-start',
+          backgroundColor: isUser ? 'azure' : 'darkcyan',
+          alignSelf: isUser ? 'flex-end' : 'flex-start',
         },
       ]}
     >
@@ -55,21 +61,21 @@ export default function MessageUI({ chatData }) {
         style={[
           styles.text,
           {
-            color: checkIsUser() ? 'black' : 'white',
+            color: isUser ? 'black' : 'white',
           },
         ]}
       >
-        {chatData.messages.message}
+        {message.message}
       </Text>
       <Text
         style={[
           styles.dayTimeSent,
           {
-            color: checkIsUser() ? 'gray' : 'black',
+            color: isUser ? 'gray' : 'black',
           },
         ]}
       >
-        {DayJs(chatData.messages.timestamp).fromNow()}
+        {DayJs(message.message.timestamp).fromNow()}
       </Text>
     </KeyboardAvoidingView>
   );

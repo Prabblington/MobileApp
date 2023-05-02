@@ -45,19 +45,19 @@ export default function ChatUI() {
   const navigation = useNavigation();
   const [chatData, setChatData] = useState({});
 
+  const getChatData = async () => {
+    const asyncChatData = await getLocalChatStorage();
+    console.log(`ChatUI async: ${asyncChatData.name}`);
+    console.log(`ChatUI chatData: ${JSON.stringify(chatData)}`);
+
+    if (JSON.stringify(chatData) !== JSON.stringify(asyncChatData)) {
+      navigation.setOptions({ title: asyncChatData.name });
+      setChatData(asyncChatData);
+    }
+  };
+
   // allows for this to only be called once
   useEffect(() => {
-    async function getChatData() {
-      const asyncChatData = await getLocalChatStorage();
-      console.log(`ChatUI async: ${asyncChatData.name}`);
-      if (chatData !== asyncChatData) {
-        console.log('loading messages...');
-
-        navigation.setOptions({ title: asyncChatData.name });
-
-        setChatData(asyncChatData);
-      }
-    }
     getChatData();
   }, [setChatData, navigation]);
 
@@ -70,10 +70,11 @@ export default function ChatUI() {
       <ImageBackground source={backgroundImage} style={styles.background}>
         <FlatList
           style={styles.list}
-          data={chatData}
+          data={chatData.messages}
           renderItem={({ item }) => <MessageUI message={item} />}
+          keyExtractor={(item) => item.message_id}
         />
-        <InputUI />
+        <InputUI onSend={getChatData} />
       </ImageBackground>
     </KeyboardAvoidingView>
   );
