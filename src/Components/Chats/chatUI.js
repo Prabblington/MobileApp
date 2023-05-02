@@ -72,6 +72,7 @@ export default function ChatUI() {
           data={chatData.messages}
           renderItem={({ item }) => <MessageUI message={item} />}
           keyExtractor={(item) => item.message_id}
+          // inverted
         />
         <InputUI onSend={getChatData} />
       </ImageBackground>
