@@ -95,7 +95,7 @@ export default function ContactListRenderer({ contact }) {
     checkExistingPfp();
   }, []);
 
-  const handleSendMessage = async () => {
+  const handleMessageInit = async () => {
     try {
       const firstName = contact.given_name
         ? contact.given_name
@@ -134,7 +134,7 @@ export default function ContactListRenderer({ contact }) {
       onPress={async () => {
         await deleteContactAsyncStorage();
         await storeContactAsyncStorage({ contact });
-        navigation.navigate('Contact Profile');
+        await navigation.navigate('Contact Profile');
       }}
       style={styles.container}
     >
@@ -157,7 +157,7 @@ export default function ContactListRenderer({ contact }) {
           <View style={styles.button}>
             <CustButton
               onPress={async () => {
-                const chatRoom = await handleSendMessage();
+                const chatRoom = await handleMessageInit();
                 navigation.navigate('ChatUI', chatRoom);
               }}
               title="Send message"
