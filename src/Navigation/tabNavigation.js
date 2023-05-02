@@ -86,6 +86,13 @@ export default function HomeTabNav() {
                 style={{ marginRight: 15 }}
               />
               <Entypo
+                onPress={() => navigation.navigate('Contacts to add')}
+                name="add-user"
+                size={22}
+                color="royalblue"
+                style={{ marginRight: 15 }}
+              />
+              <Entypo
                 onPress={() => navigation.navigate('Logged Out')}
                 name="align-right"
                 size={22}
@@ -99,7 +106,7 @@ export default function HomeTabNav() {
       <Tab.Screen
         name="Profile"
         component={ProfilePage}
-        options={({ navigation }) => ({
+        options={() => ({
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),
