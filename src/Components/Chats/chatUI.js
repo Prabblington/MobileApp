@@ -13,7 +13,6 @@ import MessageUI from './messageUI';
 import InputUI from '../Input/inputUI';
 
 import backgroundImage from '../../images/background.png';
-// import messages from '../../data/messages.json';
 import { getLocalChatStorage } from '../../api/Client/Chat Management/getSingleChat';
 
 // make the background image take up the full screen
