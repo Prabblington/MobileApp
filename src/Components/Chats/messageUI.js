@@ -1,9 +1,9 @@
 import { KeyboardAvoidingView, StyleSheet, Text } from 'react-native';
+import { useEffect, useState } from 'react';
 import DayJs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { returnCurrentUserID } from '../../api/Client/User/getUser';
-import { useEffect, useState } from 'react';
 
 DayJs.extend(RelativeTime);
 
@@ -75,7 +75,7 @@ export default function MessageUI({ message }) {
           },
         ]}
       >
-        {DayJs(message.message.timestamp).fromNow()}
+        {DayJs(message.timestamp).fromNow()}
       </Text>
     </KeyboardAvoidingView>
   );
