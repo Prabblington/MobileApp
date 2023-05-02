@@ -45,7 +45,6 @@ export default function InputUI() {
   // check if the send button is working
   const onSend = async () => {
     const chatID = await getLocalChatID();
-    console.log(chatID);
     const messageData = {
       message,
     };
@@ -54,12 +53,9 @@ export default function InputUI() {
 
     if (result.status === 200) {
       console.log('message sent!');
-      console.log(result.data);
     } else if (result.status === 500) {
       console.warn('Server error');
     }
-
-    console.warn('Sending a new message:', message);
     setNewMessage('');
   };
 
