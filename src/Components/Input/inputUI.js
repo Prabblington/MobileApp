@@ -5,6 +5,7 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import { sendMessage } from '../../api/Client/Chat Management/messages';
 import { AuthContext } from '../../Navigation/Context/authManager';
+import { getLocalChatID } from '../../api/Client/Chat Management/getSingleChat';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,12 +39,18 @@ const styles = StyleSheet.create({
 });
 
 export default function InputUI() {
-  const { axiosConfig, user } = useContext(AuthContext);
+  const { axiosConfig } = useContext(AuthContext);
   const [message, setNewMessage] = useState('');
 
   // check if the send button is working
   const onSend = async () => {
-    const result = sendMessage(user.id, message, axiosConfig);
+    const chatID = await getLocalChatID();
+    console.log(chatID);
+    const messageData = {
+      message,
+    };
+
+    const result = await sendMessage(chatID, messageData, axiosConfig);
 
     if (result.status === 200) {
       console.log('message sent!');
@@ -52,7 +59,7 @@ export default function InputUI() {
       console.warn('Server error');
     }
 
-    console.warn('Sending a new message:', setNewMessage);
+    console.warn('Sending a new message:', message);
     setNewMessage('');
   };
 

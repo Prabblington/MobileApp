@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-async function sendMessage(userID, message, cfg) {
+async function sendMessage(chatID, message, cfg) {
   try {
     return axios
-      .post(`/chat/${userID}/message`, message, cfg)
+      .post(`/chat/${chatID}/message`, message, cfg)
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
@@ -15,10 +15,10 @@ async function sendMessage(userID, message, cfg) {
   }
 }
 
-async function updateMessage(userID, messageID, message, cfg) {
+async function updateMessage(chatID, messageID, message, cfg) {
   try {
     return axios
-      .patch(`/chat/${userID}/message/${messageID}`, message, cfg)
+      .patch(`/chat/${chatID}/message/${messageID}`, message, cfg)
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
@@ -30,10 +30,10 @@ async function updateMessage(userID, messageID, message, cfg) {
   }
 }
 
-async function deleteMessage(userID, messageID, cfg) {
+async function deleteMessage(chatID, messageID, cfg) {
   try {
     return axios
-      .delete(`/chat/${userID}/message/${messageID}`, userID, messageID, cfg)
+      .delete(`/chat/${chatID}/message/${messageID}`, chatID, messageID, cfg)
       .then((response) => {
         console.log(response.data);
         console.log(response.status);
